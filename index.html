@@ -7,6 +7,15 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <video autoplay muted playsinline class="loading-video">
+                <source src="data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAABKBtZGF0AAACrQYF//+q3EXpvebZSLeWLNgg2SPu73gyNQECBAEAAIAWAAIAFwAAFxoAAhkbmV0AAADAAAAAAA=" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">42</div>
@@ -23,27 +32,63 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
+            <div class="code-label">CODE_001 // EXPERIENCE</div>
             <h1>Motive</h1>
-            <p>December Experience</p>
+            <p class="subtitle">December Edition</p>
             <p class="hero-description">A curated cultural occasion bringing together music, art, fashion, and experiences.</p>
             <a href="events.html" class="btn btn-primary">View Events</a>
         </div>
         <div class="hero-bg"></div>
     </section>
 
-    <!-- Clothing Preview Section -->
-    <section class="clothing-preview">
-        <div class="preview-content">
-            <div class="preview-text">
-                <h2>42 Objects</h2>
-                <p>Limited edition physical products crafted with intention and precision.</p>
-                <p class="preview-description">Discover our curated selection of apparel and accessories that extend the world of 42.</p>
-                <a href="clothing.html" class="btn btn-primary">Explore Objects</a>
-            </div>
-            <div class="preview-image">
-                <div class="image-placeholder">
-                    <span>Double-Collared Polo</span>
+    <!-- Featured Section -->
+    <section class="featured">
+        <div class="featured-header">
+            <h2>Featured</h2>
+            <span class="archive-link"><a href="about.html">Archive →</a></span>
+        </div>
+        <div class="featured-grid">
+            <div class="featured-item">
+                <div class="featured-image">
+                    <div class="image-placeholder">DECEMBER MOTIVE</div>
                 </div>
+                <div class="featured-info">
+                    <p class="code-label">CODE_002 // EVENT</p>
+                    <h3>Motive</h3>
+                    <p>Lagos, Nigeria — 200–300 attendees</p>
+                </div>
+            </div>
+            <div class="featured-item">
+                <div class="featured-image">
+                    <div class="image-placeholder">OBJECT 001</div>
+                </div>
+                <div class="featured-info">
+                    <p class="code-label">CODE_003 // OBJECT</p>
+                    <h3>Double-Collared Polo</h3>
+                    <p>Limited edition — Premium cotton</p>
+                </div>
+            </div>
+            <div class="featured-item">
+                <div class="featured-image">
+                    <div class="image-placeholder">CALENDAR</div>
+                </div>
+                <div class="featured-info">
+                    <p class="code-label">CODE_004 // CALENDAR</p>
+                    <h3>Lagos Events</h3>
+                    <p>Curated cultural discovery</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section class="catalog">
+        <div class="catalog-header">
+            <h2>Catalog</h2>
+            <div class="catalog-nav">
+                <a href="events.html">Events</a>
+                <a href="clothing.html">Objects</a>
+                <a href="calendar.html">Calendar</a>
             </div>
         </div>
     </section>
@@ -54,7 +99,7 @@
             <h2>The 42 List</h2>
             <p>Stay updated on events, releases, and cultural moments.</p>
             <div class="newsletter-form">
-                <input type="email" placeholder="Enter your email" required>
+                <input type="email" placeholder="your@email.com" required>
                 <button class="btn btn-primary">Subscribe</button>
             </div>
         </div>
@@ -66,5 +111,24 @@
             <p>WayKON Holdings</p>
         </div>
     </footer>
+
+    <script>
+        // Loading screen logic
+        window.addEventListener('load', function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            if (loadingScreen) {
+                setTimeout(() => {
+                    loadingScreen.style.opacity = '0';
+                    loadingScreen.style.pointerEvents = 'none';
+                }, 2500);
+            }
+        });
+
+        // Fade out transition
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            loadingScreen.style.transition = 'opacity 0.5s ease-out';
+        });
+    </script>
 </body>
 </html>
