@@ -60,46 +60,57 @@ body {
 
 /* Navigation */
 .navbar {
-    background-color: var(--bg-washed);
-    border-bottom: 1px solid var(--border-color);
-    position: sticky;
+    background-color: transparent;
+    border-bottom: none;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .nav-container {
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 1.5rem 2rem;
+    padding: 1.5rem 2.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .logo {
-    font-size: 1.8rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
     color: var(--text-primary);
+    text-transform: uppercase;
 }
 
 .nav-links {
     display: flex;
     list-style: none;
-    gap: 2.5rem;
+    gap: 3rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .nav-links a {
     color: var(--text-secondary);
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 0.8rem;
     transition: color 0.3s ease;
     position: relative;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-    color: var(--accent-blue);
+    color: var(--text-primary);
 }
 
 .nav-links a.active::after {
@@ -108,8 +119,45 @@ body {
     bottom: -8px;
     left: 0;
     width: 100%;
-    height: 2px;
-    background-color: var(--accent-blue);
+    height: 1px;
+    background-color: var(--text-primary);
+}
+
+.nav-right {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-icon {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.3s ease;
+}
+
+.nav-icon:hover {
+    color: var(--text-primary);
+}
+
+/* Page Header */
+.page-header {
+    padding-top: 120px;
+    padding-bottom: 80px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.page-header h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.page-header p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
 }
 
 /* Code Label */
@@ -133,6 +181,7 @@ body {
     background: #000000;
     overflow: hidden;
     border-bottom: 1px solid var(--border-color);
+    margin-top: 60px;
 }
 
 .hero-bg {
