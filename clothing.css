@@ -1,0 +1,365 @@
+/* ===== 42 — Clothing / Product HUD Page ===== */
+
+@import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+    --cream: #EAE8E3;
+    --cream-panel: #FFFFFF;
+    --ink: #111111;
+    --grey: #666666;
+    --line: #111111;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: 'Space Mono', 'Courier Prime', monospace;
+    min-height: 100vh;
+}
+
+a {
+    color: inherit;
+}
+
+/* ===== Header ===== */
+.pdp-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 28px 32px 0;
+}
+
+.pdp-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.pdp-logo {
+    font-family: 'Holtwood One SC', serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    color: var(--ink);
+}
+
+.pdp-breadcrumb {
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--grey);
+}
+
+.pdp-nav-center {
+    display: flex;
+    align-self: flex-start;
+}
+
+.pill-group {
+    display: flex;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    overflow: hidden;
+    background: var(--cream-panel);
+}
+
+.pill-group a {
+    padding: 9px 22px;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+    border-right: 1px solid var(--line);
+    white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.pill-group a:last-child {
+    border-right: none;
+}
+
+.pill-group a:hover,
+.pill-group a.active {
+    background: var(--ink);
+    color: var(--cream-panel);
+}
+
+.pdp-nav-right {
+    align-self: flex-start;
+}
+
+/* ===== Stage ===== */
+.pdp-stage {
+    position: relative;
+    min-height: 640px;
+    padding: 0 32px 60px;
+}
+
+.hud-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.pdp-image-stage {
+    min-height: 560px;
+}
+
+/* ===== Left Panel ===== */
+.pdp-panel {
+    position: absolute;
+    width: 320px;
+    background: var(--cream-panel);
+    border: 1px solid var(--line);
+    clip-path: polygon(
+        0 14px, 14px 0,
+        100% 0,
+        100% calc(100% - 14px),
+        calc(100% - 14px) 100%,
+        0 100%
+    );
+    box-shadow: 0 12px 30px rgba(17, 17, 17, 0.08);
+}
+
+.panel-left {
+    top: 160px;
+    left: 32px;
+}
+
+.panel-right {
+    top: 240px;
+    right: 32px;
+    width: 260px;
+}
+
+.panel-inner {
+    padding: 22px 22px 18px;
+}
+
+/* Product title block */
+.product-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.price-value {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--grey);
+}
+
+.tag-pill {
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px 12px;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* Accordion */
+.accordion {
+    border-top: 1px solid #ddd;
+}
+
+.accordion-row {
+    border-bottom: 1px solid #ddd;
+    padding: 12px 0;
+    cursor: pointer;
+}
+
+.accordion-row-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.accordion-indicator {
+    font-size: 0.68rem;
+    color: var(--grey);
+}
+
+.accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+    font-size: 0.7rem;
+    line-height: 1.7;
+    color: var(--grey);
+}
+
+.accordion-row.open .accordion-body {
+    max-height: 240px;
+    margin-top: 10px;
+}
+
+/* Thumbnails */
+.thumb-gallery {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+    margin-left: 32px;
+}
+
+.thumb {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #dcdad4;
+    border: 1px solid var(--line);
+}
+
+/* ===== Right Panel ===== */
+.size-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.size-selector {
+    display: flex;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.size-selector button {
+    flex: 1;
+    padding: 10px 6px;
+    background: var(--cream-panel);
+    border: none;
+    border-right: 1px solid var(--line);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    color: var(--ink);
+}
+
+.size-selector button:last-child {
+    border-right: none;
+}
+
+.size-selector button.selected,
+.size-selector button:hover {
+    background: var(--ink);
+    color: var(--cream-panel);
+}
+
+.fit-note {
+    font-size: 0.6rem;
+    color: var(--grey);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.fit-note a {
+    text-decoration: underline;
+}
+
+.action-row {
+    display: flex;
+    border-radius: 999px;
+    overflow: hidden;
+    background: var(--ink);
+    margin-bottom: 14px;
+}
+
+.action-row button {
+    flex: 1;
+    background: transparent;
+    color: var(--cream-panel);
+    border: none;
+    padding: 12px 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.action-row .save-btn {
+    border-right: 1px solid rgba(255,255,255,0.3);
+    flex: 0.6;
+}
+
+.payment-note {
+    font-size: 0.58rem;
+    color: var(--grey);
+    line-height: 1.6;
+}
+
+.payment-note a {
+    text-decoration: underline;
+    color: var(--ink);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+    .pdp-header {
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+    }
+
+    .pdp-nav-center,
+    .pdp-nav-right {
+        align-self: stretch;
+    }
+
+    .pill-group {
+        width: fit-content;
+    }
+
+    .pdp-stage {
+        min-height: auto;
+        padding-top: 40px;
+    }
+
+    .pdp-panel {
+        position: static;
+        width: 100%;
+        margin-bottom: 24px;
+    }
+
+    .thumb-gallery {
+        margin-left: 0;
+    }
+
+    .hud-lines {
+        display: none;
+    }
+}

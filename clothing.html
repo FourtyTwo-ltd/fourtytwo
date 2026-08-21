@@ -3,87 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Objects - 42</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Clothing - 42</title>
+    <link rel="stylesheet" href="clothing.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">fourtytwo</div>
-            <ul class="nav-links">
-                <li><a href="events.html">Events</a></li>
-                <li><a href="clothing.html" class="active">Shop</a></li>
-                <li><a href="calendar.html">Explore</a></li>
-                <li><a href="about.html">About</a></li>
-            </ul>
-            <div class="nav-right">
-                <a href="#" class="nav-icon">Search</a>
-                <a href="#" class="nav-icon">Log In</a>
-                <a href="#" class="nav-icon">Bag/0</a>
+    <header class="pdp-header">
+        <div class="pdp-brand">
+            <a href="index.html" class="pdp-logo">42</a>
+            <span class="pdp-breadcrumb">Home &gt; Clothing &gt; Piece_001</span>
+        </div>
+
+        <nav class="pdp-nav-center">
+            <div class="pill-group">
+                <a href="clothing.html" class="active">Clothing</a>
+                <a href="calendar.html">Calendar</a>
+                <a href="events.html">Events</a>
+            </div>
+        </nav>
+
+        <div class="pdp-nav-right">
+            <div class="pill-group">
+                <a href="#">Log In</a>
+                <a href="about.html">About</a>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <section class="page-header">
-        <h1>42 Objects</h1>
-        <p>Curated physical products with intention and precision</p>
-    </section>
+    <section class="pdp-stage">
+        <svg class="hud-lines" viewBox="0 0 1000 700" preserveAspectRatio="none">
+            <polyline points="352,230 460,230 500,260" fill="none" stroke="#111111" stroke-width="1"/>
+            <polyline points="740,310 620,310 560,340" fill="none" stroke="#111111" stroke-width="1"/>
+        </svg>
 
-    <section class="objects-container">
-        <div class="object-card">
-            <div class="object-image">
-                <div class="image-placeholder">OBJECT 001</div>
-            </div>
-            <div class="object-info">
-                <h2>Double-Collared Polo</h2>
-                <p class="object-type">OBJECT 001</p>
-                <p class="object-description">
-                    A distinctive garment designed with careful attention to fabric, construction, and fit.
-                    The double-collar design creates a signature silhouette that extends the 42 aesthetic.
-                </p>
-                <div class="object-details">
-                    <p><strong>Material:</strong> Premium cotton blend</p>
-                    <p><strong>Sizes:</strong> XS - XXL</p>
-                    <p><strong>Availability:</strong> Limited</p>
+        <!-- Left Panel: Product Info -->
+        <div class="pdp-panel panel-left">
+            <div class="panel-inner">
+                <div class="product-title">42 Utility Outerwear</div>
+                <div class="price-row">
+                    <span class="price-value">—</span>
+                    <span class="tag-pill">Pre-Order</span>
                 </div>
-                <p class="price">₦45,000</p>
-                <a href="#" class="btn btn-primary">View Details</a>
-            </div>
-        </div>
 
-        <div class="object-card alternate">
-            <div class="object-image">
-                <div class="image-placeholder">OBJECT 002</div>
-            </div>
-            <div class="object-info">
-                <h2>Selected Accessory</h2>
-                <p class="object-type">OBJECT 002</p>
-                <p class="object-description">
-                    A carefully curated accessory that complements the 42 aesthetic. Designed to add intention
-                    to everyday moments while maintaining the clean, editorial direction of the brand.
-                </p>
-                <div class="object-details">
-                    <p><strong>Material:</strong> Premium crafted</p>
-                    <p><strong>Quantity:</strong> Limited edition</p>
-                    <p><strong>Status:</strong> Coming soon</p>
+                <div class="accordion">
+                    <div class="accordion-row open" data-accordion>
+                        <div class="accordion-row-head">
+                            <span>Description</span>
+                            <span class="accordion-indicator">[ — ]</span>
+                        </div>
+                        <div class="accordion-body">
+                            Product details coming soon. Full specifications, materials,
+                            and construction notes will be published ahead of release.
+                        </div>
+                    </div>
+
+                    <div class="accordion-row" data-accordion>
+                        <div class="accordion-row-head">
+                            <span>Materials</span>
+                            <span class="accordion-indicator">[ + ]</span>
+                        </div>
+                        <div class="accordion-body">
+                            To be announced.
+                        </div>
+                    </div>
+
+                    <div class="accordion-row" data-accordion>
+                        <div class="accordion-row-head">
+                            <span>Size Guide</span>
+                            <span class="accordion-indicator">[ + ]</span>
+                        </div>
+                        <div class="accordion-body">
+                            To be announced.
+                        </div>
+                    </div>
+
+                    <div class="accordion-row" data-accordion>
+                        <div class="accordion-row-head">
+                            <span>Packaging</span>
+                            <span class="accordion-indicator">[ + ]</span>
+                        </div>
+                        <div class="accordion-body">
+                            To be announced.
+                        </div>
+                    </div>
+
+                    <div class="accordion-row" data-accordion>
+                        <div class="accordion-row-head">
+                            <span>Shipping &amp; Returns</span>
+                            <span class="accordion-indicator">[ + ]</span>
+                        </div>
+                        <div class="accordion-body">
+                            To be announced.
+                        </div>
+                    </div>
                 </div>
-                <p class="price">TBA</p>
-                <a href="#" class="btn btn-secondary">Coming Soon</a>
+            </div>
+        </div>
+
+        <div class="thumb-gallery">
+            <div class="thumb"></div>
+            <div class="thumb"></div>
+        </div>
+
+        <!-- Center Stage: blank / reserved for product image -->
+        <div class="pdp-image-stage"></div>
+
+        <!-- Right Panel: Size & Purchase -->
+        <div class="pdp-panel panel-right">
+            <div class="panel-inner">
+                <div class="size-label">Size</div>
+                <div class="size-selector">
+                    <button class="size-btn">XS/S</button>
+                    <button class="size-btn selected">M/L</button>
+                    <button class="size-btn">XL/2XL</button>
+                </div>
+                <div class="fit-note">
+                    Model is 185 &amp; wears size M. <a href="#">Size Guide</a>
+                </div>
+                <div class="action-row">
+                    <button class="save-btn">Save</button>
+                    <button class="preorder-btn">Pre-Order</button>
+                </div>
+                <div class="payment-note">
+                    Shop now. Pay with Klarna. <a href="#">Learn more</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="archive-preview">
-        <h2>Past Objects</h2>
-        <p>View the archive of previous 42 releases and limited editions</p>
-        <a href="#" class="btn btn-primary">Browse Archive</a>
-    </section>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2026 42. All rights reserved.</p>
-            <p>WayKON Holdings</p>
-        </div>
-    </footer>
+    <script>
+        document.querySelectorAll('[data-accordion]').forEach(function (row) {
+            row.addEventListener('click', function () {
+                const wasOpen = row.classList.contains('open');
+                document.querySelectorAll('[data-accordion]').forEach(function (r) {
+                    r.classList.remove('open');
+                    r.querySelector('.accordion-indicator').textContent = '[ + ]';
+                });
+                if (!wasOpen) {
+                    row.classList.add('open');
+                    row.querySelector('.accordion-indicator').textContent = '[ — ]';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
