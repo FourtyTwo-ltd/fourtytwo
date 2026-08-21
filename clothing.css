@@ -3,11 +3,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&family=Space+Mono:wght@400;700&display=swap');
 
 :root {
-    --cream: #EAE8E3;
-    --cream-panel: #FFFFFF;
-    --ink: #111111;
-    --grey: #666666;
-    --line: #111111;
+    --bg: #0D0D0E;
+    --panel: #1A1A1E;
+    --panel-border: #2A2A2E;
+    --ink: #FFFFFF;
+    --grey: #A0A0A0;
+    --line: #2A2A2E;
+    --accent: #1040B0;
+    --accent-hover: #1E56C8;
+    --hud-line: rgba(200, 220, 255, 0.45);
 }
 
 * {
@@ -22,7 +26,7 @@ html, body {
 }
 
 body {
-    background-color: var(--cream);
+    background-color: var(--bg);
     color: var(--ink);
     font-family: 'Space Mono', 'Courier Prime', monospace;
     min-height: 100vh;
@@ -47,11 +51,9 @@ a {
 }
 
 .pdp-logo {
-    font-family: 'Holtwood One SC', serif;
-    font-size: 1.4rem;
-    letter-spacing: 0.05em;
-    text-decoration: none;
-    color: var(--ink);
+    display: block;
+    height: 30px;
+    width: auto;
 }
 
 .pdp-breadcrumb {
@@ -68,10 +70,10 @@ a {
 
 .pill-group {
     display: flex;
-    border: 1px solid var(--line);
+    border: 1px solid var(--panel-border);
     border-radius: 999px;
     overflow: hidden;
-    background: var(--cream-panel);
+    background: var(--panel);
 }
 
 .pill-group a {
@@ -81,7 +83,7 @@ a {
     text-transform: uppercase;
     text-decoration: none;
     color: var(--ink);
-    border-right: 1px solid var(--line);
+    border-right: 1px solid var(--panel-border);
     white-space: nowrap;
     transition: background 0.2s ease, color 0.2s ease;
 }
@@ -90,10 +92,14 @@ a {
     border-right: none;
 }
 
-.pill-group a:hover,
+.pill-group a:hover {
+    background: var(--accent-hover);
+    color: var(--ink);
+}
+
 .pill-group a.active {
-    background: var(--ink);
-    color: var(--cream-panel);
+    background: var(--accent);
+    color: var(--ink);
 }
 
 .pdp-nav-right {
@@ -124,8 +130,8 @@ a {
 .pdp-panel {
     position: absolute;
     width: 320px;
-    background: var(--cream-panel);
-    border: 1px solid var(--line);
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
     clip-path: polygon(
         0 14px, 14px 0,
         100% 0,
@@ -133,7 +139,7 @@ a {
         calc(100% - 14px) 100%,
         0 100%
     );
-    box-shadow: 0 12px 30px rgba(17, 17, 17, 0.08);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
 }
 
 .panel-left {
@@ -175,21 +181,22 @@ a {
 }
 
 .tag-pill {
-    border: 1px solid var(--line);
+    border: 1px solid var(--accent);
     border-radius: 999px;
     padding: 4px 12px;
     font-size: 0.6rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
+    color: var(--accent-hover);
 }
 
 /* Accordion */
 .accordion {
-    border-top: 1px solid #ddd;
+    border-top: 1px solid var(--line);
 }
 
 .accordion-row {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--line);
     padding: 12px 0;
     cursor: pointer;
 }
@@ -207,6 +214,11 @@ a {
 .accordion-indicator {
     font-size: 0.68rem;
     color: var(--grey);
+}
+
+.accordion-row.open .accordion-row-head,
+.accordion-row.open .accordion-indicator {
+    color: var(--accent-hover);
 }
 
 .accordion-body {
@@ -235,8 +247,8 @@ a {
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: #dcdad4;
-    border: 1px solid var(--line);
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
 }
 
 /* ===== Right Panel ===== */
@@ -250,7 +262,7 @@ a {
 
 .size-selector {
     display: flex;
-    border: 1px solid var(--line);
+    border: 1px solid var(--panel-border);
     border-radius: 6px;
     overflow: hidden;
     margin-bottom: 12px;
@@ -259,24 +271,28 @@ a {
 .size-selector button {
     flex: 1;
     padding: 10px 6px;
-    background: var(--cream-panel);
+    background: var(--panel);
     border: none;
-    border-right: 1px solid var(--line);
+    border-right: 1px solid var(--panel-border);
     font-family: 'Space Mono', monospace;
     font-size: 0.65rem;
     letter-spacing: 0.03em;
     cursor: pointer;
     color: var(--ink);
+    transition: background 0.2s ease;
 }
 
 .size-selector button:last-child {
     border-right: none;
 }
 
-.size-selector button.selected,
 .size-selector button:hover {
-    background: var(--ink);
-    color: var(--cream-panel);
+    background: var(--accent-hover);
+}
+
+.size-selector button.selected {
+    background: var(--accent);
+    color: var(--ink);
 }
 
 .fit-note {
@@ -294,25 +310,31 @@ a {
     display: flex;
     border-radius: 999px;
     overflow: hidden;
-    background: var(--ink);
+    background: var(--accent);
     margin-bottom: 14px;
 }
 
 .action-row button {
     flex: 1;
     background: transparent;
-    color: var(--cream-panel);
+    color: var(--ink);
     border: none;
     padding: 12px 10px;
     font-family: 'Space Mono', monospace;
     font-size: 0.65rem;
+    font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.action-row button:hover {
+    background: var(--accent-hover);
 }
 
 .action-row .save-btn {
-    border-right: 1px solid rgba(255,255,255,0.3);
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
     flex: 0.6;
 }
 
@@ -324,7 +346,7 @@ a {
 
 .payment-note a {
     text-decoration: underline;
-    color: var(--ink);
+    color: var(--accent-hover);
 }
 
 /* ===== Responsive ===== */
