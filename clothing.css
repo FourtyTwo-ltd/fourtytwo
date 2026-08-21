@@ -52,7 +52,7 @@ a {
 
 .pdp-logo {
     display: block;
-    height: 30px;
+    height: 45px;
     width: auto;
 }
 
@@ -68,38 +68,79 @@ a {
     align-self: flex-start;
 }
 
-.pill-group {
+/* ===== Ticket-Tab Component =====
+   Interlocking rounded-block navigation with a narrow connecting
+   "neck" between each pair of tabs, and small circular notches
+   punched out of the neck (colored to match the canvas) to create
+   the ticket-stub / perforated coupon-link seam. Reused for nav,
+   size selection, and CTA buttons for site-wide consistency. */
+.ticket-group {
     display: flex;
-    border: 1px solid var(--panel-border);
-    border-radius: 999px;
-    overflow: hidden;
-    background: var(--panel);
+    align-items: center;
 }
 
-.pill-group a {
-    padding: 9px 22px;
+.ticket-tab {
+    position: relative;
+    z-index: 2;
+    height: 34px;
+    padding: 0 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    color: var(--ink);
+    font-family: 'Space Mono', monospace;
     font-size: 0.68rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     text-decoration: none;
-    color: var(--ink);
-    border-right: 1px solid var(--panel-border);
     white-space: nowrap;
-    transition: background 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-.pill-group a:last-child {
-    border-right: none;
-}
-
-.pill-group a:hover {
-    background: var(--accent-hover);
-    color: var(--ink);
-}
-
-.pill-group a.active {
+.ticket-tab.active {
     background: var(--accent);
-    color: var(--ink);
+    border-color: var(--accent);
+    color: #ffffff;
+}
+
+.ticket-tab:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+    color: #ffffff;
+}
+
+.ticket-neck {
+    position: relative;
+    z-index: 1;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    background: var(--panel-border);
+    margin: 0 -1px;
+}
+
+.ticket-neck::before,
+.ticket-neck::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--bg);
+}
+
+.ticket-neck::before {
+    top: -5.5px;
+}
+
+.ticket-neck::after {
+    bottom: -5.5px;
 }
 
 .pdp-nav-right {
@@ -261,38 +302,13 @@ a {
 }
 
 .size-selector {
-    display: flex;
-    border: 1px solid var(--panel-border);
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
 }
 
-.size-selector button {
+.size-selector .ticket-tab {
     flex: 1;
-    padding: 10px 6px;
-    background: var(--panel);
-    border: none;
-    border-right: 1px solid var(--panel-border);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.03em;
-    cursor: pointer;
-    color: var(--ink);
-    transition: background 0.2s ease;
-}
-
-.size-selector button:last-child {
-    border-right: none;
-}
-
-.size-selector button:hover {
-    background: var(--accent-hover);
-}
-
-.size-selector button.selected {
-    background: var(--accent);
-    color: var(--ink);
+    padding: 0 10px;
+    font-size: 0.62rem;
 }
 
 .fit-note {
@@ -306,36 +322,22 @@ a {
     text-decoration: underline;
 }
 
-.action-row {
-    display: flex;
-    border-radius: 999px;
-    overflow: hidden;
-    background: var(--accent);
+.action-ticket {
     margin-bottom: 14px;
 }
 
-.action-row button {
-    flex: 1;
-    background: transparent;
-    color: var(--ink);
-    border: none;
-    padding: 12px 10px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
+.action-ticket .ticket-tab {
+    height: 42px;
     font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.2s ease;
 }
 
-.action-row button:hover {
-    background: var(--accent-hover);
+.action-ticket .save-btn {
+    flex: 0.7;
+    padding: 0 14px;
 }
 
-.action-row .save-btn {
-    border-right: 1px solid rgba(255, 255, 255, 0.3);
-    flex: 0.6;
+.action-ticket .preorder-btn {
+    flex: 1;
 }
 
 .payment-note {
@@ -362,7 +364,7 @@ a {
         align-self: stretch;
     }
 
-    .pill-group {
+    .ticket-group {
         width: fit-content;
     }
 

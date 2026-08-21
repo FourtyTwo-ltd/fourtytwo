@@ -8,7 +8,8 @@
     --text-secondary: #999999;
     --text-tertiary: #666666;
     --border-color: #1a1a1a;
-    --accent-blue: #2a5a7f;
+    --accent-blue: #1E56C8;
+    --accent-blue-deep: #1040B0;
     --code-color: #7c7c7c;
 }
 
@@ -668,15 +669,51 @@ body {
 
 .calendar-filters {
     display: flex;
-    gap: 1rem;
+    align-items: center;
     margin-bottom: 3rem;
     flex-wrap: wrap;
 }
 
+/* Ticket-tab component: interlocking rounded blocks connected by a
+   narrow neck with circular notches punched to the canvas color,
+   matching the ticket-stub navigation used on the clothing page. */
+.ticket-neck {
+    position: relative;
+    z-index: 1;
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+    background: var(--border-color);
+    margin: 0 -1px;
+}
+
+.ticket-neck::before,
+.ticket-neck::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--bg-dark);
+}
+
+.ticket-neck::before {
+    top: -4.5px;
+}
+
+.ticket-neck::after {
+    bottom: -4.5px;
+}
+
 .filter-btn {
+    position: relative;
+    z-index: 2;
     padding: 0.5rem 1.5rem;
-    background-color: transparent;
+    background-color: var(--bg-washed);
     border: 1px solid var(--border-color);
+    border-radius: 8px;
     color: var(--text-secondary);
     cursor: pointer;
     transition: all 0.3s ease;

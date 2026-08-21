@@ -14,17 +14,20 @@
         </div>
 
         <nav class="pdp-nav-center">
-            <div class="pill-group">
-                <a href="clothing.html" class="active">Clothing</a>
-                <a href="calendar.html">Calendar</a>
-                <a href="events.html">Events</a>
+            <div class="ticket-group">
+                <a href="clothing.html" class="ticket-tab active">Clothing</a>
+                <span class="ticket-neck"></span>
+                <a href="calendar.html" class="ticket-tab">Calendar</a>
+                <span class="ticket-neck"></span>
+                <a href="events.html" class="ticket-tab">Events</a>
             </div>
         </nav>
 
         <div class="pdp-nav-right">
-            <div class="pill-group">
-                <a href="#">Log In</a>
-                <a href="about.html">About</a>
+            <div class="ticket-group">
+                <a href="#" class="ticket-tab">Log In</a>
+                <span class="ticket-neck"></span>
+                <a href="about.html" class="ticket-tab">About</a>
             </div>
         </div>
     </header>
@@ -111,17 +114,20 @@
         <div class="pdp-panel panel-right">
             <div class="panel-inner">
                 <div class="size-label">Size</div>
-                <div class="size-selector">
-                    <button class="size-btn">XS/S</button>
-                    <button class="size-btn selected">M/L</button>
-                    <button class="size-btn">XL/2XL</button>
+                <div class="ticket-group size-selector">
+                    <button class="ticket-tab size-btn" data-size>XS/S</button>
+                    <span class="ticket-neck"></span>
+                    <button class="ticket-tab size-btn active" data-size>M/L</button>
+                    <span class="ticket-neck"></span>
+                    <button class="ticket-tab size-btn" data-size>XL/2XL</button>
                 </div>
                 <div class="fit-note">
                     Model is 185 &amp; wears size M. <a href="#">Size Guide</a>
                 </div>
-                <div class="action-row">
-                    <button class="save-btn">Save</button>
-                    <button class="preorder-btn">Pre-Order</button>
+                <div class="ticket-group action-ticket">
+                    <button class="ticket-tab active save-btn">Save</button>
+                    <span class="ticket-neck"></span>
+                    <button class="ticket-tab active preorder-btn">Pre-Order</button>
                 </div>
                 <div class="payment-note">
                     Shop now. Pay with Klarna. <a href="#">Learn more</a>
@@ -131,6 +137,15 @@
     </section>
 
     <script>
+        document.querySelectorAll('[data-size]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('[data-size]').forEach(function (b) {
+                    b.classList.remove('active');
+                });
+                btn.classList.add('active');
+            });
+        });
+
         document.querySelectorAll('[data-accordion]').forEach(function (row) {
             row.addEventListener('click', function () {
                 const wasOpen = row.classList.contains('open');
