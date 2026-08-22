@@ -1,0 +1,44 @@
+/* ===== 42 — Shared Audio Widget =====
+   Self-contained (hardcoded colors) so it works identically on every
+   page regardless of which theme stylesheet is also loaded. */
+
+.audio-widget {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(13, 13, 14, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    padding: 8px 14px;
+    font-family: 'Space Mono', 'Courier Prime', monospace;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.audio-status-light {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #00FF66;
+    box-shadow: 0 0 6px #00FF66;
+}
+
+.audio-widget.off .audio-status-light {
+    background: #FF0033;
+    box-shadow: 0 0 6px #FF0033;
+}
+
+@media (max-width: 768px) {
+    .audio-widget {
+        bottom: 18px;
+        left: 18px;
+        padding: 7px 12px;
+    }
+}

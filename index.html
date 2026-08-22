@@ -5,16 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>42 — Directory</title>
     <link rel="stylesheet" href="directory.css">
+    <link rel="stylesheet" href="audio-widget.css">
 </head>
 <body>
-    <!-- ===== Pre-loader ===== -->
-    <div id="preloader-overlay">
-        <video id="preloader-video" autoplay muted playsinline loop webkit-playsinline>
-            <source src="assets/tv.mov" type="video/quicktime">
-        </video>
-    </div>
-
     <div class="directory-stage">
+        <a href="index.html" class="directory-mark">
+            <img src="assets/42logowhite.png" alt="42">
+        </a>
+
         <nav class="directory-index">
             <a href="clothing.html" class="directory-item">
                 <span class="directory-index-num">0001</span>Clothing
@@ -34,73 +32,11 @@
         </nav>
     </div>
 
-    <!-- ===== Audio Toggle ===== -->
-    <button type="button" class="audio-widget" id="audioWidget" aria-label="Toggle background audio">
+    <button type="button" class="audio-widget directory-audio" aria-label="Toggle background audio">
         <span class="audio-status-light"></span>
-        <span id="audioLabel">Audio: On</span>
+        <span class="audio-label">Audio: On</span>
     </button>
 
-    <script>
-        // ===== Pre-loader lifecycle =====
-        var overlay = document.getElementById('preloader-overlay');
-
-        document.addEventListener('DOMContentLoaded', function () {
-            setTimeout(function () {
-                overlay.classList.add('hide');
-            }, 2500);
-        });
-
-        overlay.addEventListener('transitionend', function () {
-            if (overlay.classList.contains('hide')) {
-                overlay.style.display = 'none';
-            }
-        });
-
-        // ===== Tab-aware background audio =====
-        var audioEngine = new Audio('assets/bg-audio.mp3');
-        audioEngine.loop = true;
-        audioEngine.volume = 0.6;
-
-        var audioWidget = document.getElementById('audioWidget');
-        var audioLabel = document.getElementById('audioLabel');
-        var isAudioToggledOn = true;
-
-        function tryPlay() {
-            var p = audioEngine.play();
-            if (p && p.catch) p.catch(function () { /* blocked until user gesture */ });
-        }
-
-        function setAudioState(on) {
-            isAudioToggledOn = on;
-            audioWidget.classList.toggle('off', !on);
-            audioLabel.textContent = on ? 'Audio: On' : 'Audio: Off';
-            if (on) {
-                tryPlay();
-            } else {
-                audioEngine.pause();
-            }
-        }
-
-        audioWidget.addEventListener('click', function () {
-            setAudioState(!isAudioToggledOn);
-        });
-
-        // Browsers block true autoplay with sound; start on pre-loader end
-        // or the first pointer interaction, whichever comes first.
-        setTimeout(tryPlay, 2500);
-        function firstGestureStart() {
-            if (isAudioToggledOn) tryPlay();
-            document.removeEventListener('pointerdown', firstGestureStart);
-        }
-        document.addEventListener('pointerdown', firstGestureStart);
-
-        document.addEventListener('visibilitychange', function () {
-            if (document.hidden) {
-                audioEngine.pause();
-            } else if (isAudioToggledOn) {
-                tryPlay();
-            }
-        });
-    </script>
+    <script src="audio.js"></script>
 </body>
 </html>

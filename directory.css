@@ -1,6 +1,7 @@
 /* ===== 42 — Directory Gateway (Homepage) =====
    Minimal full-viewport entrance. No mascot, no metadata overlay,
-   no gridlines — a clean, compact, centered directory list. */
+   no gridlines, no pre-loader — a clean, compact, centered directory
+   list that loads immediately. */
 
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
@@ -9,8 +10,6 @@
     --ink: #FFFFFF;
     --grey: #A0A0A0;
     --accent-hover: #1E56C8;
-    --green: #00FF66;
-    --red: #FF0033;
 }
 
 * {
@@ -34,29 +33,6 @@ body {
 a {
     color: inherit;
     text-decoration: none;
-}
-
-/* ===== Pre-loader ===== */
-#preloader-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 99999;
-    background-color: #0D0D0E;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.4s ease;
-}
-
-#preloader-overlay.hide {
-    opacity: 0;
-    pointer-events: none;
-}
-
-#preloader-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 /* ===== Directory Stage ===== */
@@ -92,6 +68,7 @@ a {
 }
 
 .directory-index-num {
+    font-size: 0.55em;
     font-weight: 400;
     color: var(--grey);
     min-width: 3.2em;
@@ -101,38 +78,25 @@ a {
     color: var(--accent-hover);
 }
 
-/* ===== Audio Toggle ===== */
-.audio-widget {
+/* ===== Bottom-Left Brand Mark ===== */
+.directory-mark {
     position: fixed;
     bottom: 24px;
+    left: 24px;
+    z-index: 40;
+}
+
+.directory-mark img {
+    height: 22px;
+    width: auto;
+    display: block;
+}
+
+/* Directory page only: audio widget moves to the opposite corner
+   from the brand mark. */
+.directory-audio {
+    left: auto;
     right: 24px;
-    z-index: 10000;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: none;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: var(--ink);
-    padding: 8px 14px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    cursor: pointer;
-}
-
-.audio-status-light {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--green);
-    box-shadow: 0 0 6px var(--green);
-}
-
-.audio-widget.off .audio-status-light {
-    background: var(--red);
-    box-shadow: 0 0 6px var(--red);
 }
 
 /* ===== Responsive ===== */
@@ -146,8 +110,16 @@ a {
         min-width: 2.8em;
     }
 
-    .audio-widget {
+    .directory-mark {
         bottom: 18px;
+        left: 18px;
+    }
+
+    .directory-mark img {
+        height: 18px;
+    }
+
+    .directory-audio {
         right: 18px;
     }
 }

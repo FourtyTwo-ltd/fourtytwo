@@ -6,6 +6,7 @@
     <title>Clothing - 42</title>
     <link rel="stylesheet" href="header-footer.css">
     <link rel="stylesheet" href="clothing.css">
+    <link rel="stylesheet" href="audio-widget.css">
 </head>
 <body>
     <header class="pdp-header">
@@ -177,6 +178,11 @@
         </div>
     </footer>
 
+    <button type="button" class="audio-widget" aria-label="Toggle background audio">
+        <span class="audio-status-light"></span>
+        <span class="audio-label">Audio: On</span>
+    </button>
+
     <div class="currency-widget" id="currencyWidget">
         <button class="currency-toggle" id="currencyToggle">
             <span id="currencyLabel">NGN 🇳🇬</span>
@@ -274,5 +280,6 @@
             newsletterForm.reset();
         });
     </script>
+    <script src="audio.js"></script>
 </body>
 </html>
