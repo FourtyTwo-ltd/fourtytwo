@@ -139,17 +139,23 @@ a {
 }
 
 .cal-cell {
+    position: relative;
     background: var(--bg);
     min-height: 120px;
     padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 6px;
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.cal-cell:hover {
-    background: var(--panel);
+@media (hover: hover) {
+    .cal-cell:hover {
+        background: var(--panel);
+        transform: scale(1.03);
+        box-shadow: 0 0 0 1px var(--accent-hover), 0 12px 24px rgba(0, 0, 0, 0.5);
+        z-index: 10;
+    }
 }
 
 .cal-cell.muted {
@@ -158,6 +164,12 @@ a {
 
 .cal-cell.muted:hover {
     background: var(--bg);
+    transform: none;
+    box-shadow: none;
+}
+
+.cal-cell.has-motive {
+    box-shadow: inset 0 0 0 1px rgba(30, 86, 200, 0.35);
 }
 
 .cal-cell-day {
@@ -172,21 +184,112 @@ a {
     gap: 4px;
 }
 
+/* Each event line + its un-clipped hover preview card */
+.cal-event-item {
+    position: relative;
+}
+
+.cal-event-item.filtered-out {
+    display: none;
+}
+
 .cal-event-lead {
+    display: block;
     font-size: 0.58rem;
     letter-spacing: 0.02em;
     color: var(--ink);
     line-height: 1.4;
-    cursor: default;
+    text-decoration: none;
+    cursor: pointer;
     transition: color 0.2s ease;
+}
+
+.cal-event-item.is-motive .cal-event-lead {
+    color: var(--accent-hover);
 }
 
 .cal-event-lead:hover {
     color: var(--accent-hover);
 }
 
-.cal-event-lead.filtered-out {
-    display: none;
+.cal-event-card {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 210px;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    z-index: 60;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+}
+
+@media (hover: hover) {
+    .cal-event-item:hover .cal-event-card,
+    .cal-event-item:focus-within .cal-event-card {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+}
+
+.cal-event-card-image {
+    height: 80px;
+    background: linear-gradient(135deg, var(--panel-border), var(--bg));
+}
+
+.cal-event-card.is-motive .cal-event-card-image {
+    background: linear-gradient(135deg, var(--accent), var(--bg));
+}
+
+.cal-event-card-body {
+    padding: 12px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.cal-motive-tag {
+    font-size: 0.52rem;
+    letter-spacing: 0.08em;
+    color: var(--accent-hover);
+    font-weight: 700;
+}
+
+.cal-event-card-body h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+}
+
+.cal-event-card-meta {
+    font-size: 0.58rem;
+    color: var(--grey);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.cal-event-card-cta {
+    margin-top: 4px;
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    border-top: 1px solid var(--panel-border);
+    padding-top: 8px;
+    transition: color 0.2s ease;
+}
+
+.cal-event-card-cta:hover {
+    color: var(--accent-hover);
 }
 
 /* ===== List View ===== */
@@ -200,9 +303,10 @@ a {
     display: flex;
     align-items: baseline;
     gap: 24px;
-    padding: 18px 4px;
+    padding: 18px 14px;
     border-bottom: 1px solid var(--panel-border);
-    transition: background 0.2s ease, transform 0.15s ease;
+    border-left: 3px solid transparent;
+    transition: background 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
 }
 
 .cal-list-row:hover {
@@ -212,6 +316,32 @@ a {
 
 .cal-list-row.filtered-out {
     display: none;
+}
+
+.cal-list-row.is-motive {
+    border-left-color: var(--accent);
+}
+
+.cal-list-motive-tag {
+    font-size: 0.56rem;
+    letter-spacing: 0.08em;
+    color: var(--accent-hover);
+    font-weight: 700;
+    margin-right: 10px;
+}
+
+.cal-list-cta {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.cal-list-cta:hover {
+    color: var(--accent-hover);
 }
 
 .cal-list-date {
@@ -252,40 +382,353 @@ a {
     display: block;
 }
 
+/* ===== Mobile Day Blocks (shown instead of the dense grid on mobile) ===== */
+.cal-mobile-days {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cal-day-block {
+    border: 1px solid var(--panel-border);
+    background: var(--panel);
+}
+
+.cal-day-block.is-motive {
+    border-color: var(--accent);
+}
+
+.cal-day-block.filtered-out {
+    display: none;
+}
+
+.cal-day-block-head {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 16px;
+    background: none;
+    border: none;
+    color: var(--ink);
+    font-family: 'Space Mono', monospace;
+    cursor: pointer;
+    text-align: left;
+}
+
+.cal-day-block-date {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.cal-day-block-count {
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--grey);
+}
+
+.cal-day-block-arrow {
+    margin-left: auto;
+    color: var(--accent-hover);
+    transition: transform 0.25s ease;
+}
+
+.cal-day-block.open .cal-day-block-arrow {
+    transform: rotate(180deg);
+}
+
+.cal-day-block-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.cal-day-block.open .cal-day-block-body {
+    max-height: 600px;
+}
+
+.cal-day-block-event {
+    padding: 14px 16px;
+    border-top: 1px solid var(--panel-border);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cal-day-block-event.filtered-out {
+    display: none;
+}
+
+.cal-day-block-event h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.cal-day-block-event p {
+    font-size: 0.62rem;
+    color: var(--grey);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+/* ===== Section Heads (Today in Lagos / Upcoming Feed) ===== */
+.cal-section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 0 32px;
+    margin: 60px 0 20px;
+}
+
+.cal-section-index {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--grey);
+}
+
+.cal-section-head h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+}
+
+.cal-section-sub {
+    color: var(--accent-hover);
+}
+
+/* ===== Today in Lagos ===== */
+.cal-today {
+    padding-bottom: 20px;
+}
+
+.cal-today-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--panel-border);
+    border: 1px solid var(--panel-border);
+    margin: 0 32px;
+}
+
+.cal-today-cards {
+    background: var(--bg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.cal-today-card {
+    border: 1px solid var(--panel-border);
+    border-left: 3px solid var(--panel-border);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.cal-today-card:hover,
+.cal-today-card.active {
+    border-color: var(--accent-hover);
+    background: var(--panel);
+}
+
+.cal-today-card.is-motive {
+    border-left-color: var(--accent);
+}
+
+.cal-today-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+}
+
+.cal-today-card p {
+    font-size: 0.62rem;
+    color: var(--grey);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.cal-today-map {
+    background: var(--bg);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 260px;
+}
+
+.cal-map-svg {
+    width: 100%;
+    height: auto;
+    max-height: 320px;
+}
+
+.cal-map-shape {
+    fill: var(--panel);
+    stroke: var(--panel-border);
+    stroke-width: 0.5;
+}
+
+.map-pin {
+    cursor: pointer;
+}
+
+.map-pin circle {
+    fill: var(--accent-hover);
+    stroke: var(--bg);
+    stroke-width: 1;
+    transition: r 0.2s ease, fill 0.2s ease;
+}
+
+.map-pin.is-motive circle {
+    fill: var(--accent);
+}
+
+.map-pin:hover circle,
+.map-pin.active circle {
+    r: 4.5;
+    fill: #ffffff;
+}
+
+.map-pin text {
+    font-family: 'Space Mono', monospace;
+    font-size: 3px;
+    fill: var(--ink);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+
+.map-pin:hover text,
+.map-pin.active text {
+    opacity: 1;
+}
+
+/* ===== Upcoming Events Feed ===== */
+.cal-feed {
+    padding-bottom: 60px;
+}
+
+.cal-feed-track {
+    display: flex;
+    gap: 1px;
+    background: var(--panel-border);
+    border: 1px solid var(--panel-border);
+    margin: 0 32px;
+    overflow-x: auto;
+}
+
+.cal-feed-card {
+    flex: 0 0 220px;
+    background: var(--bg);
+    padding: 16px;
+    border-left: 3px solid transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: background 0.2s ease;
+}
+
+.cal-feed-card:hover {
+    background: var(--panel);
+}
+
+.cal-feed-card.filtered-out {
+    display: none;
+}
+
+.cal-feed-card.is-motive {
+    border-left-color: var(--accent);
+}
+
+.cal-feed-card-date {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-hover);
+}
+
+.cal-feed-card h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.cal-feed-card p {
+    font-size: 0.58rem;
+    color: var(--grey);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.cal-feed-empty {
+    display: none;
+    padding: 24px 32px;
+    color: var(--grey);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.cal-feed-empty.show {
+    display: block;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
     .cal-title {
         padding: 28px 20px 16px;
     }
 
+    /* Filters: three clean horizontally scrollable rows */
     .cal-controls {
-        padding: 0 20px 24px;
+        padding: 0 0 20px;
         flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
+        align-items: stretch;
+        gap: 14px;
     }
 
+    .cal-filter-group {
+        flex-wrap: nowrap;
+        padding: 0 20px;
+    }
+
+    .cal-filter-group .ticket-group,
+    .cal-filter-group .type-tag-group {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding-bottom: 2px;
+    }
+
+    .cal-filter-group .ticket-group::-webkit-scrollbar,
+    .cal-filter-group .type-tag-group::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Replace the dense 42-cell grid with tappable day blocks */
     .cal-grid-wrap {
-        padding: 20px 12px 40px;
+        padding: 16px 20px 40px;
     }
 
-    .cal-weekday {
-        font-size: 0.5rem;
-        padding: 6px 0;
+    .cal-weekdays,
+    .cal-grid {
+        display: none;
     }
 
-    .cal-cell {
-        min-height: 76px;
-        padding: 6px;
-        gap: 3px;
-    }
-
-    .cal-cell-day {
-        font-size: 0.72rem;
-    }
-
-    .cal-event-lead {
-        font-size: 0.48rem;
+    .cal-mobile-days {
+        display: flex;
     }
 
     .cal-list {
@@ -295,10 +738,26 @@ a {
     .cal-list-row {
         flex-wrap: wrap;
         gap: 8px 16px;
+        padding: 16px 12px;
     }
 
     .cal-list-meta {
         margin-left: 0;
         width: 100%;
+    }
+
+    /* Today in Lagos + Feed: stack on mobile */
+    .cal-section-head {
+        padding: 0 20px;
+        margin: 44px 0 16px;
+    }
+
+    .cal-today-grid {
+        grid-template-columns: 1fr;
+        margin: 0 20px;
+    }
+
+    .cal-feed-track {
+        margin: 0 20px;
     }
 }
