@@ -1,0 +1,375 @@
+/* ===== 42 — Events Page (Ticket-Stub / Boarding-Pass System) =====
+   Page-specific styles. Header, mobile menu, ticket-tab component,
+   and footer come from header-footer.css (shared site-wide). */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Mono', 'Courier Prime', monospace;
+    min-height: 100vh;
+}
+
+a {
+    color: inherit;
+}
+
+/* ===== Kinetic clip-path title reveal ===== */
+.kinetic-clip {
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.kinetic-clip.in-view {
+    clip-path: inset(0 0 0% 0);
+}
+
+/* ===== Page Header ===== */
+.ev-header {
+    padding: 40px 32px 24px;
+    border-bottom: 1px solid var(--panel-border);
+    position: relative;
+}
+
+.ev-header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.8rem, 8vw, 6rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    text-transform: uppercase;
+}
+
+.ev-header p {
+    margin-top: 12px;
+    color: var(--grey);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.ev-header-mark {
+    position: absolute;
+    top: 44px;
+    right: 32px;
+    height: 30px;
+    width: auto;
+    opacity: 0.5;
+}
+
+/* ===== Featured Boarding Pass Hero ===== */
+.ev-hero {
+    margin: 32px;
+    border: 1px solid var(--panel-border);
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.2fr 1px 1fr;
+    background: var(--panel-border);
+    gap: 0;
+    overflow: hidden;
+}
+
+.ev-hero-main {
+    background: var(--bg);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+}
+
+.ev-hero-tag {
+    font-size: 0.64rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-hover);
+    font-weight: 700;
+}
+
+.ev-hero-main h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+}
+
+.ev-hero-desc {
+    color: var(--grey);
+    font-size: 0.78rem;
+    line-height: 1.8;
+    max-width: 46ch;
+}
+
+.ev-hero-watermark {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    height: 60px;
+    width: auto;
+    opacity: 0.12;
+    pointer-events: none;
+}
+
+.ev-hero-stub {
+    background: var(--bg);
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+}
+
+.ev-hero-stub::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 0;
+    bottom: 0;
+    border-left: 1px dashed var(--panel-border);
+}
+
+.ev-stub-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--grey);
+    border-bottom: 1px solid var(--panel-border);
+    padding-bottom: 10px;
+}
+
+.ev-stub-row span:last-child {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+.ev-hero-cta {
+    margin-top: 10px;
+    align-self: flex-start;
+    padding: 14px 28px;
+    background: var(--accent);
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.ev-hero-cta:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+/* ===== Section Head ===== */
+.ev-section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 0 32px;
+    margin: 56px 0 20px;
+}
+
+.ev-section-index {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--grey);
+}
+
+.ev-section-head h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+}
+
+/* ===== Credential Card Grid (Tickets / Tables) ===== */
+.ev-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--panel-border);
+    border: 1px solid var(--panel-border);
+    margin: 0 32px 8px;
+}
+
+.ev-card {
+    background: var(--bg);
+    padding: 26px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-left: 3px solid transparent;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.ev-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 85% 15%, rgba(30, 86, 200, 0.14), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.ev-card:hover {
+    transform: scale(1.03);
+    border-left-color: var(--accent-hover);
+    z-index: 5;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.ev-card:hover::after {
+    opacity: 1;
+}
+
+.ev-card-index {
+    font-size: 0.58rem;
+    color: var(--grey);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.ev-card h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.15rem;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    transition: color 0.3s ease;
+}
+
+.ev-card:hover h4 {
+    color: var(--accent-hover);
+}
+
+.ev-card-price {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.ev-card-sub {
+    font-size: 0.6rem;
+    color: var(--grey);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.ev-card-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.ev-card-list li {
+    font-size: 0.62rem;
+    color: var(--grey);
+    letter-spacing: 0.02em;
+    padding-left: 14px;
+    position: relative;
+}
+
+.ev-card-list li::before {
+    content: '-';
+    position: absolute;
+    left: 0;
+    color: var(--accent-hover);
+}
+
+/* ===== Detail Drawer Toggle ===== */
+.ev-drawer-toggle {
+    background: none;
+    border: none;
+    color: var(--accent-hover);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: left;
+    padding: 0;
+    margin-top: 8px;
+}
+
+.ev-drawer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    opacity: 0;
+}
+
+.ev-drawer.open {
+    max-height: 300px;
+    opacity: 1;
+    margin-top: 8px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+    .ev-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .ev-hero-stub::before {
+        display: none;
+        border-top: 1px dashed var(--panel-border);
+    }
+}
+
+@media (max-width: 768px) {
+    .ev-header {
+        padding: 28px 20px 20px;
+    }
+
+    .ev-header-mark {
+        top: 30px;
+        right: 20px;
+        height: 22px;
+    }
+
+    .ev-hero {
+        margin: 20px;
+    }
+
+    .ev-hero-main,
+    .ev-hero-stub {
+        padding: 26px 22px;
+    }
+
+    .ev-section-head {
+        padding: 0 20px;
+        margin: 40px 0 16px;
+    }
+
+    .ev-card-grid {
+        grid-template-columns: 1fr;
+        margin: 0 20px 8px;
+    }
+
+    .ev-card:hover {
+        transform: none;
+    }
+}

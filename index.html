@@ -3,209 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>42 - Cultural Platform</title>
-    <link rel="stylesheet" href="header-footer.css">
-    <link rel="stylesheet" href="styles.css">
+    <title>42 — Directory</title>
+    <link rel="stylesheet" href="directory.css">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div id="loadingScreen" class="loading-screen">
-        <div class="loading-content">
-            <video autoplay muted playsinline class="loading-video">
-                <source src="data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMW1wNDEAAAAIZnJlZQAABKBtZGF0AAACrQYF//+q3EXpvebZSLeWLNgg2SPu73gyNQECBAEAAIAWAAIAFwAAFxoAAhkbmV0AAADAAAAAAA=" type="video/mp4">
-            </video>
-        </div>
+    <!-- ===== Pre-loader ===== -->
+    <div id="preloader-overlay">
+        <!--
+            No promo video file exists in the connected Drive yet (only a
+            screen recording, which isn't appropriate brand content here).
+            The <video> is wired up and ready — add a <source src="..."> once
+            a real clip is available. Until then this shows the wordmark on
+            black for the same 2.5s window.
+        -->
+        <video id="preloader-video" autoplay muted playsinline loop webkit-playsinline></video>
+        <span class="preloader-mark">42</span>
     </div>
 
-    <header class="pdp-header">
-        <div class="header-left">
-            <a href="index.html"><img src="assets/42logowhite.png" alt="42" class="pdp-logo"></a>
-            <span class="pdp-breadcrumb">Home</span>
-        </div>
+    <div class="directory-frame">
+        <div class="directory-meta meta-top-left">42 // System Directory</div>
+        <div class="directory-meta meta-top-right"><span id="liveClock">--:--:-- WAT</span></div>
+        <div class="directory-meta meta-bottom-left">6.5244&deg; N, 3.3792&deg; E</div>
 
-        <div class="header-center">
-            <nav class="pdp-nav-center">
-                <div class="ticket-group">
-                    <a href="clothing.html" class="ticket-tab">Clothing</a>
-                    <span class="ticket-neck"></span>
-                    <a href="calendar.html" class="ticket-tab">Calendar</a>
-                    <span class="ticket-neck"></span>
-                    <a href="events.html" class="ticket-tab">Events</a>
-                </div>
+        <div class="directory-stage">
+            <div class="directory-backdrop" id="directoryBackdrop"></div>
+            <img src="assets/mascot.jpg" alt="" class="directory-mascot" id="directoryMascot">
+
+            <nav class="directory-index">
+                <a href="clothing.html" class="directory-item" data-fx="clothing">
+                    <span class="directory-index-num">0001</span>Clothing
+                </a>
+                <a href="calendar.html" class="directory-item" data-fx="calendar">
+                    <span class="directory-index-num">0002</span>Calendar
+                </a>
+                <a href="events.html" class="directory-item" data-fx="events">
+                    <span class="directory-index-num">0003</span>Events
+                </a>
+                <a href="about.html" class="directory-item">
+                    <span class="directory-index-num">0004</span>About &amp; Contact
+                </a>
+                <a href="#" class="directory-item">
+                    <span class="directory-index-num">0005</span>Log In
+                </a>
             </nav>
         </div>
-
-        <div class="header-right">
-            <div class="pdp-nav-right">
-                <div class="ticket-group">
-                    <a href="#" class="ticket-tab">Log In</a>
-                    <span class="ticket-neck"></span>
-                    <a href="about.html" class="ticket-tab">About</a>
-                </div>
-            </div>
-            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </header>
-
-    <div class="mobile-menu-overlay" id="mobileMenu">
-        <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">&times;</button>
-        <nav class="mobile-menu-list">
-            <a href="index.html" class="mobile-menu-item active"><span class="mm-index">0001</span>Home</a>
-            <a href="clothing.html" class="mobile-menu-item"><span class="mm-index">0002</span>Clothing</a>
-            <a href="calendar.html" class="mobile-menu-item"><span class="mm-index">0003</span>Calendar</a>
-            <a href="events.html" class="mobile-menu-item"><span class="mm-index">0004</span>Events</a>
-            <a href="about.html" class="mobile-menu-item"><span class="mm-index">0005</span>About &amp; Contact</a>
-            <a href="#" class="mobile-menu-item"><span class="mm-index">0006</span>Log In</a>
-        </nav>
     </div>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="code-label">CODE_001 // EXPERIENCE</div>
-            <h1>Motive</h1>
-            <p class="subtitle">December Edition</p>
-            <p class="hero-description">A curated cultural occasion bringing together music, art, fashion, and experiences.</p>
-            <a href="events.html" class="btn btn-primary">View Events</a>
-        </div>
-        <div class="hero-bg"></div>
-    </section>
-
-    <!-- Featured Section -->
-    <section class="featured">
-        <div class="featured-header">
-            <h2>Featured</h2>
-            <span class="archive-link"><a href="about.html">Archive →</a></span>
-        </div>
-        <div class="featured-grid">
-            <div class="featured-item">
-                <div class="featured-image">
-                    <div class="image-placeholder">DECEMBER MOTIVE</div>
-                </div>
-                <div class="featured-info">
-                    <p class="code-label">CODE_002 // EVENT</p>
-                    <h3>Motive</h3>
-                    <p>Lagos, Nigeria — 200–300 attendees</p>
-                </div>
-            </div>
-            <div class="featured-item">
-                <div class="featured-image">
-                    <div class="image-placeholder">OBJECT 001</div>
-                </div>
-                <div class="featured-info">
-                    <p class="code-label">CODE_003 // OBJECT</p>
-                    <h3>Double-Collared Polo</h3>
-                    <p>Limited edition — Premium cotton</p>
-                </div>
-            </div>
-            <div class="featured-item">
-                <div class="featured-image">
-                    <div class="image-placeholder">CALENDAR</div>
-                </div>
-                <div class="featured-info">
-                    <p class="code-label">CODE_004 // CALENDAR</p>
-                    <h3>Lagos Events</h3>
-                    <p>Curated cultural discovery</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Catalog Section -->
-    <section class="catalog">
-        <div class="catalog-header">
-            <h2>Catalog</h2>
-            <div class="catalog-nav">
-                <a href="events.html">Events</a>
-                <a href="clothing.html">Objects</a>
-                <a href="calendar.html">Calendar</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Section -->
-    <section class="newsletter">
-        <div class="newsletter-content">
-            <h2>The 42 List</h2>
-            <p>Stay updated on events, releases, and cultural moments.</p>
-            <div class="newsletter-form">
-                <input type="email" placeholder="your@email.com" required>
-                <button class="btn btn-primary">Subscribe</button>
-            </div>
-        </div>
-    </section>
-
-    <footer class="pdp-footer">
-        <div class="footer-top">
-            <div class="footer-col footer-legal">
-                <p class="footer-owner">Owned by WayKON</p>
-                <p class="footer-owner-sub">WayKON Holdings</p>
-                <p class="footer-copyright">Copyright &copy; 2026 Fourtytwo</p>
-            </div>
-
-            <div class="footer-col footer-contact">
-                <a href="mailto:fourtytwolagos@gmail.com" class="footer-link footer-email">fourtytwolagos@gmail.com</a>
-                <div class="footer-social">
-                    <a href="#" class="footer-link" target="_blank" rel="noopener">Instagram</a>
-                    <a href="#" class="footer-link" target="_blank" rel="noopener">TikTok</a>
-                </div>
-            </div>
-
-            <div class="footer-col footer-newsletter">
-                <form class="newsletter-form" id="globalNewsletterForm">
-                    <input type="email" placeholder="Enter your email" required>
-                    <button type="submit" aria-label="Subscribe">&gt;</button>
-                </form>
-            </div>
-        </div>
-
-        <div class="footer-hero">
-            <img src="assets/42hooklogo.png" alt="42" class="footer-hero-logo">
-        </div>
-    </footer>
+    <!-- ===== Audio Widget ===== -->
+    <button type="button" class="audio-widget" id="audioWidget" aria-label="Toggle background audio">
+        <span class="audio-knob"><span class="audio-knob-notch"></span></span>
+        <span class="audio-wave"><span></span><span></span><span></span><span></span></span>
+        <span class="audio-status-light"></span>
+        <span class="audio-label" id="audioLabel">Audio [On]</span>
+    </button>
 
     <script>
-        // Loading screen logic
-        window.addEventListener('load', function() {
-            const loadingScreen = document.getElementById('loadingScreen');
-            if (loadingScreen) {
-                setTimeout(() => {
-                    loadingScreen.style.opacity = '0';
-                    loadingScreen.style.pointerEvents = 'none';
-                }, 2500);
+        // ===== Pre-loader lifecycle =====
+        var overlay = document.getElementById('preloader-overlay');
+
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                overlay.classList.add('hide');
+            }, 2500);
+        });
+
+        overlay.addEventListener('transitionend', function () {
+            if (overlay.classList.contains('hide')) {
+                overlay.style.display = 'none';
             }
         });
 
-        // Fade out transition
-        document.addEventListener('DOMContentLoaded', function() {
-            const loadingScreen = document.getElementById('loadingScreen');
-            loadingScreen.style.transition = 'opacity 0.5s ease-out';
-        });
+        // ===== Live Lagos time (WAT = UTC+1, no DST) =====
+        var clockEl = document.getElementById('liveClock');
+        function updateClock() {
+            var now = new Date();
+            var watMs = now.getTime() + (now.getTimezoneOffset() * 60000) + (60 * 60000);
+            var wat = new Date(watMs);
+            var hh = String(wat.getHours()).padStart(2, '0');
+            var mm = String(wat.getMinutes()).padStart(2, '0');
+            var ss = String(wat.getSeconds()).padStart(2, '0');
+            clockEl.textContent = hh + ':' + mm + ':' + ss + ' WAT';
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
 
-        var hamburgerBtn = document.getElementById('hamburgerBtn');
-        var mobileMenu = document.getElementById('mobileMenu');
-        var mobileMenuClose = document.getElementById('mobileMenuClose');
+        // ===== Mascot hover micro-interactions =====
+        var mascot = document.getElementById('directoryMascot');
+        var backdrop = document.getElementById('directoryBackdrop');
 
-        hamburgerBtn.addEventListener('click', function () {
-            mobileMenu.classList.add('open');
-        });
-
-        mobileMenuClose.addEventListener('click', function () {
-            mobileMenu.classList.remove('open');
-        });
-
-        document.querySelectorAll('.mobile-menu-item').forEach(function (item) {
-            item.addEventListener('click', function () {
-                mobileMenu.classList.remove('open');
+        document.querySelectorAll('.directory-item[data-fx]').forEach(function (item) {
+            var fx = item.getAttribute('data-fx');
+            item.addEventListener('mouseenter', function () {
+                mascot.className = 'directory-mascot hover-' + fx;
+                backdrop.className = 'directory-backdrop show fx-' + fx;
+            });
+            item.addEventListener('mouseleave', function () {
+                mascot.className = 'directory-mascot';
+                backdrop.className = 'directory-backdrop';
             });
         });
 
-        var globalNewsletterForm = document.getElementById('globalNewsletterForm');
-        globalNewsletterForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            globalNewsletterForm.reset();
+        // ===== Audio engine (tab-aware) =====
+        // No music track exists in the connected Drive yet — the Audio
+        // object, rotary widget, and visibility handling are fully wired
+        // and ready; point `src` at a real file when one is available.
+        var audioEngine = new Audio();
+        audioEngine.loop = true;
+        audioEngine.volume = 0.6;
+
+        var audioWidget = document.getElementById('audioWidget');
+        var audioLabel = document.getElementById('audioLabel');
+        var isAudioToggledOn = true;
+
+        function tryPlay() {
+            if (!audioEngine.src) return;
+            var p = audioEngine.play();
+            if (p && p.catch) p.catch(function () { /* blocked until user gesture */ });
+        }
+
+        function setAudioState(on) {
+            isAudioToggledOn = on;
+            audioWidget.classList.toggle('off', !on);
+            audioLabel.textContent = on ? 'Audio [On]' : 'Audio [Off]';
+            if (on) {
+                tryPlay();
+            } else {
+                audioEngine.pause();
+            }
+        }
+
+        audioWidget.addEventListener('click', function () {
+            setAudioState(!isAudioToggledOn);
+        });
+
+        // Start on first pointer interaction (browsers block true autoplay
+        // with sound; this is the compliant equivalent).
+        function firstGestureStart() {
+            if (isAudioToggledOn) tryPlay();
+            document.removeEventListener('pointerdown', firstGestureStart);
+        }
+        document.addEventListener('pointerdown', firstGestureStart);
+
+        document.addEventListener('visibilitychange', function () {
+            if (document.hidden) {
+                audioEngine.pause();
+            } else if (isAudioToggledOn) {
+                tryPlay();
+            }
         });
     </script>
 </body>

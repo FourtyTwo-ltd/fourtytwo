@@ -282,18 +282,18 @@
         // Sample cultural events — placeholder content pending real listings.
         var EVENTS = [
             { id: 'e3', date: '2026-12-24', name: '42 Fest', type: 'MOTIVE', location: 'LAGOS', venue: 'Muri Okunola Park', time: '9:00 PM', coords: [6.4281, 3.4219] },
-            { id: 'e4', date: '2026-12-25', name: 'Flytime Concert', type: 'CONCERT', location: 'LAGOS', venue: 'Eko Convention Centre', time: '7:00 PM' },
+            { id: 'e4', date: '2026-12-25', name: 'Flytime Concert', type: 'CONCERT', location: 'LAGOS', venue: 'Eko Hotel', time: '7:00 PM', coords: [6.4299, 3.4256] },
             { id: 'e5', date: '2026-12-26', name: 'Go Crazy Pop-Up', type: 'POP-UP', location: 'ABUJA', venue: 'Jabi Lake Mall', time: '12:00 PM' },
-            { id: 'e6', date: '2026-12-31', name: 'New Year Motive', type: 'MOTIVE', location: 'LAGOS', venue: 'Landmark Beach', time: '10:00 PM' },
+            { id: 'e6', date: '2026-12-31', name: 'New Year Motive', type: 'MOTIVE', location: 'LAGOS', venue: 'Landmark Beach', time: '10:00 PM', coords: [6.4324, 3.4520] },
             { id: 'e7', date: '2027-01-03', name: 'Abuja Sessions', type: 'CONCERT', location: 'ABUJA', venue: 'Transcorp Hilton Grounds', time: '8:00 PM' }
         ];
 
         var FEATURED_EVENT_ID = 'e3';
 
-        var GRID_START = new Date(2026, 10, 29); // Sun Nov 29 2026 — first cell of the grid
-        var RANGE_START = new Date(2026, 11, 1); // Dec 1 2026
+        var GRID_START = new Date(2026, 11, 13); // Sun Dec 13 2026 — first cell of the grid
+        var RANGE_START = new Date(2026, 11, 13); // Dec 13 2026
         var RANGE_END = new Date(2027, 0, 5);    // Jan 5 2027
-        var GRID_CELLS = 42; // 6 full weeks
+        var GRID_CELLS = 28; // 4 weeks, exactly 2 mobile pages of 2 weeks each
 
         function isoDate(d) {
             var y = d.getFullYear();
@@ -519,9 +519,9 @@
         if (featuredEvent.type === 'MOTIVE') heroCard.classList.add('is-motive');
 
         var map = L.map('lagosMap', { zoomControl: true, scrollWheelZoom: false }).setView([6.4550, 3.4600], 11);
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; OpenStreetMap &copy; CARTO',
-            subdomains: 'abcd',
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors',
+            subdomains: 'abc',
             maxZoom: 19
         }).addTo(map);
 
@@ -535,40 +535,59 @@
         lagosHubs.forEach(function (hub) {
             L.circleMarker(hub.coords, {
                 radius: 5,
-                color: '#2A2A2E',
-                weight: 1,
-                fillColor: '#A0A0A0',
-                fillOpacity: 0.85
+                color: '#1040B0',
+                weight: 1.5,
+                fillColor: '#ffffff',
+                fillOpacity: 0.9
             }).addTo(map).bindTooltip(hub.name, { direction: 'top', className: 'cal-map-tooltip' });
         });
 
-        var eventIcon = L.divIcon({
-            className: 'cal-event-marker',
-            html: '<span class="cal-pin-dot"></span>',
-            iconSize: [16, 16]
+        // One pin per Lagos event that has real coordinates. Hovering or
+        // clicking a pin bridges to its matching card (hero and/or feed);
+        // hovering or clicking a card bridges back to its pin.
+        var eventMarkers = {};
+
+        EVENTS.filter(function (ev) { return ev.coords; }).forEach(function (ev) {
+            var icon = L.divIcon({
+                className: 'cal-event-marker' + (ev.type === 'MOTIVE' ? ' is-motive' : ''),
+                html: '<span class="cal-pin-dot"></span>',
+                iconSize: [16, 16]
+            });
+            var marker = L.marker(ev.coords, { icon: icon }).addTo(map);
+            marker.bindTooltip(ev.name + ' — ' + ev.venue, { direction: 'top', className: 'cal-map-tooltip' });
+            marker.on('mouseover', function () { setEventActive(ev.id, true); });
+            marker.on('mouseout', function () { setEventActive(ev.id, false); });
+            marker.on('click', function () { setEventActive(ev.id, true, true); });
+            eventMarkers[ev.id] = marker;
         });
 
-        var eventMarker = L.marker(featuredEvent.coords, { icon: eventIcon }).addTo(map);
-        eventMarker.bindTooltip(featuredEvent.name + ' — ' + featuredEvent.venue, {
-            direction: 'top',
-            className: 'cal-map-tooltip'
-        });
+        function setEventActive(eventId, active, scrollToCard) {
+            var marker = eventMarkers[eventId];
+            if (marker) {
+                var markerEl = marker.getElement();
+                if (markerEl) markerEl.classList.toggle('active', active);
+            }
 
-        function setHeroActive(active) {
-            heroCard.classList.toggle('active', active);
-            var markerEl = eventMarker.getElement();
-            if (markerEl) markerEl.classList.toggle('active', active);
+            if (eventId === featuredEvent.id) {
+                heroCard.classList.toggle('active', active);
+                if (active && scrollToCard) heroCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+
+            var feedCard = document.querySelector('.cal-feed-card[data-event-id="' + eventId + '"]');
+            if (feedCard) {
+                feedCard.classList.toggle('active', active);
+                if (active && scrollToCard) {
+                    feedCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                }
+            }
         }
 
-        heroCard.addEventListener('mouseenter', function () { setHeroActive(true); });
-        heroCard.addEventListener('mouseleave', function () { setHeroActive(false); });
+        heroCard.addEventListener('mouseenter', function () { setEventActive(featuredEvent.id, true); });
+        heroCard.addEventListener('mouseleave', function () { setEventActive(featuredEvent.id, false); });
         heroCard.addEventListener('click', function () {
-            setHeroActive(true);
+            setEventActive(featuredEvent.id, true);
             map.panTo(featuredEvent.coords);
         });
-        eventMarker.on('mouseover', function () { setHeroActive(true); });
-        eventMarker.on('mouseout', function () { setHeroActive(false); });
-        eventMarker.on('click', function () { setHeroActive(true); });
 
         // ===== Build Upcoming Events Feed =====
         var feedTrack = document.getElementById('feedTrack');
@@ -582,10 +601,15 @@
             card.className = 'cal-feed-card' + (isMotive ? ' is-motive' : '');
             card.dataset.type = ev.type;
             card.dataset.location = ev.location;
+            card.dataset.eventId = ev.id;
             card.innerHTML =
                 '<span class="cal-feed-card-date">' + slashDate(d) + '</span>' +
                 '<h4>' + ev.name + '</h4>' +
                 '<p>' + ev.type + ' &middot; ' + ev.venue + '</p>';
+            if (ev.coords) {
+                card.addEventListener('mouseenter', function () { setEventActive(ev.id, true); });
+                card.addEventListener('mouseleave', function () { setEventActive(ev.id, false); });
+            }
             card.addEventListener('click', function () { openDateView(ev.date); });
             feedTrack.appendChild(card);
         });
