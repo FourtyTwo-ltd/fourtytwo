@@ -1,18 +1,16 @@
 /* ===== 42 — Directory Gateway (Homepage) =====
-   Standalone full-viewport entrance page. Does not use the shared
-   .pdp-header/.pdp-footer chrome — it IS the site entrance, framed
-   with its own brutalist metadata overlay instead. */
+   Minimal full-viewport entrance. No mascot, no metadata overlay,
+   no gridlines — a clean, compact, centered directory list. */
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
 :root {
     --bg: #0D0D0E;
-    --panel: #1A1A1E;
-    --panel-border: #2A2A2E;
     --ink: #FFFFFF;
     --grey: #A0A0A0;
-    --accent: #1040B0;
     --accent-hover: #1E56C8;
+    --green: #00FF66;
+    --red: #FF0033;
 }
 
 * {
@@ -47,12 +45,11 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 0.6s ease, filter 0.6s ease;
+    transition: opacity 0.4s ease;
 }
 
 #preloader-overlay.hide {
     opacity: 0;
-    filter: blur(10px);
     pointer-events: none;
 }
 
@@ -62,140 +59,31 @@ a {
     object-fit: cover;
 }
 
-.preloader-mark {
-    position: absolute;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(3rem, 12vw, 8rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    opacity: 0.9;
-}
-
-/* ===== Directory Frame (brutalist gridlines + metadata) ===== */
-.directory-frame {
-    position: relative;
-    min-height: 100vh;
-    padding: 20px;
-}
-
-.directory-frame::before {
-    content: '';
-    position: absolute;
-    inset: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    pointer-events: none;
-}
-
-.directory-meta {
-    position: fixed;
-    font-size: 0.6rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--grey);
-    z-index: 40;
-}
-
-.meta-top-left {
-    top: 34px;
-    left: 34px;
-}
-
-.meta-top-right {
-    top: 34px;
-    right: 34px;
-    text-align: right;
-}
-
-.meta-bottom-left {
-    bottom: 34px;
-    left: 34px;
-}
-
-#liveClock {
-    color: var(--ink);
-    font-weight: 700;
-}
-
-/* ===== Central Directory Index + Mascot ===== */
+/* ===== Directory Stage ===== */
 .directory-stage {
-    position: relative;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
-}
-
-.directory-mascot {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1);
-    height: 78vh;
-    max-height: 700px;
-    width: auto;
-    opacity: 0.5;
-    z-index: 1;
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, filter 0.3s ease;
-    filter: saturate(1) brightness(1);
-    pointer-events: none;
-}
-
-.directory-backdrop {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-}
-
-/* Hover: Clothing — fabric silhouette reveal */
-.directory-backdrop.fx-clothing {
-    background:
-        repeating-linear-gradient(45deg, rgba(30, 86, 200, 0.12) 0 2px, transparent 2px 14px);
-}
-
-/* Hover: Calendar — concert backdrop flash */
-.directory-backdrop.fx-calendar {
-    background: radial-gradient(circle at center, rgba(30, 86, 200, 0.35), transparent 65%);
-}
-
-/* Hover: Events — structural glitch lines */
-.directory-backdrop.fx-events {
-    background:
-        linear-gradient(90deg, transparent 48%, rgba(30, 86, 200, 0.5) 49%, rgba(30, 86, 200, 0.5) 50%, transparent 51%),
-        linear-gradient(0deg, transparent 30%, rgba(255, 255, 255, 0.06) 31%, transparent 32%);
-}
-
-.directory-backdrop.show {
-    opacity: 1;
 }
 
 .directory-index {
-    position: relative;
-    z-index: 2;
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    text-align: center;
+    gap: 2px;
 }
 
 .directory-item {
     display: flex;
     align-items: baseline;
-    justify-content: center;
-    gap: 22px;
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(2.2rem, 6.4vw, 4.4rem);
+    gap: 16px;
+    font-size: 0.95rem;
     font-weight: 700;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
-    letter-spacing: -0.01em;
-    line-height: 1.08;
     color: var(--ink);
-    padding: 4px 24px;
-    transition: color 0.25s ease, transform 0.25s ease;
+    padding: 7px 4px;
+    transition: color 0.2s ease;
 }
 
 .directory-item:hover,
@@ -204,189 +92,62 @@ a {
 }
 
 .directory-index-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.32em;
     font-weight: 400;
     color: var(--grey);
-    min-width: 2.6em;
-    text-align: right;
+    min-width: 3.2em;
 }
 
 .directory-item:hover .directory-index-num {
     color: var(--accent-hover);
 }
 
-/* Item-specific mascot reactions, triggered via JS class on .directory-mascot */
-.directory-mascot.hover-clothing {
-    transform: translate(-50%, -50%) scale(1.06);
-}
-
-.directory-mascot.hover-calendar {
-    transform: translate(-50%, -50%) scale(1.02) rotate(-2deg);
-}
-
-.directory-mascot.hover-events {
-    animation: mascot-glitch 0.35s steps(2, end) 2;
-}
-
-@keyframes mascot-glitch {
-    0% { transform: translate(-50%, -50%) scale(1); filter: saturate(1) hue-rotate(0deg); }
-    25% { transform: translate(calc(-50% + 6px), -50%) scale(1.01); filter: saturate(1.6) hue-rotate(8deg); }
-    50% { transform: translate(calc(-50% - 6px), -50%) scale(1); filter: saturate(1.6) hue-rotate(-8deg); }
-    75% { transform: translate(-50%, -50%) scale(1.01); filter: saturate(1.2) hue-rotate(0deg); }
-    100% { transform: translate(-50%, -50%) scale(1); filter: saturate(1) hue-rotate(0deg); }
-}
-
-/* ===== Audio Rotary Widget ===== */
+/* ===== Audio Toggle ===== */
 .audio-widget {
     position: fixed;
-    bottom: 34px;
-    right: 34px;
+    bottom: 24px;
+    right: 24px;
     z-index: 10000;
     display: flex;
     align-items: center;
-    gap: 12px;
-    background: var(--panel);
-    border: 1px solid var(--panel-border);
-    border-radius: 999px;
-    padding: 8px 16px 8px 8px;
+    gap: 8px;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--ink);
+    padding: 8px 14px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     cursor: pointer;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-}
-
-.audio-knob {
-    position: relative;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    border: 1px solid var(--panel-border);
-    background: var(--bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.audio-widget.off .audio-knob {
-    transform: rotate(90deg);
-}
-
-.audio-knob-notch {
-    position: absolute;
-    top: 4px;
-    left: 50%;
-    width: 2px;
-    height: 8px;
-    background: var(--accent-hover);
-    transform: translateX(-50%);
-}
-
-.audio-wave {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    height: 14px;
-}
-
-.audio-wave span {
-    display: block;
-    width: 2px;
-    background: var(--accent-hover);
-    border-radius: 1px;
-    animation: wave-bounce 0.9s ease-in-out infinite;
-}
-
-.audio-wave span:nth-child(1) { height: 40%; animation-delay: 0s; }
-.audio-wave span:nth-child(2) { height: 100%; animation-delay: 0.15s; }
-.audio-wave span:nth-child(3) { height: 60%; animation-delay: 0.3s; }
-.audio-wave span:nth-child(4) { height: 85%; animation-delay: 0.45s; }
-
-@keyframes wave-bounce {
-    0%, 100% { transform: scaleY(0.4); }
-    50% { transform: scaleY(1); }
-}
-
-.audio-widget.off .audio-wave span {
-    animation-play-state: paused;
-    transform: scaleY(0.15);
 }
 
 .audio-status-light {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    background: #00FF66;
-    box-shadow: 0 0 10px #00FF66;
-    transition: background 0.25s ease, box-shadow 0.25s ease;
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
 }
 
 .audio-widget.off .audio-status-light {
-    background: #FF0033;
-    box-shadow: 0 0 10px #FF0033;
-}
-
-.audio-label {
-    font-size: 0.6rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-weight: 700;
-    white-space: nowrap;
+    background: var(--red);
+    box-shadow: 0 0 6px var(--red);
 }
 
 /* ===== Responsive ===== */
-@media (max-width: 900px) {
-    .directory-mascot {
-        height: 56vh;
-        opacity: 0.35;
-    }
-
-    .directory-item {
-        font-size: clamp(1.7rem, 9vw, 2.6rem);
-        gap: 14px;
-    }
-}
-
 @media (max-width: 768px) {
-    .directory-frame::before {
-        inset: 14px;
-    }
-
-    .directory-meta {
-        font-size: 0.54rem;
-    }
-
-    .meta-top-left, .meta-top-right {
-        top: 24px;
-    }
-
-    .meta-top-left, .meta-bottom-left {
-        left: 24px;
-    }
-
-    .meta-top-right {
-        right: 24px;
-    }
-
-    .meta-bottom-left {
-        bottom: 24px;
-    }
-
-    .directory-index {
-        gap: 2px;
-    }
-
     .directory-item {
+        font-size: 0.85rem;
         gap: 12px;
-        padding: 6px 16px;
+    }
+
+    .directory-index-num {
+        min-width: 2.8em;
     }
 
     .audio-widget {
-        bottom: 24px;
-        right: 24px;
-        padding: 6px 12px 6px 6px;
-    }
-
-    .audio-label {
-        display: none;
+        bottom: 18px;
+        right: 18px;
     }
 }

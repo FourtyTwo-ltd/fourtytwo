@@ -9,52 +9,35 @@
 <body>
     <!-- ===== Pre-loader ===== -->
     <div id="preloader-overlay">
-        <!--
-            No promo video file exists in the connected Drive yet (only a
-            screen recording, which isn't appropriate brand content here).
-            The <video> is wired up and ready — add a <source src="..."> once
-            a real clip is available. Until then this shows the wordmark on
-            black for the same 2.5s window.
-        -->
-        <video id="preloader-video" autoplay muted playsinline loop webkit-playsinline></video>
-        <span class="preloader-mark">42</span>
+        <video id="preloader-video" autoplay muted playsinline loop webkit-playsinline>
+            <source src="assets/tv.mov" type="video/quicktime">
+        </video>
     </div>
 
-    <div class="directory-frame">
-        <div class="directory-meta meta-top-left">42 // System Directory</div>
-        <div class="directory-meta meta-top-right"><span id="liveClock">--:--:-- WAT</span></div>
-        <div class="directory-meta meta-bottom-left">6.5244&deg; N, 3.3792&deg; E</div>
-
-        <div class="directory-stage">
-            <div class="directory-backdrop" id="directoryBackdrop"></div>
-            <img src="assets/mascot.jpg" alt="" class="directory-mascot" id="directoryMascot">
-
-            <nav class="directory-index">
-                <a href="clothing.html" class="directory-item" data-fx="clothing">
-                    <span class="directory-index-num">0001</span>Clothing
-                </a>
-                <a href="calendar.html" class="directory-item" data-fx="calendar">
-                    <span class="directory-index-num">0002</span>Calendar
-                </a>
-                <a href="events.html" class="directory-item" data-fx="events">
-                    <span class="directory-index-num">0003</span>Events
-                </a>
-                <a href="about.html" class="directory-item">
-                    <span class="directory-index-num">0004</span>About &amp; Contact
-                </a>
-                <a href="#" class="directory-item">
-                    <span class="directory-index-num">0005</span>Log In
-                </a>
-            </nav>
-        </div>
+    <div class="directory-stage">
+        <nav class="directory-index">
+            <a href="clothing.html" class="directory-item">
+                <span class="directory-index-num">0001</span>Clothing
+            </a>
+            <a href="calendar.html" class="directory-item">
+                <span class="directory-index-num">0002</span>Calendar
+            </a>
+            <a href="events.html" class="directory-item">
+                <span class="directory-index-num">0003</span>Events
+            </a>
+            <a href="about.html" class="directory-item">
+                <span class="directory-index-num">0004</span>About &amp; Contact
+            </a>
+            <a href="#" class="directory-item">
+                <span class="directory-index-num">0005</span>Log In
+            </a>
+        </nav>
     </div>
 
-    <!-- ===== Audio Widget ===== -->
+    <!-- ===== Audio Toggle ===== -->
     <button type="button" class="audio-widget" id="audioWidget" aria-label="Toggle background audio">
-        <span class="audio-knob"><span class="audio-knob-notch"></span></span>
-        <span class="audio-wave"><span></span><span></span><span></span><span></span></span>
         <span class="audio-status-light"></span>
-        <span class="audio-label" id="audioLabel">Audio [On]</span>
+        <span id="audioLabel">Audio: On</span>
     </button>
 
     <script>
@@ -73,41 +56,8 @@
             }
         });
 
-        // ===== Live Lagos time (WAT = UTC+1, no DST) =====
-        var clockEl = document.getElementById('liveClock');
-        function updateClock() {
-            var now = new Date();
-            var watMs = now.getTime() + (now.getTimezoneOffset() * 60000) + (60 * 60000);
-            var wat = new Date(watMs);
-            var hh = String(wat.getHours()).padStart(2, '0');
-            var mm = String(wat.getMinutes()).padStart(2, '0');
-            var ss = String(wat.getSeconds()).padStart(2, '0');
-            clockEl.textContent = hh + ':' + mm + ':' + ss + ' WAT';
-        }
-        updateClock();
-        setInterval(updateClock, 1000);
-
-        // ===== Mascot hover micro-interactions =====
-        var mascot = document.getElementById('directoryMascot');
-        var backdrop = document.getElementById('directoryBackdrop');
-
-        document.querySelectorAll('.directory-item[data-fx]').forEach(function (item) {
-            var fx = item.getAttribute('data-fx');
-            item.addEventListener('mouseenter', function () {
-                mascot.className = 'directory-mascot hover-' + fx;
-                backdrop.className = 'directory-backdrop show fx-' + fx;
-            });
-            item.addEventListener('mouseleave', function () {
-                mascot.className = 'directory-mascot';
-                backdrop.className = 'directory-backdrop';
-            });
-        });
-
-        // ===== Audio engine (tab-aware) =====
-        // No music track exists in the connected Drive yet — the Audio
-        // object, rotary widget, and visibility handling are fully wired
-        // and ready; point `src` at a real file when one is available.
-        var audioEngine = new Audio();
+        // ===== Tab-aware background audio =====
+        var audioEngine = new Audio('assets/bg-audio.mp3');
         audioEngine.loop = true;
         audioEngine.volume = 0.6;
 
@@ -116,7 +66,6 @@
         var isAudioToggledOn = true;
 
         function tryPlay() {
-            if (!audioEngine.src) return;
             var p = audioEngine.play();
             if (p && p.catch) p.catch(function () { /* blocked until user gesture */ });
         }
@@ -124,7 +73,7 @@
         function setAudioState(on) {
             isAudioToggledOn = on;
             audioWidget.classList.toggle('off', !on);
-            audioLabel.textContent = on ? 'Audio [On]' : 'Audio [Off]';
+            audioLabel.textContent = on ? 'Audio: On' : 'Audio: Off';
             if (on) {
                 tryPlay();
             } else {
@@ -136,8 +85,9 @@
             setAudioState(!isAudioToggledOn);
         });
 
-        // Start on first pointer interaction (browsers block true autoplay
-        // with sound; this is the compliant equivalent).
+        // Browsers block true autoplay with sound; start on pre-loader end
+        // or the first pointer interaction, whichever comes first.
+        setTimeout(tryPlay, 2500);
         function firstGestureStart() {
             if (isAudioToggledOn) tryPlay();
             document.removeEventListener('pointerdown', firstGestureStart);
