@@ -4,98 +4,355 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendar - 42</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="header-footer.css">
+    <link rel="stylesheet" href="calendar.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">fourtytwo</div>
-            <ul class="nav-links">
-                <li><a href="events.html">Events</a></li>
-                <li><a href="clothing.html">Shop</a></li>
-                <li><a href="calendar.html" class="active">Explore</a></li>
-                <li><a href="about.html">About</a></li>
-            </ul>
-            <div class="nav-right">
-                <a href="#" class="nav-icon">Search</a>
-                <a href="#" class="nav-icon">Log In</a>
-                <a href="#" class="nav-icon">Bag/0</a>
-            </div>
+    <header class="pdp-header">
+        <div class="header-left">
+            <a href="index.html"><img src="assets/42logowhite.png" alt="42" class="pdp-logo"></a>
+            <span class="pdp-breadcrumb">Home &gt; Calendar</span>
         </div>
-    </nav>
 
-    <section class="page-header">
-        <h1>42 Calendar</h1>
-        <p>Curated cultural and event discovery in Lagos</p>
+        <div class="header-center">
+            <nav class="pdp-nav-center">
+                <div class="ticket-group">
+                    <a href="clothing.html" class="ticket-tab">Clothing</a>
+                    <span class="ticket-neck"></span>
+                    <a href="calendar.html" class="ticket-tab active">Calendar</a>
+                    <span class="ticket-neck"></span>
+                    <a href="events.html" class="ticket-tab">Events</a>
+                </div>
+            </nav>
+        </div>
+
+        <div class="header-right">
+            <div class="pdp-nav-right">
+                <div class="ticket-group">
+                    <a href="#" class="ticket-tab">Log In</a>
+                    <span class="ticket-neck"></span>
+                    <a href="about.html" class="ticket-tab">About</a>
+                </div>
+            </div>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">&times;</button>
+        <nav class="mobile-menu-list">
+            <a href="index.html" class="mobile-menu-item"><span class="mm-index">0001</span>Home</a>
+            <a href="clothing.html" class="mobile-menu-item"><span class="mm-index">0002</span>Clothing</a>
+            <a href="calendar.html" class="mobile-menu-item active"><span class="mm-index">0003</span>Calendar</a>
+            <a href="events.html" class="mobile-menu-item"><span class="mm-index">0004</span>Events</a>
+            <a href="about.html" class="mobile-menu-item"><span class="mm-index">0005</span>About &amp; Contact</a>
+            <a href="#" class="mobile-menu-item"><span class="mm-index">0006</span>Log In</a>
+        </nav>
+    </div>
+
+    <section class="cal-title">
+        <h1>December 2026</h1>
     </section>
 
-    <section class="calendar-container">
-        <div class="calendar-intro">
-            <p>
-                The 42 Calendar features selected cultural moments, experiences, and events happening
-                across Lagos. Discover music, fashion, art, and culture curated by 42.
-            </p>
+    <section class="cal-controls">
+        <div class="cal-filter-group">
+            <span class="cal-filter-label">Location</span>
+            <div class="ticket-group" id="locationGroup">
+                <button type="button" class="ticket-tab active" data-location="LAGOS">Lagos</button>
+                <span class="ticket-neck"></span>
+                <button type="button" class="ticket-tab" data-location="ABUJA">Abuja</button>
+            </div>
         </div>
 
-        <div class="calendar-filters">
-            <button class="filter-btn active">All</button>
-            <span class="ticket-neck"></span>
-            <button class="filter-btn">Music</button>
-            <span class="ticket-neck"></span>
-            <button class="filter-btn">Fashion</button>
-            <span class="ticket-neck"></span>
-            <button class="filter-btn">Art</button>
-            <span class="ticket-neck"></span>
-            <button class="filter-btn">Culture</button>
+        <div class="cal-filter-group">
+            <span class="cal-filter-label">Type</span>
+            <div class="type-tag-group" id="typeGroup">
+                <button type="button" class="type-tag active" data-type="MOTIVE">Motive</button>
+                <button type="button" class="type-tag active" data-type="CONCERT">Concert</button>
+                <button type="button" class="type-tag active" data-type="POP-UP">Pop-Up</button>
+            </div>
         </div>
 
-        <div class="events-list">
-            <div class="calendar-event">
-                <div class="event-meta">
-                    <span class="event-month">DEC</span>
-                    <span class="event-day">15</span>
-                </div>
-                <div class="event-info">
-                    <h3>Motive</h3>
-                    <p class="event-venue">Venue TBA • Lagos</p>
-                    <p class="event-category">Music • Culture</p>
-                </div>
-                <a href="events.html" class="event-link">Learn More →</a>
-            </div>
-
-            <div class="calendar-event">
-                <div class="event-meta">
-                    <span class="event-month">AUG</span>
-                    <span class="event-day">25</span>
-                </div>
-                <div class="event-info">
-                    <h3>Cultural Exhibition</h3>
-                    <p class="event-venue">TBA • Lagos</p>
-                    <p class="event-category">Art</p>
-                </div>
-                <a href="#" class="event-link">Learn More →</a>
-            </div>
-
-            <div class="calendar-event">
-                <div class="event-meta">
-                    <span class="event-month">SEP</span>
-                    <span class="event-day">10</span>
-                </div>
-                <div class="event-info">
-                    <h3>Fashion & Music Showcase</h3>
-                    <p class="event-venue">TBA • Lagos</p>
-                    <p class="event-category">Fashion • Music</p>
-                </div>
-                <a href="#" class="event-link">Learn More →</a>
+        <div class="cal-filter-group">
+            <span class="cal-filter-label">View</span>
+            <div class="ticket-group" id="viewGroup">
+                <button type="button" class="ticket-tab active" data-view="grid">Grid View</button>
+                <span class="ticket-neck"></span>
+                <button type="button" class="ticket-tab" data-view="list">List Schedule</button>
             </div>
         </div>
     </section>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2026 42. All rights reserved.</p>
-            <p>WayKON Holdings</p>
+    <!-- Grid View -->
+    <section class="cal-view active" id="gridView">
+        <div class="cal-grid-wrap">
+            <div class="cal-weekdays">
+                <div class="cal-weekday">Sun</div>
+                <div class="cal-weekday">Mon</div>
+                <div class="cal-weekday">Tue</div>
+                <div class="cal-weekday">Wed</div>
+                <div class="cal-weekday">Thu</div>
+                <div class="cal-weekday">Fri</div>
+                <div class="cal-weekday">Sat</div>
+            </div>
+            <div class="cal-grid" id="calGrid"></div>
+            <p class="cal-grid-empty" id="calGridEmpty">No events match the current filters.</p>
+        </div>
+    </section>
+
+    <!-- List Schedule View -->
+    <section class="cal-view" id="listView">
+        <div class="cal-list" id="calList"></div>
+        <p class="cal-list-empty" id="calListEmpty">No events match the current filters.</p>
+    </section>
+
+    <footer class="pdp-footer">
+        <div class="footer-top">
+            <div class="footer-col footer-legal">
+                <p class="footer-owner">Owned by WayKON</p>
+                <p class="footer-owner-sub">WayKON Holdings</p>
+                <p class="footer-copyright">Copyright &copy; 2026 Fourtytwo</p>
+            </div>
+
+            <div class="footer-col footer-contact">
+                <a href="mailto:fourtytwolagos@gmail.com" class="footer-link footer-email">fourtytwolagos@gmail.com</a>
+                <div class="footer-social">
+                    <a href="#" class="footer-link" target="_blank" rel="noopener">Instagram</a>
+                    <a href="#" class="footer-link" target="_blank" rel="noopener">TikTok</a>
+                </div>
+            </div>
+
+            <div class="footer-col footer-newsletter">
+                <form class="newsletter-form" id="globalNewsletterForm">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" aria-label="Subscribe">&gt;</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-hero">
+            <img src="assets/42hooklogo.png" alt="42" class="footer-hero-logo">
         </div>
     </footer>
+
+    <script>
+        // ===== Shared header / mobile menu =====
+        var hamburgerBtn = document.getElementById('hamburgerBtn');
+        var mobileMenu = document.getElementById('mobileMenu');
+        var mobileMenuClose = document.getElementById('mobileMenuClose');
+
+        hamburgerBtn.addEventListener('click', function () {
+            mobileMenu.classList.add('open');
+        });
+
+        mobileMenuClose.addEventListener('click', function () {
+            mobileMenu.classList.remove('open');
+        });
+
+        document.querySelectorAll('.mobile-menu-item').forEach(function (item) {
+            item.addEventListener('click', function () {
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        var globalNewsletterForm = document.getElementById('globalNewsletterForm');
+        globalNewsletterForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            globalNewsletterForm.reset();
+        });
+
+        // ===== Calendar data =====
+        // Sample cultural events — placeholder content pending real listings.
+        var EVENTS = [
+            { date: '2026-12-24', name: '42 Fest', type: 'MOTIVE', location: 'LAGOS' },
+            { date: '2026-12-25', name: 'Flytime Concert', type: 'CONCERT', location: 'LAGOS' },
+            { date: '2026-12-26', name: 'Go Crazy Pop-Up', type: 'POP-UP', location: 'ABUJA' },
+            { date: '2026-12-31', name: 'New Year Motive', type: 'MOTIVE', location: 'LAGOS' },
+            { date: '2027-01-03', name: 'Abuja Sessions', type: 'CONCERT', location: 'ABUJA' }
+        ];
+
+        var GRID_START = new Date(2026, 10, 29); // Sun Nov 29 2026 — first cell of the grid
+        var RANGE_START = new Date(2026, 11, 1); // Dec 1 2026
+        var RANGE_END = new Date(2027, 0, 5);    // Jan 5 2027
+        var GRID_CELLS = 42; // 6 full weeks
+
+        function isoDate(d) {
+            var y = d.getFullYear();
+            var m = String(d.getMonth() + 1).padStart(2, '0');
+            var day = String(d.getDate()).padStart(2, '0');
+            return y + '-' + m + '-' + day;
+        }
+
+        function slashDate(d) {
+            var m = String(d.getMonth() + 1).padStart(2, '0');
+            var day = String(d.getDate()).padStart(2, '0');
+            return m + '/' + day;
+        }
+
+        var eventsByDate = {};
+        EVENTS.forEach(function (ev) {
+            if (!eventsByDate[ev.date]) eventsByDate[ev.date] = [];
+            eventsByDate[ev.date].push(ev);
+        });
+
+        // ===== Filter state =====
+        var state = {
+            location: 'LAGOS',
+            types: { MOTIVE: true, CONCERT: true, 'POP-UP': true },
+            view: 'grid'
+        };
+
+        function eventMatches(ev) {
+            return ev.location === state.location && state.types[ev.type];
+        }
+
+        // ===== Build Grid View =====
+        var calGrid = document.getElementById('calGrid');
+        var calGridEmpty = document.getElementById('calGridEmpty');
+
+        for (var i = 0; i < GRID_CELLS; i++) {
+            var cellDate = new Date(GRID_START);
+            cellDate.setDate(GRID_START.getDate() + i);
+            var muted = cellDate < RANGE_START || cellDate > RANGE_END;
+
+            var cell = document.createElement('div');
+            cell.className = 'cal-cell' + (muted ? ' muted' : '');
+
+            var dayEl = document.createElement('div');
+            dayEl.className = 'cal-cell-day';
+            dayEl.textContent = cellDate.getDate();
+            cell.appendChild(dayEl);
+
+            if (!muted) {
+                var iso = isoDate(cellDate);
+                var dayEvents = eventsByDate[iso] || [];
+                if (dayEvents.length) {
+                    var eventsWrap = document.createElement('div');
+                    eventsWrap.className = 'cal-cell-events';
+                    dayEvents.forEach(function (ev) {
+                        var lead = document.createElement('div');
+                        lead.className = 'cal-event-lead';
+                        lead.textContent = '- ' + ev.name.toUpperCase();
+                        lead.dataset.type = ev.type;
+                        lead.dataset.location = ev.location;
+                        eventsWrap.appendChild(lead);
+                    });
+                    cell.appendChild(eventsWrap);
+                }
+            }
+
+            calGrid.appendChild(cell);
+        }
+
+        // ===== Build List View =====
+        var calList = document.getElementById('calList');
+        var calListEmpty = document.getElementById('calListEmpty');
+
+        var sortedEvents = EVENTS.slice().sort(function (a, b) {
+            return a.date.localeCompare(b.date);
+        });
+
+        sortedEvents.forEach(function (ev) {
+            var row = document.createElement('div');
+            row.className = 'cal-list-row';
+            row.dataset.type = ev.type;
+            row.dataset.location = ev.location;
+
+            var d = new Date(ev.date + 'T00:00:00');
+
+            var dateEl = document.createElement('div');
+            dateEl.className = 'cal-list-date';
+            dateEl.textContent = slashDate(d);
+
+            var eventEl = document.createElement('div');
+            eventEl.className = 'cal-list-event';
+            eventEl.textContent = 'Event: ' + ev.name;
+
+            var metaEl = document.createElement('div');
+            metaEl.className = 'cal-list-meta';
+            metaEl.textContent = ev.type + ' · ' + ev.location;
+
+            row.appendChild(dateEl);
+            row.appendChild(eventEl);
+            row.appendChild(metaEl);
+            calList.appendChild(row);
+        });
+
+        // ===== Apply filters =====
+        function applyFilters() {
+            var visibleCount = 0;
+
+            document.querySelectorAll('.cal-event-lead').forEach(function (lead) {
+                var match = lead.dataset.location === state.location && state.types[lead.dataset.type];
+                lead.classList.toggle('filtered-out', !match);
+                if (match) visibleCount++;
+            });
+            calGridEmpty.classList.toggle('show', visibleCount === 0);
+
+            var listVisible = 0;
+            document.querySelectorAll('.cal-list-row').forEach(function (row) {
+                var match = row.dataset.location === state.location && state.types[row.dataset.type];
+                row.classList.toggle('filtered-out', !match);
+                if (match) listVisible++;
+            });
+            calListEmpty.classList.toggle('show', listVisible === 0);
+        }
+
+        applyFilters();
+
+        // ===== Location toggle =====
+        document.querySelectorAll('#locationGroup [data-location]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('#locationGroup [data-location]').forEach(function (b) {
+                    b.classList.remove('active');
+                });
+                btn.classList.add('active');
+                state.location = btn.getAttribute('data-location');
+                applyFilters();
+            });
+        });
+
+        // ===== Type tag toggle (multi-select) =====
+        document.querySelectorAll('#typeGroup [data-type]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var type = btn.getAttribute('data-type');
+                state.types[type] = !state.types[type];
+                btn.classList.toggle('active', state.types[type]);
+                applyFilters();
+            });
+        });
+
+        // ===== View switcher =====
+        var gridView = document.getElementById('gridView');
+        var listView = document.getElementById('listView');
+
+        function fadeIn(el) {
+            el.classList.add('active');
+            el.style.opacity = '0';
+            requestAnimationFrame(function () {
+                el.style.opacity = '1';
+            });
+        }
+
+        document.querySelectorAll('#viewGroup [data-view]').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('#viewGroup [data-view]').forEach(function (b) {
+                    b.classList.remove('active');
+                });
+                btn.classList.add('active');
+
+                var view = btn.getAttribute('data-view');
+                if (view === 'grid') {
+                    listView.classList.remove('active');
+                    fadeIn(gridView);
+                } else {
+                    gridView.classList.remove('active');
+                    fadeIn(listView);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

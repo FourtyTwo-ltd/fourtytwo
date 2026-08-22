@@ -1,16 +1,11 @@
-/* ===== 42 — Clothing / Product HUD Page ===== */
+/* ===== 42 — Clothing / Product HUD Page =====
+   Page-specific styles only. Header, mobile menu, ticket-tab
+   component, and footer live in header-footer.css (shared site-wide). */
 
-@import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@600;700&display=swap');
 
 :root {
-    --bg: #0D0D0E;
-    --panel: #1A1A1E;
-    --panel-border: #2A2A2E;
-    --ink: #FFFFFF;
-    --grey: #A0A0A0;
     --line: #2A2A2E;
-    --accent: #1040B0;
-    --accent-hover: #1E56C8;
     --hud-line: rgba(200, 220, 255, 0.45);
 }
 
@@ -34,213 +29,6 @@ body {
 
 a {
     color: inherit;
-}
-
-/* ===== Header ===== */
-.pdp-header {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: start;
-    gap: 16px;
-    padding: 20px 32px 0;
-}
-
-.header-left {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    justify-self: start;
-}
-
-.header-center {
-    display: flex;
-    align-items: center;
-    justify-self: center;
-}
-
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    justify-self: end;
-}
-
-.pdp-logo {
-    display: block;
-    height: 50px;
-    width: auto;
-}
-
-.pdp-breadcrumb {
-    font-size: 0.65rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--grey);
-}
-
-.pdp-nav-center {
-    display: flex;
-}
-
-/* ===== Hamburger (mobile only) ===== */
-.hamburger-btn {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    width: 28px;
-    height: 22px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-}
-
-.hamburger-btn span {
-    display: block;
-    width: 100%;
-    height: 2px;
-    background: #ffffff;
-}
-
-/* ===== Mobile Full-Screen Menu ===== */
-.mobile-menu-overlay {
-    position: fixed;
-    inset: 0;
-    background: var(--bg);
-    z-index: 2000;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 40px 32px;
-    opacity: 0;
-    transform: translateY(-12px);
-    pointer-events: none;
-    transition: opacity 0.25s ease, transform 0.25s ease;
-}
-
-.mobile-menu-overlay.open {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-.mobile-menu-close {
-    position: absolute;
-    top: 24px;
-    right: 28px;
-    background: none;
-    border: none;
-    color: #ffffff;
-    font-size: 2rem;
-    line-height: 1;
-    cursor: pointer;
-}
-
-.mobile-menu-list {
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
-}
-
-.mobile-menu-item {
-    display: flex;
-    align-items: baseline;
-    gap: 18px;
-    font-family: 'Space Mono', monospace;
-    font-size: 1.6rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
-    color: #ffffff;
-    text-decoration: none;
-}
-
-.mm-index {
-    font-size: 0.85rem;
-    font-weight: 400;
-    color: var(--grey);
-    min-width: 3.4em;
-}
-
-.mobile-menu-item.active,
-.mobile-menu-item.active .mm-index {
-    color: var(--accent-hover);
-}
-
-/* ===== Ticket-Tab Component =====
-   Interlocking rounded-block navigation with a narrow connecting
-   "neck" between each pair of tabs, and small circular notches
-   punched out of the neck (colored to match the canvas) to create
-   the ticket-stub / perforated coupon-link seam. Reused for nav,
-   size selection, and CTA buttons for site-wide consistency. */
-.ticket-group {
-    display: flex;
-    align-items: center;
-}
-
-.ticket-tab {
-    position: relative;
-    z-index: 2;
-    height: 34px;
-    padding: 0 22px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9px;
-    background: var(--panel);
-    border: 1px solid var(--panel-border);
-    color: var(--ink);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    text-decoration: none;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-}
-
-.ticket-tab.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #ffffff;
-}
-
-.ticket-tab:hover {
-    background: var(--accent-hover);
-    border-color: var(--accent-hover);
-    color: #ffffff;
-}
-
-.ticket-neck {
-    position: relative;
-    z-index: 1;
-    width: 14px;
-    height: 14px;
-    flex-shrink: 0;
-    background: var(--panel-border);
-    margin: 0 -1px;
-}
-
-.ticket-neck::before,
-.ticket-neck::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    background: var(--bg);
-}
-
-.ticket-neck::before {
-    top: -5.5px;
-}
-
-.ticket-neck::after {
-    bottom: -5.5px;
 }
 
 /* ===== Stage ===== */
@@ -312,9 +100,10 @@ a {
 }
 
 .price-value {
-    font-size: 2.4rem;
-    font-weight: 800;
-    letter-spacing: -0.01em;
+    font-family: 'Space Grotesk', 'Space Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
     color: var(--ink);
 }
 
@@ -522,154 +311,8 @@ a {
     color: #ffffff;
 }
 
-/* ===== Footer ===== */
-.pdp-footer {
-    border-top: 1px solid var(--panel-border);
-    margin-top: 40px;
-}
-
-.footer-top {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 48px 32px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    justify-content: space-between;
-}
-
-.footer-col {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.footer-owner {
-    color: var(--ink);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    font-size: 0.75rem;
-}
-
-.footer-owner-sub {
-    color: var(--grey);
-    font-size: 0.68rem;
-    letter-spacing: 0.04em;
-}
-
-.footer-copyright {
-    color: var(--grey);
-    margin-top: 6px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 0.6rem;
-}
-
-.footer-link {
-    color: var(--ink);
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: 0.7rem;
-    transition: color 0.2s ease;
-}
-
-.footer-link:hover {
-    color: var(--accent-hover);
-}
-
-.footer-social {
-    display: flex;
-    gap: 18px;
-    margin-top: 4px;
-}
-
-.newsletter-form {
-    display: flex;
-    border: 1px solid var(--panel-border);
-    border-radius: 999px;
-    overflow: hidden;
-    min-width: 240px;
-}
-
-.newsletter-form input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    padding: 10px 16px;
-    color: var(--ink);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.newsletter-form input::placeholder {
-    color: var(--grey);
-}
-
-.newsletter-form input:focus {
-    outline: none;
-}
-
-.newsletter-form button {
-    background: var(--accent);
-    border: none;
-    color: #ffffff;
-    width: 44px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.newsletter-form button:hover {
-    background: var(--accent-hover);
-}
-
-.footer-hero {
-    width: 100%;
-    overflow: hidden;
-    padding: 0 24px 32px;
-}
-
-.footer-hero-logo {
-    width: 100%;
-    display: block;
-}
-
 /* ===== Responsive (Mobile ≤768px) ===== */
 @media (max-width: 768px) {
-    .pdp-header {
-        grid-template-columns: 1fr auto;
-        align-items: center;
-        padding: 20px 24px 0;
-    }
-
-    .header-left {
-        justify-self: start;
-    }
-
-    .pdp-logo {
-        height: 38px;
-    }
-
-    .header-center {
-        display: none;
-    }
-
-    .header-right {
-        justify-self: end;
-    }
-
-    .header-right .pdp-nav-right {
-        display: none;
-    }
-
-    .hamburger-btn {
-        display: flex;
-    }
-
     .pdp-stage {
         display: flex;
         flex-direction: column;
@@ -698,17 +341,6 @@ a {
 
     .hud-lines {
         display: none;
-    }
-
-    .footer-top {
-        flex-direction: column;
-        gap: 28px;
-        padding: 40px 24px;
-    }
-
-    .newsletter-form {
-        min-width: 0;
-        width: 100%;
     }
 
     .currency-widget {

@@ -145,7 +145,7 @@ body {
 
 /* Page Header */
 .page-header {
-    padding-top: 120px;
+    padding-top: 48px;
     padding-bottom: 80px;
     border-bottom: 1px solid var(--border-color);
 }
@@ -182,7 +182,6 @@ body {
     background: #000000;
     overflow: hidden;
     border-bottom: 1px solid var(--border-color);
-    margin-top: 60px;
 }
 
 .hero-bg {

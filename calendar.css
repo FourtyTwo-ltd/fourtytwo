@@ -1,0 +1,304 @@
+/* ===== 42 — Calendar Page (Brutalist Dual-View) =====
+   Page-specific styles. Header, mobile menu, ticket-tab component,
+   and footer come from header-footer.css (shared site-wide). */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Mono', 'Courier Prime', monospace;
+    min-height: 100vh;
+}
+
+a {
+    color: inherit;
+}
+
+/* ===== Title ===== */
+.cal-title {
+    padding: 36px 32px 20px;
+}
+
+.cal-title h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.6rem, 7vw, 5.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    text-transform: uppercase;
+}
+
+/* ===== Controls ===== */
+.cal-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px 28px;
+    border-bottom: 1px solid var(--panel-border);
+}
+
+.cal-filter-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.cal-filter-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--grey);
+    margin-right: 4px;
+}
+
+.type-tag-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.type-tag {
+    padding: 8px 16px;
+    border: 1px solid var(--panel-border);
+    border-radius: 999px;
+    background: var(--panel);
+    color: var(--ink);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.type-tag:hover {
+    transform: translateY(-1px);
+    border-color: var(--accent-hover);
+}
+
+.type-tag.active {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+/* ===== View switch ===== */
+.cal-view {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cal-view.active {
+    display: block;
+}
+
+/* ===== Grid View ===== */
+.cal-grid-wrap {
+    padding: 28px 32px 60px;
+}
+
+.cal-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    margin-bottom: 1px;
+}
+
+.cal-weekday {
+    background: var(--panel);
+    color: var(--grey);
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background: var(--panel-border);
+    border: 1px solid var(--panel-border);
+}
+
+.cal-cell {
+    background: var(--bg);
+    min-height: 120px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: background 0.2s ease;
+}
+
+.cal-cell:hover {
+    background: var(--panel);
+}
+
+.cal-cell.muted {
+    opacity: 0.3;
+}
+
+.cal-cell.muted:hover {
+    background: var(--bg);
+}
+
+.cal-cell-day {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.cal-cell-events {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cal-event-lead {
+    font-size: 0.58rem;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    line-height: 1.4;
+    cursor: default;
+    transition: color 0.2s ease;
+}
+
+.cal-event-lead:hover {
+    color: var(--accent-hover);
+}
+
+.cal-event-lead.filtered-out {
+    display: none;
+}
+
+/* ===== List View ===== */
+.cal-list {
+    padding: 8px 32px 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+.cal-list-row {
+    display: flex;
+    align-items: baseline;
+    gap: 24px;
+    padding: 18px 4px;
+    border-bottom: 1px solid var(--panel-border);
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.cal-list-row:hover {
+    background: var(--panel);
+    transform: translateX(4px);
+}
+
+.cal-list-row.filtered-out {
+    display: none;
+}
+
+.cal-list-date {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    min-width: 80px;
+    color: var(--accent-hover);
+}
+
+.cal-list-event {
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.cal-list-meta {
+    font-size: 0.6rem;
+    color: var(--grey);
+    margin-left: auto;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+}
+
+.cal-list-empty,
+.cal-grid-empty {
+    padding: 40px 4px;
+    color: var(--grey);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    display: none;
+}
+
+.cal-list-empty.show,
+.cal-grid-empty.show {
+    display: block;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .cal-title {
+        padding: 28px 20px 16px;
+    }
+
+    .cal-controls {
+        padding: 0 20px 24px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .cal-grid-wrap {
+        padding: 20px 12px 40px;
+    }
+
+    .cal-weekday {
+        font-size: 0.5rem;
+        padding: 6px 0;
+    }
+
+    .cal-cell {
+        min-height: 76px;
+        padding: 6px;
+        gap: 3px;
+    }
+
+    .cal-cell-day {
+        font-size: 0.72rem;
+    }
+
+    .cal-event-lead {
+        font-size: 0.48rem;
+    }
+
+    .cal-list {
+        padding: 8px 20px 48px;
+    }
+
+    .cal-list-row {
+        flex-wrap: wrap;
+        gap: 8px 16px;
+    }
+
+    .cal-list-meta {
+        margin-left: 0;
+        width: 100%;
+    }
+}

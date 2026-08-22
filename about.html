@@ -4,25 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - 42</title>
+    <link rel="stylesheet" href="header-footer.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">fourtytwo</div>
-            <ul class="nav-links">
-                <li><a href="events.html">Events</a></li>
-                <li><a href="clothing.html">Shop</a></li>
-                <li><a href="calendar.html">Explore</a></li>
-                <li><a href="about.html" class="active">About</a></li>
-            </ul>
-            <div class="nav-right">
-                <a href="#" class="nav-icon">Search</a>
-                <a href="#" class="nav-icon">Log In</a>
-                <a href="#" class="nav-icon">Bag/0</a>
-            </div>
+    <header class="pdp-header">
+        <div class="header-left">
+            <a href="index.html"><img src="assets/42logowhite.png" alt="42" class="pdp-logo"></a>
+            <span class="pdp-breadcrumb">Home &gt; About</span>
         </div>
-    </nav>
+
+        <div class="header-center">
+            <nav class="pdp-nav-center">
+                <div class="ticket-group">
+                    <a href="clothing.html" class="ticket-tab">Clothing</a>
+                    <span class="ticket-neck"></span>
+                    <a href="calendar.html" class="ticket-tab">Calendar</a>
+                    <span class="ticket-neck"></span>
+                    <a href="events.html" class="ticket-tab">Events</a>
+                </div>
+            </nav>
+        </div>
+
+        <div class="header-right">
+            <div class="pdp-nav-right">
+                <div class="ticket-group">
+                    <a href="#" class="ticket-tab">Log In</a>
+                    <span class="ticket-neck"></span>
+                    <a href="about.html" class="ticket-tab active">About</a>
+                </div>
+            </div>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-menu-overlay" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">&times;</button>
+        <nav class="mobile-menu-list">
+            <a href="index.html" class="mobile-menu-item"><span class="mm-index">0001</span>Home</a>
+            <a href="clothing.html" class="mobile-menu-item"><span class="mm-index">0002</span>Clothing</a>
+            <a href="calendar.html" class="mobile-menu-item"><span class="mm-index">0003</span>Calendar</a>
+            <a href="events.html" class="mobile-menu-item"><span class="mm-index">0004</span>Events</a>
+            <a href="about.html" class="mobile-menu-item active"><span class="mm-index">0005</span>About &amp; Contact</a>
+            <a href="#" class="mobile-menu-item"><span class="mm-index">0006</span>Log In</a>
+        </nav>
+    </div>
 
     <section class="page-header">
         <h1>About 42</h1>
@@ -93,11 +121,59 @@
         </div>
     </section>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <p>&copy; 2026 42. All rights reserved.</p>
-            <p>WayKON Holdings</p>
+    <footer class="pdp-footer">
+        <div class="footer-top">
+            <div class="footer-col footer-legal">
+                <p class="footer-owner">Owned by WayKON</p>
+                <p class="footer-owner-sub">WayKON Holdings</p>
+                <p class="footer-copyright">Copyright &copy; 2026 Fourtytwo</p>
+            </div>
+
+            <div class="footer-col footer-contact">
+                <a href="mailto:fourtytwolagos@gmail.com" class="footer-link footer-email">fourtytwolagos@gmail.com</a>
+                <div class="footer-social">
+                    <a href="#" class="footer-link" target="_blank" rel="noopener">Instagram</a>
+                    <a href="#" class="footer-link" target="_blank" rel="noopener">TikTok</a>
+                </div>
+            </div>
+
+            <div class="footer-col footer-newsletter">
+                <form class="newsletter-form" id="globalNewsletterForm">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" aria-label="Subscribe">&gt;</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-hero">
+            <img src="assets/42hooklogo.png" alt="42" class="footer-hero-logo">
         </div>
     </footer>
+
+    <script>
+        var hamburgerBtn = document.getElementById('hamburgerBtn');
+        var mobileMenu = document.getElementById('mobileMenu');
+        var mobileMenuClose = document.getElementById('mobileMenuClose');
+
+        hamburgerBtn.addEventListener('click', function () {
+            mobileMenu.classList.add('open');
+        });
+
+        mobileMenuClose.addEventListener('click', function () {
+            mobileMenu.classList.remove('open');
+        });
+
+        document.querySelectorAll('.mobile-menu-item').forEach(function (item) {
+            item.addEventListener('click', function () {
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        var globalNewsletterForm = document.getElementById('globalNewsletterForm');
+        globalNewsletterForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            globalNewsletterForm.reset();
+        });
+    </script>
 </body>
 </html>
