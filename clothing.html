@@ -9,12 +9,11 @@
 <body>
     <header class="pdp-header">
         <div class="header-left">
-            <a href="index.html"><img src="assets/42logowhite.png" alt="42" class="pdp-logo mobile-logo"></a>
+            <a href="index.html"><img src="assets/42logowhite.png" alt="42" class="pdp-logo"></a>
             <span class="pdp-breadcrumb">Home &gt; Clothing &gt; Piece_001</span>
         </div>
 
         <div class="header-center">
-            <a href="index.html"><img src="assets/42logowhite.png" alt="42" class="pdp-logo desktop-logo"></a>
             <nav class="pdp-nav-center">
                 <div class="ticket-group">
                     <a href="clothing.html" class="ticket-tab active">Clothing</a>
@@ -63,7 +62,7 @@
             <div class="panel-inner">
                 <div class="product-title">42 Double-Collared Polo</div>
                 <div class="price-row">
-                    <span class="price-value">₦65,000</span>
+                    <span class="price-value" id="priceValue">₦65,000</span>
                     <span class="tag-pill">Pre-Order</span>
                 </div>
 
@@ -129,19 +128,16 @@
         <div class="pdp-panel panel-right">
             <div class="panel-inner">
                 <div class="size-label">Size</div>
-                <div class="ticket-group size-selector">
+                <div class="size-selector">
                     <button class="ticket-tab size-btn" data-size>XS/S</button>
-                    <span class="ticket-neck"></span>
                     <button class="ticket-tab size-btn active" data-size>M/L</button>
-                    <span class="ticket-neck"></span>
                     <button class="ticket-tab size-btn" data-size>XL/2XL</button>
                 </div>
                 <div class="fit-note">
                     Model is 185 &amp; wears size M. <a href="#">Size Guide</a>
                 </div>
-                <div class="ticket-group action-ticket">
+                <div class="action-ticket">
                     <button class="ticket-tab active save-btn">Save</button>
-                    <span class="ticket-neck"></span>
                     <button class="ticket-tab active preorder-btn">Pre-Order</button>
                 </div>
                 <div class="payment-note">
@@ -150,6 +146,48 @@
             </div>
         </div>
     </section>
+
+    <footer class="pdp-footer">
+        <div class="footer-top">
+            <div class="footer-col footer-legal">
+                <p class="footer-owner">Owned by WayKON</p>
+                <p class="footer-owner-sub">WayKON Holdings</p>
+                <p class="footer-copyright">Copyright &copy; 2026 Fourtytwo</p>
+            </div>
+
+            <div class="footer-col footer-contact">
+                <a href="mailto:fourtytwolagos@gmail.com" class="footer-link">fourtytwolagos@gmail.com</a>
+                <div class="footer-social">
+                    <a href="#" class="footer-link" target="_blank" rel="noopener">Instagram</a>
+                    <a href="#" class="footer-link" target="_blank" rel="noopener">TikTok</a>
+                </div>
+            </div>
+
+            <div class="footer-col footer-newsletter">
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit" aria-label="Subscribe">&gt;</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-hero">
+            <img src="assets/42hooklogo.png" alt="42" class="footer-hero-logo">
+        </div>
+    </footer>
+
+    <div class="currency-widget" id="currencyWidget">
+        <button class="currency-toggle" id="currencyToggle">
+            <span id="currencyLabel">NGN 🇳🇬</span>
+        </button>
+        <div class="currency-dropdown" id="currencyDropdown">
+            <button type="button" data-currency="NGN" class="active">NGN 🇳🇬</button>
+            <button type="button" data-currency="GBP">GBP 🇬🇧</button>
+            <button type="button" data-currency="USD">USD 🇺🇸</button>
+            <button type="button" data-currency="EUR">EUR 🇪🇺</button>
+            <button type="button" data-currency="AED">AED 🇦🇪</button>
+        </div>
+    </div>
 
     <script>
         var hamburgerBtn = document.getElementById('hamburgerBtn');
@@ -191,6 +229,48 @@
                     row.querySelector('.accordion-indicator').textContent = '[ — ]';
                 }
             });
+        });
+
+        var PRICES = {
+            NGN: '₦65,000',
+            GBP: '£40',
+            USD: '$50',
+            EUR: '€40',
+            AED: '180 AED'
+        };
+
+        var currencyToggle = document.getElementById('currencyToggle');
+        var currencyDropdown = document.getElementById('currencyDropdown');
+        var currencyLabel = document.getElementById('currencyLabel');
+        var priceValue = document.getElementById('priceValue');
+
+        currencyToggle.addEventListener('click', function (e) {
+            e.stopPropagation();
+            currencyDropdown.classList.toggle('open');
+        });
+
+        document.addEventListener('click', function () {
+            currencyDropdown.classList.remove('open');
+        });
+
+        document.querySelectorAll('#currencyDropdown button').forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                var code = btn.getAttribute('data-currency');
+                document.querySelectorAll('#currencyDropdown button').forEach(function (b) {
+                    b.classList.remove('active');
+                });
+                btn.classList.add('active');
+                currencyLabel.textContent = btn.textContent;
+                priceValue.textContent = PRICES[code];
+                currencyDropdown.classList.remove('open');
+            });
+        });
+
+        var newsletterForm = document.getElementById('newsletterForm');
+        newsletterForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            newsletterForm.reset();
         });
     </script>
 </body>

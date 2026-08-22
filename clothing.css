@@ -54,31 +54,21 @@ a {
 
 .header-center {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 8px;
     justify-self: center;
 }
 
 .header-right {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 16px;
     justify-self: end;
 }
 
 .pdp-logo {
     display: block;
-    height: 45px;
+    height: 50px;
     width: auto;
-}
-
-.desktop-logo {
-    display: block;
-}
-
-.mobile-logo {
-    display: none;
 }
 
 .pdp-breadcrumb {
@@ -322,9 +312,10 @@ a {
 }
 
 .price-value {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--grey);
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--ink);
 }
 
 .tag-pill {
@@ -391,22 +382,33 @@ a {
     margin-bottom: 12px;
 }
 
-.size-selector {
+/* Size selector & CTA: flush capsule, no ticket-neck bridge — tabs
+   sit directly touching with a shared divider, unlike the header nav. */
+.size-selector,
+.action-ticket {
+    display: flex;
+    border: 1px solid var(--panel-border);
+    border-radius: 9px;
+    overflow: hidden;
     margin-bottom: 14px;
 }
 
-.size-selector .ticket-tab {
+.size-selector .ticket-tab,
+.action-ticket .ticket-tab {
     flex: 1;
-    padding: 0 10px;
-    font-size: 0.62rem;
+    border: none;
+    border-right: 1px solid var(--panel-border);
+    border-radius: 0;
 }
 
-/* Clean structural bridge for size selector & CTA — no notch dots */
-.size-selector .ticket-neck::before,
-.size-selector .ticket-neck::after,
-.action-ticket .ticket-neck::before,
-.action-ticket .ticket-neck::after {
-    display: none;
+.size-selector .ticket-tab:last-child,
+.action-ticket .ticket-tab:last-child {
+    border-right: none;
+}
+
+.size-selector .ticket-tab {
+    padding: 0 10px;
+    font-size: 0.62rem;
 }
 
 .fit-note {
@@ -418,10 +420,6 @@ a {
 
 .fit-note a {
     text-decoration: underline;
-}
-
-.action-ticket {
-    margin-bottom: 14px;
 }
 
 .action-ticket .ticket-tab {
@@ -449,6 +447,197 @@ a {
     color: var(--accent-hover);
 }
 
+/* ===== Currency / Region Widget ===== */
+.currency-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1500;
+}
+
+.currency-toggle {
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 999px;
+    color: var(--ink);
+    padding: 10px 18px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+}
+
+.currency-toggle:hover {
+    border-color: var(--accent-hover);
+}
+
+.currency-dropdown {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    right: 0;
+    min-width: 150px;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
+}
+
+.currency-dropdown.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.currency-dropdown button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 11px 16px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--panel-border);
+    color: var(--ink);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.currency-dropdown button:last-child {
+    border-bottom: none;
+}
+
+.currency-dropdown button:hover,
+.currency-dropdown button.active {
+    background: var(--accent-hover);
+    color: #ffffff;
+}
+
+/* ===== Footer ===== */
+.pdp-footer {
+    border-top: 1px solid var(--panel-border);
+    margin-top: 40px;
+}
+
+.footer-top {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 48px 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: space-between;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-owner {
+    color: var(--ink);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 0.75rem;
+}
+
+.footer-owner-sub {
+    color: var(--grey);
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+}
+
+.footer-copyright {
+    color: var(--grey);
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.6rem;
+}
+
+.footer-link {
+    color: var(--ink);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.7rem;
+    transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+    color: var(--accent-hover);
+}
+
+.footer-social {
+    display: flex;
+    gap: 18px;
+    margin-top: 4px;
+}
+
+.newsletter-form {
+    display: flex;
+    border: 1px solid var(--panel-border);
+    border-radius: 999px;
+    overflow: hidden;
+    min-width: 240px;
+}
+
+.newsletter-form input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 10px 16px;
+    color: var(--ink);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.newsletter-form input::placeholder {
+    color: var(--grey);
+}
+
+.newsletter-form input:focus {
+    outline: none;
+}
+
+.newsletter-form button {
+    background: var(--accent);
+    border: none;
+    color: #ffffff;
+    width: 44px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.newsletter-form button:hover {
+    background: var(--accent-hover);
+}
+
+.footer-hero {
+    width: 100%;
+    overflow: hidden;
+    padding: 0 24px 32px;
+}
+
+.footer-hero-logo {
+    width: 100%;
+    display: block;
+}
+
 /* ===== Responsive (Mobile ≤768px) ===== */
 @media (max-width: 768px) {
     .pdp-header {
@@ -461,12 +650,8 @@ a {
         justify-self: start;
     }
 
-    .desktop-logo {
-        display: none;
-    }
-
-    .mobile-logo {
-        display: block;
+    .pdp-logo {
+        height: 38px;
     }
 
     .header-center {
@@ -497,11 +682,11 @@ a {
         min-height: 320px;
     }
 
-    .panel-right {
+    .panel-left {
         order: 2;
     }
 
-    .panel-left {
+    .panel-right {
         order: 3;
     }
 
@@ -513,5 +698,21 @@ a {
 
     .hud-lines {
         display: none;
+    }
+
+    .footer-top {
+        flex-direction: column;
+        gap: 28px;
+        padding: 40px 24px;
+    }
+
+    .newsletter-form {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .currency-widget {
+        bottom: 16px;
+        right: 16px;
     }
 }
