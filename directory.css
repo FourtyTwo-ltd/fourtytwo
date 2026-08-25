@@ -216,6 +216,10 @@ a {
    top padding reserved on desktop. */
 @media (max-width: 768px) {
     .directory-stage {
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
         padding-top: 0;
         padding-bottom: 0;
         justify-content: center;
