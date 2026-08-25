@@ -445,10 +445,15 @@ a {
         margin: 20px;
     }
 
+    .ev-hero-visual {
+        min-height: 230px;
+        margin-bottom: -3rem;
+    }
+
     .ev-hero-content {
         margin-top: 0;
         margin-bottom: 0;
-        padding-top: 0.5rem;
+        padding-top: 6px;
     }
 
     .ev-hero-meta {
