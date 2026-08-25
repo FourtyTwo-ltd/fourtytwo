@@ -69,25 +69,47 @@ a {
     opacity: 0.5;
 }
 
-/* ===== Featured Boarding Pass Hero ===== */
+/* ===== Featured Event Hero ===== */
 .ev-hero {
     margin: 32px;
-    border: 1px solid var(--panel-border);
     position: relative;
     display: grid;
-    grid-template-columns: 1.2fr 1px 1fr;
-    background: var(--panel-border);
-    gap: 0;
+    grid-template-columns: 1.05fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "visual content"
+        "visual meta";
+    gap: 0 48px;
+}
+
+/* Eyes graphic — masked/feathered so it dissolves into the page
+   background instead of sitting inside a visible frame. */
+.ev-hero-visual {
+    grid-area: visual;
+    position: relative;
+    min-height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
 }
 
-.ev-hero-main {
-    background: var(--bg);
-    padding: 40px;
+.ev-hero-eyes {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
+    -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
+    mix-blend-mode: screen;
+}
+
+.ev-hero-content {
+    grid-area: content;
+    align-self: end;
     display: flex;
     flex-direction: column;
     gap: 14px;
-    position: relative;
+    padding: 40px 0 24px;
 }
 
 .ev-hero-tag {
@@ -98,11 +120,20 @@ a {
     font-weight: 700;
 }
 
-.ev-hero-main h2 {
+.ev-hero-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
     font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(2.2rem, 5vw, 4rem);
     text-transform: uppercase;
     letter-spacing: -0.01em;
+}
+
+.ev-title-logo {
+    height: 0.85em;
+    width: auto;
+    display: block;
 }
 
 .ev-hero-desc {
@@ -112,33 +143,19 @@ a {
     max-width: 46ch;
 }
 
-.ev-hero-watermark {
-    position: absolute;
-    bottom: 24px;
-    right: 24px;
-    height: 60px;
-    width: auto;
-    opacity: 0.12;
-    pointer-events: none;
-}
-
-.ev-hero-stub {
-    background: var(--bg);
-    padding: 40px 32px;
+.ev-hero-meta {
+    grid-area: meta;
+    align-self: start;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     gap: 10px;
-    position: relative;
+    padding: 24px 0 40px;
 }
 
-.ev-hero-stub::before {
-    content: '';
-    position: absolute;
-    left: -1px;
-    top: 0;
-    bottom: 0;
-    border-left: 1px dashed var(--panel-border);
+.ev-hero-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .ev-stub-row {
@@ -157,6 +174,19 @@ a {
     font-weight: 700;
 }
 
+.ev-map-link {
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--panel-border);
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.ev-map-link:hover {
+    color: var(--accent-hover);
+    text-decoration-color: var(--accent-hover);
+}
+
 .ev-hero-cta {
     margin-top: 10px;
     align-self: flex-start;
@@ -169,12 +199,44 @@ a {
     letter-spacing: 0.08em;
     text-transform: uppercase;
     border-radius: 999px;
+    white-space: nowrap;
     transition: background 0.2s ease, transform 0.15s ease;
 }
 
 .ev-hero-cta:hover {
     background: var(--accent-hover);
     transform: translateY(-1px);
+}
+
+/* ===== Special Guests Marquee ===== */
+.ev-guests {
+    margin-top: 8px;
+}
+
+.ev-marquee {
+    width: 100%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+}
+
+.ev-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+}
+
+.ev-marquee-card {
+    height: 220px;
+    width: auto;
+    flex-shrink: 0;
+    margin-right: 20px;
+    display: block;
 }
 
 /* ===== Section Head ===== */
@@ -330,12 +392,38 @@ a {
 /* ===== Responsive ===== */
 @media (max-width: 900px) {
     .ev-hero {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
     }
 
-    .ev-hero-stub::before {
-        display: none;
-        border-top: 1px dashed var(--panel-border);
+    .ev-hero-visual {
+        order: 1;
+        min-height: 300px;
+    }
+
+    .ev-hero-meta {
+        order: 2;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 24px 0;
+    }
+
+    .ev-hero-details {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .ev-hero-content {
+        order: 3;
+        padding: 8px 0 32px;
+    }
+
+    .ev-hero-cta {
+        margin-top: 0;
+        flex-shrink: 0;
     }
 }
 
@@ -354,14 +442,33 @@ a {
         margin: 20px;
     }
 
-    .ev-hero-main,
-    .ev-hero-stub {
-        padding: 26px 22px;
+    .ev-hero-meta {
+        padding: 18px 0;
+        gap: 12px;
+    }
+
+    .ev-hero-details {
+        gap: 8px;
+    }
+
+    .ev-stub-row {
+        font-size: 0.56rem;
+        padding-bottom: 6px;
+    }
+
+    .ev-hero-cta {
+        padding: 12px 18px;
+        font-size: 0.6rem;
     }
 
     .ev-section-head {
         padding: 0 20px;
         margin: 40px 0 16px;
+    }
+
+    .ev-marquee-card {
+        height: 150px;
+        margin-right: 14px;
     }
 
     .ev-card-grid {
