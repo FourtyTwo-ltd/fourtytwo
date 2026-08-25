@@ -32,8 +32,6 @@
                 <div class="ticket-group">
                     <a href="about.html" class="ticket-tab">About</a>
                     <span class="ticket-neck"></span>
-                    <a href="about.html#contact" class="ticket-tab">Contact</a>
-                    <span class="ticket-neck"></span>
                     <a href="#" class="ticket-tab">Log In</a>
                 </div>
             </div>
@@ -46,20 +44,15 @@
     <div class="mobile-menu-overlay" id="mobileMenu">
         <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">&times;</button>
         <nav class="mobile-menu-list">
-            <a href="index.html" class="mobile-menu-item"><span class="mm-index">0001</span>Home</a>
-            <a href="clothing.html" class="mobile-menu-item"><span class="mm-index">0002</span>Clothing</a>
-            <a href="calendar.html" class="mobile-menu-item"><span class="mm-index">0003</span>Calendar</a>
-            <a href="events.html" class="mobile-menu-item active"><span class="mm-index">0004</span>Events</a>
-            <a href="about.html" class="mobile-menu-item"><span class="mm-index">0005</span>About &amp; Contact</a>
-            <a href="#" class="mobile-menu-item"><span class="mm-index">0006</span>Log In</a>
+            <a href="index.html" class="mobile-menu-item"><span class="mm-index">0001</span>Directory</a>
+            <a href="events.html" class="mobile-menu-item active"><span class="mm-index">0002</span>Events</a>
+            <a href="clothing.html" class="mobile-menu-item"><span class="mm-index">0003</span>Clothing</a>
+            <a href="calendar.html" class="mobile-menu-item"><span class="mm-index">0004</span>Calendar</a>
+            <a href="about.html" class="mobile-menu-item"><span class="mm-index">0005</span>About</a>
+            <a href="about.html#contact" class="mobile-menu-item"><span class="mm-index">0006</span>Contact</a>
+            <a href="#" class="mobile-menu-item"><span class="mm-index">0007</span>Log In</a>
         </nav>
     </div>
-
-    <section class="ev-header">
-        <img src="assets/42logowhite.png" alt="" class="ev-header-mark">
-        <h1 class="kinetic-clip" id="evTitle">Events</h1>
-        <p>Experience cultural moments curated with intention</p>
-    </section>
 
     <!-- Featured Event Hero -->
     <section class="ev-hero">
@@ -71,18 +64,18 @@
             <span class="ev-hero-tag">Motive &middot; 42 Proprietary</span>
             <h2 class="ev-hero-title">
                 <img src="assets/42widelogo.png" alt="42" class="ev-title-logo">
-                <span>Fest</span>
+                <span>December</span>
             </h2>
             <p class="ev-hero-desc">
-                Motive is the flagship experience combining music, live performances, fashion, and culture &mdash;
+                42 December is the flagship experience combining music, fashion, and culture &mdash;
                 a curated cultural occasion designed at a controlled scale for maximum impact and atmosphere.
             </p>
         </div>
 
         <div class="ev-hero-meta">
             <div class="ev-hero-details">
-                <div class="ev-stub-row"><span>Date</span><span>Dec 24, 2026</span></div>
-                <div class="ev-stub-row"><span>Time</span><span>9:00 PM</span></div>
+                <div class="ev-stub-row"><span>Date</span><span>Dec 17, 2026</span></div>
+                <div class="ev-stub-row"><span>Time</span><span>9:00 PM &ndash; 3:00 AM</span></div>
                 <div class="ev-stub-row">
                     <span>Location</span>
                     <span>
@@ -97,10 +90,6 @@
 
     <!-- Special Guests -->
     <section class="ev-guests">
-        <div class="ev-section-head">
-            <span class="ev-section-index">00</span>
-            <h3 class="kinetic-clip">Special Guest</h3>
-        </div>
         <div class="ev-marquee">
             <div class="ev-marquee-track">
                 <img src="assets/guestcardtemplate.png" alt="Special guest" class="ev-marquee-card">
@@ -239,10 +228,7 @@
         });
 
         // ===== Kinetic clip-path header reveals =====
-        var evTitle = document.getElementById('evTitle');
-        requestAnimationFrame(function () { evTitle.classList.add('in-view'); });
-
-        var clipHeadings = document.querySelectorAll('.kinetic-clip:not(#evTitle)');
+        var clipHeadings = document.querySelectorAll('.kinetic-clip');
         if ('IntersectionObserver' in window) {
             var clipObserver = new IntersectionObserver(function (entries) {
                 entries.forEach(function (entry) {
