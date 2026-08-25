@@ -244,6 +244,12 @@ a {
     z-index: 1500;
 }
 
+/* This page already has the currency widget at bottom-right; stack the
+   shared audio widget directly above it so neither one overlaps. */
+.audio-widget {
+    bottom: 66px;
+}
+
 .currency-toggle {
     background: var(--panel);
     border: 1px solid var(--panel-border);
@@ -346,5 +352,9 @@ a {
     .currency-widget {
         bottom: 16px;
         right: 16px;
+    }
+
+    .audio-widget {
+        bottom: 60px;
     }
 }

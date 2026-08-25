@@ -8,35 +8,45 @@
     <link rel="stylesheet" href="audio-widget.css">
 </head>
 <body>
-    <div class="directory-stage">
-        <a href="index.html" class="directory-mark">
-            <img src="assets/42logowhite.png" alt="42">
-        </a>
+    <a href="index.html" class="directory-logo-link">
+        <img src="assets/42logowhite.png" alt="42" class="directory-logo">
+    </a>
 
-        <nav class="directory-index">
-            <a href="clothing.html" class="directory-item">
-                <span class="directory-index-num">0001</span>Clothing
+    <a href="#" class="directory-login">Log In</a>
+
+    <div class="directory-stage">
+        <div class="folder-row">
+            <a href="clothing.html" class="folder-item">
+                <span class="folder-icon"><span class="folder-tab"></span><span class="folder-body"></span></span>
+                <span class="folder-label">Clothing</span>
             </a>
-            <a href="calendar.html" class="directory-item">
-                <span class="directory-index-num">0002</span>Calendar
+            <a href="events.html" class="folder-item">
+                <span class="folder-icon"><span class="folder-tab"></span><span class="folder-body"></span></span>
+                <span class="folder-label">Events</span>
             </a>
-            <a href="events.html" class="directory-item">
-                <span class="directory-index-num">0003</span>Events
+        </div>
+        <div class="folder-row">
+            <a href="calendar.html" class="folder-item">
+                <span class="folder-icon"><span class="folder-tab"></span><span class="folder-body"></span></span>
+                <span class="folder-label">Calendar</span>
             </a>
-            <a href="about.html" class="directory-item">
-                <span class="directory-index-num">0004</span>About &amp; Contact
+            <a href="about.html" class="folder-item">
+                <span class="folder-icon"><span class="folder-tab"></span><span class="folder-body"></span></span>
+                <span class="folder-label">About</span>
             </a>
-            <a href="#" class="directory-item">
-                <span class="directory-index-num">0005</span>Log In
+            <a href="about.html#contact" class="folder-item">
+                <span class="folder-icon"><span class="folder-tab"></span><span class="folder-body"></span></span>
+                <span class="folder-label">Contact</span>
             </a>
-        </nav>
+        </div>
     </div>
 
-    <button type="button" class="audio-widget directory-audio" aria-label="Toggle background audio">
+    <button type="button" class="audio-widget" aria-label="Toggle background audio">
         <span class="audio-status-light"></span>
         <span class="audio-label">Audio: On</span>
     </button>
 
     <script src="audio.js"></script>
+    <script src="pjax.js"></script>
 </body>
 </html>

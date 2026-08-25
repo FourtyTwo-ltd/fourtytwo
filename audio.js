@@ -1,13 +1,13 @@
 /* ===== 42 — Sitewide Persistent Audio Playlist =====
-   Shared by every page. Plays Track 1, then Track 2, looping back to
-   Track 1. Honesty note: this is a classic multi-page site (real
-   full navigations, not an SPA), so audio cannot be truly gapless
-   across page loads — there is no way to keep one <audio> element
-   alive through a browser navigation. What this DOES do: persist
-   {track, position, on/off} to localStorage on every page, and on
-   the next page resume that same track from that same position, so
-   playback picks back up rather than restarting from Track 1 muted.
-   Any gap is just the navigation time itself. */
+   Loaded exactly ONCE per real page load (pjax.js swaps page content
+   via fetch() without ever reloading the document, so this script —
+   and the single `audioEngine` Audio object it creates — survives
+   every internal navigation untouched. That's what makes playback
+   genuinely continuous instead of restarting per page.
+
+   Exposes window.Audio42.reinitWidgets(), which pjax.js calls after
+   every content swap to rebind the (freshly swapped-in) widget button
+   to this same persistent engine and reflect its current state. */
 (function () {
     var TRACKS = ['assets/bg-audio.mp3', 'assets/bg-audio-2.mp3'];
     var STORAGE_KEY = 'audio42State';
@@ -81,17 +81,20 @@
         saveState();
     }
 
-    function initWidgets() {
+    // Re-binds click handlers on whatever .audio-widget button currently
+    // exists in the DOM. Safe to call repeatedly (every pjax swap) since
+    // it always targets the current node, not a stale reference.
+    function reinitWidgets() {
         applyWidgetUI();
         document.querySelectorAll('.audio-widget').forEach(function (w) {
-            w.addEventListener('click', function () { setAudioState(!state.isOn); });
+            w.onclick = function () { setAudioState(!state.isOn); };
         });
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initWidgets);
+        document.addEventListener('DOMContentLoaded', reinitWidgets);
     } else {
-        initWidgets();
+        reinitWidgets();
     }
 
     // Desktop and mobile both follow the same browser autoplay policy:
@@ -113,4 +116,6 @@
 
     window.addEventListener('pagehide', saveState);
     setInterval(saveState, 2000); // periodic checkpoint as a pagehide fallback
+
+    window.Audio42 = { reinitWidgets: reinitWidgets };
 })();
