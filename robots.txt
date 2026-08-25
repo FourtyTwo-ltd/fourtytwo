@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /events
+Allow: /calendar
+
+Sitemap: https://fourtytwolagos.com/sitemap.xml

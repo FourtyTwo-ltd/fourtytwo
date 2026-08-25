@@ -34,9 +34,14 @@
 }
 
 /* Compensates for the header's own height now that it's removed from
-   normal flow — keeps every page's content clear of the fixed bar. */
+   normal flow — keeps every page's content clear of the fixed bar.
+   Explicit scroll rules guard against any page-specific stylesheet
+   (e.g. directory.css) leaving overflow locked after a pjax swap —
+   belt-and-suspenders on top of the pjax stylesheet-reconciliation fix. */
 body {
     padding-top: 84px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .header-left {
@@ -282,6 +287,21 @@ body {
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-size: 0.6rem;
+}
+
+.footer-legal-links {
+    display: flex;
+    gap: 14px;
+    margin-top: 10px;
+}
+
+.footer-legal-links .footer-link {
+    font-size: 0.6rem;
+    color: var(--grey);
+}
+
+.footer-legal-links .footer-link:hover {
+    color: var(--accent-hover);
 }
 
 .footer-link {

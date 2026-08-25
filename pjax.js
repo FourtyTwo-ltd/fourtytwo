@@ -11,7 +11,7 @@
    Falls back to a real navigation (window.location.href) if fetch
    fails for any reason, so the site still works with this disabled. */
 (function () {
-    var PAGES = ['index.html', 'clothing.html', 'calendar.html', 'events.html', 'about.html'];
+    var PAGES = ['index.html', 'clothing.html', 'calendar.html', 'events.html', 'about.html', 'privacy.html', 'terms.html'];
     var isNavigating = false;
 
     function isInternalLink(a) {
@@ -34,7 +34,25 @@
         return PAGES.indexOf(last) !== -1;
     }
 
+    // Reconciles <link rel="stylesheet"> tags to exactly match the target
+    // page: adds what's missing AND removes what the new page doesn't
+    // load. Without the removal step, a page-specific stylesheet (e.g.
+    // directory.css, which locks body to position:fixed/overflow:hidden
+    // for the non-scrolling Directory Gateway) stays linked forever once
+    // added, silently breaking scroll on every page navigated to
+    // afterward until a hard refresh clears it.
     function syncStylesheets(headDoc) {
+        var targetHrefs = Array.prototype.map.call(
+            headDoc.querySelectorAll('link[rel="stylesheet"]'),
+            function (l) { return l.href; }
+        );
+
+        Array.prototype.slice.call(document.querySelectorAll('link[rel="stylesheet"]')).forEach(function (link) {
+            if (targetHrefs.indexOf(link.href) === -1) {
+                link.parentNode.removeChild(link);
+            }
+        });
+
         var existingHrefs = Array.prototype.map.call(
             document.querySelectorAll('link[rel="stylesheet"]'),
             function (l) { return l.href; }
@@ -53,10 +71,12 @@
         if (index >= scripts.length) { done(); return; }
         var old = scripts[index];
 
-        // Never re-run the persistent audio engine or this router itself —
-        // re-executing audio.js would spawn a second Audio object and
-        // break the whole point of this file.
-        if (old.src && /\/(audio|pjax)\.js(\?|$)/.test(old.src)) {
+        // Never re-run the persistent audio engine, this router itself, or
+        // the analytics wrapper — re-executing audio.js would spawn a
+        // second Audio object, and re-executing analytics.js would rebind
+        // a duplicate click listener on every navigation. pjax calls
+        // Analytics42.trackPageview() directly after each swap instead.
+        if (old.src && /\/(audio|pjax|analytics)\.js(\?|$)/.test(old.src)) {
             runScriptsSequentially(scripts, index + 1, done);
             return;
         }
@@ -104,6 +124,7 @@
 
                 swapBody(doc, function () {
                     if (window.Audio42) window.Audio42.reinitWidgets();
+                    if (window.Analytics42) window.Analytics42.trackPageview();
 
                     if (push) {
                         history.pushState({ pjax: true }, doc.title, url);

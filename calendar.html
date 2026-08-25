@@ -3,11 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendar - 42</title>
+    <title>December Calendar - 42</title>
+    <meta name="description" content="42's editorial guide to December cultural moments in Lagos — featured events, a curated event list, and an interactive map of Lagos Island venues.">
+    <link rel="canonical" href="https://fourtytwolagos.com/calendar.html">
+
+    <link rel="icon" type="image/png" href="assets/42-logo-black.png">
+    <link rel="apple-touch-icon" href="assets/42-logo-black.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="42">
+    <meta property="og:title" content="December Calendar - 42">
+    <meta property="og:description" content="42's editorial guide to December cultural moments in Lagos — featured events, a curated event list, and an interactive map of Lagos Island venues.">
+    <meta property="og:image" content="https://fourtytwolagos.com/assets/42hooklogo.png">
+    <meta property="og:url" content="https://fourtytwolagos.com/calendar.html">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="December Calendar - 42">
+    <meta name="twitter:description" content="42's editorial guide to December cultural moments in Lagos — featured events, a curated event list, and an interactive map of Lagos Island venues.">
+    <meta name="twitter:image" content="https://fourtytwolagos.com/assets/42hooklogo.png">
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="header-footer.css">
     <link rel="stylesheet" href="calendar.css">
     <link rel="stylesheet" href="audio-widget.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Event",
+        "name": "42 December",
+        "startDate": "2026-12-17T21:00:00+01:00",
+        "endDate": "2026-12-18T03:00:00+01:00",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "location": {
+            "@type": "Place",
+            "name": "Lagos, Nigeria",
+            "address": { "@type": "PostalAddress", "addressLocality": "Lagos", "addressCountry": "NG" }
+        },
+        "organizer": { "@type": "Organization", "name": "42", "url": "https://fourtytwolagos.com/" },
+        "offers": {
+            "@type": "Offer",
+            "url": "https://fourtytwolagos.com/events.html",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
 </head>
 <body>
     <header class="pdp-header">
@@ -55,18 +96,67 @@
     </div>
 
     <section class="cal-title">
-        <h1 id="calTitleText">December 2026</h1>
+        <h1 id="calTitleText">December Calendar</h1>
     </section>
 
-    <!-- Pure List View -->
+    <!-- 01: Editorial Event List View -->
     <section class="cal-list-view">
-        <!-- Featured Event Card -->
+        <div class="cal-simple-list">
+            <div class="cal-simple-row">
+                <span class="cal-simple-date">Dec 20, 2026</span>
+                <span class="cal-simple-name">Flytime Concert</span>
+                <span class="cal-simple-venue">Eko Hotel &middot; Lagos</span>
+                <span class="cal-simple-tag">Concert</span>
+                <span class="cal-simple-time">7:00 PM</span>
+                <a href="#" class="cal-simple-cta" onclick="event.preventDefault()">Get Tickets &#8599;</a>
+            </div>
+            <div class="cal-simple-row">
+                <span class="cal-simple-date">Dec 26, 2026</span>
+                <span class="cal-simple-name">Go Crazy Pop-Up</span>
+                <span class="cal-simple-venue">Jabi Lake Mall &middot; Abuja</span>
+                <span class="cal-simple-tag">Pop-Up</span>
+                <span class="cal-simple-time">12:00 PM</span>
+                <a href="#" class="cal-simple-cta" onclick="event.preventDefault()">Get Tickets &#8599;</a>
+            </div>
+            <div class="cal-simple-row">
+                <span class="cal-simple-date">Dec 31, 2026</span>
+                <span class="cal-simple-name">New Year Motive</span>
+                <span class="cal-simple-venue">Landmark Beach &middot; Lagos</span>
+                <span class="cal-simple-tag is-motive">Motive</span>
+                <span class="cal-simple-time">10:00 PM</span>
+                <a href="#" class="cal-simple-cta" onclick="event.preventDefault()">Get Tickets &#8599;</a>
+            </div>
+            <div class="cal-simple-row">
+                <span class="cal-simple-date">Jan 3, 2027</span>
+                <span class="cal-simple-name">Abuja Sessions</span>
+                <span class="cal-simple-venue">Transcorp Hilton Grounds &middot; Abuja</span>
+                <span class="cal-simple-tag">Concert</span>
+                <span class="cal-simple-time">8:00 PM</span>
+                <a href="#" class="cal-simple-cta" onclick="event.preventDefault()">Get Tickets &#8599;</a>
+            </div>
+            <div class="cal-simple-row">
+                <span class="cal-simple-date">Jan 10, 2027</span>
+                <span class="cal-simple-name">Lekki Sound Bath</span>
+                <span class="cal-simple-venue">Lekki &middot; Lagos</span>
+                <span class="cal-simple-tag">Pop-Up</span>
+                <span class="cal-simple-time">6:00 PM</span>
+                <a href="#" class="cal-simple-cta" onclick="event.preventDefault()">Get Tickets &#8599;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 02: Featured Events -->
+    <section class="cal-featured-section">
+        <div class="cal-section-head">
+            <span class="cal-section-index">02</span>
+            <h2>Featured Events</h2>
+        </div>
         <div class="cal-featured-card">
             <span class="cal-featured-tag">Motive &middot; 42 Proprietary</span>
-            <h2 class="cal-featured-title">
-                <img src="assets/42widelogo.png" alt="42" class="cal-featured-logo">
+            <h3 class="cal-featured-title">
+                <img src="assets/42widelogo.png" alt="42 December flagship event graphic" class="cal-featured-logo">
                 <span>December</span>
-            </h2>
+            </h3>
             <div class="cal-featured-meta">
                 <span>Dec 17, 2026</span>
                 <span class="cal-featured-dot">&middot;</span>
@@ -76,44 +166,14 @@
             </div>
             <a href="#" class="cal-featured-cta" onclick="event.preventDefault()">Get Tickets &#8599;</a>
         </div>
-
-        <!-- Template List Items -->
-        <div class="cal-simple-list">
-            <div class="cal-simple-row">
-                <span class="cal-simple-date">Dec 20, 2026</span>
-                <span class="cal-simple-name">Flytime Concert</span>
-                <span class="cal-simple-venue">Eko Hotel &middot; Lagos</span>
-                <span class="cal-simple-status">Upcoming</span>
-            </div>
-            <div class="cal-simple-row">
-                <span class="cal-simple-date">Dec 26, 2026</span>
-                <span class="cal-simple-name">Go Crazy Pop-Up</span>
-                <span class="cal-simple-venue">Jabi Lake Mall &middot; Abuja</span>
-                <span class="cal-simple-status status-onsale">On Sale</span>
-            </div>
-            <div class="cal-simple-row">
-                <span class="cal-simple-date">Dec 31, 2026</span>
-                <span class="cal-simple-name">New Year Motive</span>
-                <span class="cal-simple-venue">Landmark Beach &middot; Lagos</span>
-                <span class="cal-simple-status status-selling">Selling Fast</span>
-            </div>
-            <div class="cal-simple-row">
-                <span class="cal-simple-date">Jan 3, 2027</span>
-                <span class="cal-simple-name">Abuja Sessions</span>
-                <span class="cal-simple-venue">Transcorp Hilton Grounds &middot; Abuja</span>
-                <span class="cal-simple-status">Upcoming</span>
-            </div>
-            <div class="cal-simple-row">
-                <span class="cal-simple-date">Jan 10, 2027</span>
-                <span class="cal-simple-name">Lekki Sound Bath</span>
-                <span class="cal-simple-venue">Lekki &middot; Lagos</span>
-                <span class="cal-simple-status">Upcoming</span>
-            </div>
-        </div>
     </section>
 
-    <!-- Interactive Map -->
+    <!-- 03: Interactive Map -->
     <section class="cal-map-section">
+        <div class="cal-section-head">
+            <span class="cal-section-index">03</span>
+            <h2>Lagos Island</h2>
+        </div>
         <div id="lagosMap" class="cal-leaflet-map"></div>
     </section>
 
@@ -123,6 +183,10 @@
                 <p class="footer-owner">Owned by WayKON</p>
                 <p class="footer-owner-sub">WayKON Holdings</p>
                 <p class="footer-copyright">Copyright &copy; 2026 Fourtytwo</p>
+                <div class="footer-legal-links">
+                    <a href="privacy.html" class="footer-link">Privacy Policy</a>
+                    <a href="terms.html" class="footer-link">Terms of Use</a>
+                </div>
             </div>
 
             <div class="footer-col footer-contact">
@@ -142,7 +206,7 @@
         </div>
 
         <div class="footer-hero">
-            <img src="assets/42hooklogo.png" alt="42" class="footer-hero-logo">
+            <img src="assets/42hooklogo.png" alt="fourtytwo" class="footer-hero-logo" loading="lazy">
         </div>
     </footer>
 
@@ -196,8 +260,12 @@
         splitIntoWords(titleEl);
         requestAnimationFrame(function () { revealNow(titleEl); });
 
-        // ===== Interactive Lagos map with bookmark pins =====
-        var map = L.map('lagosMap', { zoomControl: true, scrollWheelZoom: false }).setView([6.5000, 3.4200], 11);
+        // ===== Interactive Lagos Island map with red pins =====
+        // Real interactive OSM/Leaflet map (Google Maps requires a billed
+        // API key this project doesn't have) — same dark-skinned approach
+        // used elsewhere on the site, centered/zoomed on the Lagos Island
+        // cluster: Victoria Island, Ikoyi, and Lekki Phase 1.
+        var map = L.map('lagosMap', { zoomControl: true, scrollWheelZoom: false }).setView([6.4420, 3.4450], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors',
             subdomains: 'abc',
@@ -207,16 +275,15 @@
         var lagosHubs = [
             { name: 'Victoria Island', coords: [6.4281, 3.4219] },
             { name: 'Ikoyi', coords: [6.4541, 3.4316] },
-            { name: 'Lekki', coords: [6.4698, 3.5852] },
-            { name: 'Murtala Muhammed International Airport', coords: [6.5774, 3.3212] }
+            { name: 'Lekki Phase 1', coords: [6.4400, 3.4720] }
         ];
 
         lagosHubs.forEach(function (hub) {
             var icon = L.divIcon({
-                className: 'cal-bookmark-pin',
-                html: '<span class="cal-bookmark-shape"></span>',
-                iconSize: [22, 28],
-                iconAnchor: [11, 28]
+                className: 'cal-pin',
+                html: '<span class="cal-pin-dot"></span>',
+                iconSize: [22, 22],
+                iconAnchor: [11, 22]
             });
             L.marker(hub.coords, { icon: icon }).addTo(map)
                 .bindTooltip(hub.name, { direction: 'top', className: 'cal-map-tooltip' });
@@ -227,7 +294,8 @@
         <span class="audio-status-light"></span>
         <span class="audio-label">Audio: On</span>
     </button>
-    <script src="audio.js"></script>
-    <script src="pjax.js"></script>
+    <script src="analytics.js" defer></script>
+    <script src="audio.js" defer></script>
+    <script src="pjax.js" defer></script>
 </body>
 </html>

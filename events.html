@@ -4,9 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Events - 42</title>
+    <meta name="description" content="42 December is the flagship 42 experience — music, fashion, and culture in Lagos, Dec 17 2026. Tickets, tables, and special guests.">
+    <link rel="canonical" href="https://fourtytwolagos.com/events.html">
+
+    <link rel="icon" type="image/png" href="assets/42-logo-black.png">
+    <link rel="apple-touch-icon" href="assets/42-logo-black.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="42">
+    <meta property="og:title" content="42 December — Events">
+    <meta property="og:description" content="42 December is the flagship 42 experience — music, fashion, and culture in Lagos, Dec 17 2026. Tickets, tables, and special guests.">
+    <meta property="og:image" content="https://fourtytwolagos.com/assets/42hooklogo.png">
+    <meta property="og:url" content="https://fourtytwolagos.com/events.html">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="42 December — Events">
+    <meta name="twitter:description" content="42 December is the flagship 42 experience — music, fashion, and culture in Lagos, Dec 17 2026. Tickets, tables, and special guests.">
+    <meta name="twitter:image" content="https://fourtytwolagos.com/assets/42hooklogo.png">
+
     <link rel="stylesheet" href="header-footer.css">
     <link rel="stylesheet" href="events.css">
     <link rel="stylesheet" href="audio-widget.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Event",
+        "name": "42 December",
+        "description": "42 December is the flagship experience combining music, fashion, and culture — a curated cultural occasion designed at a controlled scale for maximum impact and atmosphere.",
+        "startDate": "2026-12-17T21:00:00+01:00",
+        "endDate": "2026-12-18T03:00:00+01:00",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "location": {
+            "@type": "Place",
+            "name": "Lagos, Nigeria",
+            "address": { "@type": "PostalAddress", "addressLocality": "Lagos", "addressCountry": "NG" }
+        },
+        "organizer": { "@type": "Organization", "name": "42", "url": "https://fourtytwolagos.com/" },
+        "offers": {
+            "@type": "Offer",
+            "url": "https://fourtytwolagos.com/events.html",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
 </head>
 <body>
     <header class="pdp-header">
@@ -93,14 +135,14 @@
     <section class="ev-guests">
         <div class="ev-marquee">
             <div class="ev-marquee-track">
-                <img src="assets/guestcardtemplate.png" alt="Special guest" class="ev-marquee-card">
-                <img src="assets/guestcardtemplate.png" alt="" class="ev-marquee-card" aria-hidden="true">
-                <img src="assets/guestcardtemplate.png" alt="" class="ev-marquee-card" aria-hidden="true">
-                <img src="assets/guestcardtemplate.png" alt="" class="ev-marquee-card" aria-hidden="true">
-                <img src="assets/guestcardtemplate.png" alt="" class="ev-marquee-card" aria-hidden="true">
-                <img src="assets/guestcardtemplate.png" alt="" class="ev-marquee-card" aria-hidden="true">
-                <img src="assets/guestcardtemplate.png" alt="" class="ev-marquee-card" aria-hidden="true">
-                <img src="assets/guestcardtemplate.png" alt="" class="ev-marquee-card" aria-hidden="true">
+                <img src="assets/guestcardtemplate.png" alt="Special guest" class="ev-marquee-card" loading="lazy">
+                <img src="assets/guestcardtemplate.png" alt="" class="ev-marquee-card" loading="lazy" aria-hidden="true">
+                <img src="assets/guestcardtemplate.png" alt="" class="ev-marquee-card" loading="lazy" aria-hidden="true">
+                <img src="assets/guestcardtemplate.png" alt="" class="ev-marquee-card" loading="lazy" aria-hidden="true">
+                <img src="assets/guestcardtemplate.png" alt="" class="ev-marquee-card" loading="lazy" aria-hidden="true">
+                <img src="assets/guestcardtemplate.png" alt="" class="ev-marquee-card" loading="lazy" aria-hidden="true">
+                <img src="assets/guestcardtemplate.png" alt="" class="ev-marquee-card" loading="lazy" aria-hidden="true">
+                <img src="assets/guestcardtemplate.png" alt="" class="ev-marquee-card" loading="lazy" aria-hidden="true">
             </div>
         </div>
     </section>
@@ -207,6 +249,10 @@
                 <p class="footer-owner">Owned by WayKON</p>
                 <p class="footer-owner-sub">WayKON Holdings</p>
                 <p class="footer-copyright">Copyright &copy; 2026 Fourtytwo</p>
+                <div class="footer-legal-links">
+                    <a href="privacy.html" class="footer-link">Privacy Policy</a>
+                    <a href="terms.html" class="footer-link">Terms of Use</a>
+                </div>
             </div>
 
             <div class="footer-col footer-contact">
@@ -226,7 +272,7 @@
         </div>
 
         <div class="footer-hero">
-            <img src="assets/42hooklogo.png" alt="42" class="footer-hero-logo">
+            <img src="assets/42hooklogo.png" alt="fourtytwo" class="footer-hero-logo" loading="lazy">
         </div>
     </footer>
 
@@ -276,7 +322,8 @@
         <span class="audio-status-light"></span>
         <span class="audio-label">Audio: On</span>
     </button>
-    <script src="audio.js"></script>
-    <script src="pjax.js"></script>
+    <script src="analytics.js" defer></script>
+    <script src="audio.js" defer></script>
+    <script src="pjax.js" defer></script>
 </body>
 </html>

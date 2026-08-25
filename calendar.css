@@ -69,7 +69,7 @@ a {
     display: flex;
     flex-direction: column;
     gap: 14px;
-    margin-bottom: 32px;
+    margin: 0 32px;
 }
 
 .cal-featured-tag {
@@ -176,6 +176,45 @@ a {
     text-transform: uppercase;
 }
 
+.cal-simple-tag {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-hover);
+    border: 1px solid var(--accent-hover);
+    padding: 4px 10px;
+    border-radius: 999px;
+}
+
+.cal-simple-tag.is-motive {
+    color: #ffffff;
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.cal-simple-time {
+    font-size: 0.62rem;
+    color: var(--grey);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.cal-simple-cta {
+    margin-left: auto;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.cal-simple-cta:hover {
+    color: var(--accent-hover);
+}
+
 .cal-simple-status {
     margin-left: auto;
     font-size: 0.6rem;
@@ -199,31 +238,60 @@ a {
     border-color: var(--accent);
 }
 
-/* ===== Interactive Map ===== */
+/* ===== Section Head (Featured Events / Map) ===== */
+.cal-featured-section,
 .cal-map-section {
-    margin: 20px 32px 60px;
+    padding: 0;
+}
+
+.cal-section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 0 32px;
+    margin: 48px 0 16px;
+}
+
+.cal-section-index {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--grey);
+}
+
+.cal-section-head h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+}
+
+/* ===== Interactive Map ===== */
+.cal-map-section > .cal-leaflet-map {
+    margin: 0 32px 60px;
+    width: calc(100% - 64px);
     border: 1px solid var(--panel-border);
 }
 
 .cal-leaflet-map {
-    width: 100%;
     height: 420px;
     filter: saturate(1.15) contrast(1.02);
 }
 
-/* Custom bookmark/pin marker for named Lagos hubs */
-.cal-bookmark-pin {
+/* Standard red rounded "teardrop" pin for named Lagos hubs */
+.cal-pin {
     position: relative;
 }
 
-.cal-bookmark-shape {
+.cal-pin-dot {
     display: block;
     width: 22px;
-    height: 28px;
-    background: var(--accent-hover);
-    clip-path: polygon(0 0, 100% 0, 100% 65%, 50% 100%, 0 65%);
-    border: 2px solid var(--bg);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+    height: 22px;
+    background: #FF3B30;
+    border: 2px solid #ffffff;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
 }
 
 .leaflet-container {
@@ -269,14 +337,22 @@ a {
 
     .cal-featured-card {
         padding: 26px 22px;
+        margin: 0 20px;
     }
 
-    .cal-simple-status {
+    .cal-simple-status,
+    .cal-simple-cta {
         margin-left: 0;
     }
 
-    .cal-map-section {
-        margin: 16px 20px 48px;
+    .cal-section-head {
+        padding: 0 20px;
+        margin: 36px 0 14px;
+    }
+
+    .cal-map-section > .cal-leaflet-map {
+        margin: 0 20px 48px;
+        width: calc(100% - 40px);
     }
 
     .cal-leaflet-map {

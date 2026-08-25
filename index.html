@@ -4,8 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>42 — Directory</title>
+    <meta name="description" content="42 is a Lagos-based culture and experiences company — curated events, clothing, and a discovery calendar for Nigerian cultural moments.">
+    <link rel="canonical" href="https://fourtytwolagos.com/">
+    <!-- Domain is a placeholder pending purchase/deployment — update canonical + OG URLs once live. -->
+
+    <link rel="icon" type="image/png" href="assets/42-logo-black.png">
+    <link rel="apple-touch-icon" href="assets/42-logo-black.png">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="42">
+    <meta property="og:title" content="42 — Directory">
+    <meta property="og:description" content="42 is a Lagos-based culture and experiences company — curated events, clothing, and a discovery calendar for Nigerian cultural moments.">
+    <meta property="og:image" content="https://fourtytwolagos.com/assets/42hooklogo.png">
+    <meta property="og:url" content="https://fourtytwolagos.com/">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="42 — Directory">
+    <meta name="twitter:description" content="42 is a Lagos-based culture and experiences company — curated events, clothing, and a discovery calendar for Nigerian cultural moments.">
+    <meta name="twitter:image" content="https://fourtytwolagos.com/assets/42hooklogo.png">
+
     <link rel="stylesheet" href="directory.css">
     <link rel="stylesheet" href="audio-widget.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "42",
+        "url": "https://fourtytwolagos.com/",
+        "logo": "https://fourtytwolagos.com/assets/42logowhite.png",
+        "founder": { "@type": "Person", "name": "Kene Okonjo" },
+        "parentOrganization": { "@type": "Organization", "name": "WayKON Holdings" },
+        "areaServed": "NG"
+    }
+    </script>
 </head>
 <body>
     <a href="index.html" class="directory-logo-link">
@@ -46,7 +78,8 @@
         <span class="audio-label">Audio: On</span>
     </button>
 
-    <script src="audio.js"></script>
-    <script src="pjax.js"></script>
+    <script src="analytics.js" defer></script>
+    <script src="audio.js" defer></script>
+    <script src="pjax.js" defer></script>
 </body>
 </html>
