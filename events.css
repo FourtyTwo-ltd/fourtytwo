@@ -176,6 +176,17 @@ a {
     transform: translateY(-1px);
 }
 
+/* Get Tickets CTA on each individual ticket-tier card — mobile only. */
+.ev-card-cta {
+    display: none;
+}
+
+/* Contact / booking block on Premium Table cards — mobile only. */
+.ev-card-contact,
+.ev-card-book-row {
+    display: none;
+}
+
 /* ===== Special Guests Marquee ===== */
 .ev-guests {
     margin-top: 0;
@@ -412,6 +423,12 @@ a {
         margin: 20px;
     }
 
+    .ev-hero-content {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 0.5rem;
+    }
+
     .ev-hero-meta {
         padding: 12px 0 18px;
         gap: 12px;
@@ -438,7 +455,7 @@ a {
 
     .ev-marquee-card {
         height: 150px;
-        margin-right: 14px;
+        margin-right: 12px;
     }
 
     .ev-card-grid {
@@ -448,5 +465,105 @@ a {
 
     .ev-card:hover {
         transform: none;
+    }
+
+    /* ===== Ticket Options: interactive sticky-stack cards ===== */
+    .ev-card-grid--stack {
+        display: block;
+        background: none;
+        border: none;
+    }
+
+    .ev-card-grid--stack .ev-card {
+        position: sticky;
+        border: 1px solid var(--panel-border);
+        margin-bottom: 16px;
+        box-shadow: 0 -14px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .ev-card-grid--stack .ev-card:nth-child(1) { top: 88px; z-index: 1; }
+    .ev-card-grid--stack .ev-card:nth-child(2) { top: 104px; z-index: 2; }
+    .ev-card-grid--stack .ev-card:nth-child(3) { top: 120px; z-index: 3; }
+
+    .ev-card-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        align-self: flex-start;
+        margin-top: 12px;
+        padding: 10px 20px;
+        background: var(--accent);
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        border-radius: 999px;
+        transition: background 0.2s ease;
+    }
+
+    .ev-card-cta:hover {
+        background: var(--accent-hover);
+    }
+
+    /* ===== Premium Tables: booking contact block ===== */
+    .ev-card-contact {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin-top: 10px;
+    }
+
+    .ev-card-contact-link {
+        font-size: 0.62rem;
+        color: var(--grey);
+        text-decoration: underline;
+        text-decoration-color: var(--panel-border);
+        text-underline-offset: 3px;
+        transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    }
+
+    .ev-card-contact-link:hover {
+        color: var(--accent-hover);
+        text-decoration-color: var(--accent-hover);
+    }
+
+    .ev-card-book-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+    }
+
+    .ev-card-book-btn {
+        flex: 1;
+        white-space: nowrap;
+        text-align: center;
+        padding: 10px 14px;
+        background: var(--accent);
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 0.58rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        border-radius: 999px;
+        transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .ev-card-book-btn:hover {
+        background: var(--accent-hover);
+    }
+
+    .ev-card-book-btn--alt {
+        background: transparent;
+        border: 1px solid var(--panel-border);
+        color: var(--ink);
+    }
+
+    .ev-card-book-btn--alt:hover {
+        border-color: var(--accent-hover);
+        color: var(--accent-hover);
     }
 }

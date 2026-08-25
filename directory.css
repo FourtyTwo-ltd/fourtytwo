@@ -209,3 +209,16 @@ a {
         font-size: 0.58rem;
     }
 }
+
+/* Equalizes top/bottom padding so the flex centering in .directory-stage
+   (above) lands the folder grid dead-center between the fixed logo/login
+   bar and the bottom edge, instead of biasing low from the larger
+   top padding reserved on desktop. */
+@media (max-width: 768px) {
+    .directory-stage {
+        padding-top: 0;
+        padding-bottom: 0;
+        justify-content: center;
+        align-items: center;
+    }
+}
