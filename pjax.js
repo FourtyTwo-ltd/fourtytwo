@@ -8,11 +8,23 @@
    not just "resumes from the same position" but literally the same
    still-playing <audio> element.
 
+   A brief full-screen loader (solid background + logo) covers every
+   navigation. It isn't there to be fast — it's there so the swap
+   never becomes visible mid-flight: the previous version of this
+   file swapped in the new body before the new page's stylesheets had
+   actually finished downloading, so for a beat the browser rendered
+   the new markup in default unstyled black-serif-on-white. The loader
+   now stays up until every new stylesheet has fired load/error AND
+   the new page's scripts have run, so what's revealed underneath it
+   is always fully styled.
+
    Falls back to a real navigation (window.location.href) if fetch
    fails for any reason, so the site still works with this disabled. */
 (function () {
     var PAGES = ['index.html', 'clothing.html', 'calendar.html', 'events.html', 'about.html', 'privacy.html', 'terms.html'];
     var isNavigating = false;
+    var MIN_LOADER_MS = 350;
+    var loaderEl = null;
 
     function isInternalLink(a) {
         if (!a) return false;
@@ -34,13 +46,50 @@
         return PAGES.indexOf(last) !== -1;
     }
 
+    // Built with inline styles (not a CSS class) and attached to <html>
+    // rather than <body> — it must render correctly even before any
+    // page-specific stylesheet has loaded, and it must survive
+    // swapBody() replacing document.body.innerHTML wholesale.
+    function getLoader() {
+        if (loaderEl) return loaderEl;
+
+        loaderEl = document.createElement('div');
+        loaderEl.setAttribute('aria-hidden', 'true');
+        loaderEl.style.cssText =
+            'position:fixed;inset:0;z-index:2147483647;' +
+            'background:#0D0D0E;display:flex;align-items:center;justify-content:center;' +
+            'opacity:0;pointer-events:none;transition:opacity 0.25s ease;';
+
+        var img = document.createElement('img');
+        img.src = 'assets/42logowhite.png';
+        img.alt = '';
+        img.style.cssText = 'width:64px;height:auto;opacity:0.92;';
+        loaderEl.appendChild(img);
+
+        document.documentElement.appendChild(loaderEl);
+        return loaderEl;
+    }
+
+    function showLoader() {
+        var el = getLoader();
+        el.style.pointerEvents = 'auto';
+        requestAnimationFrame(function () { el.style.opacity = '1'; });
+    }
+
+    function hideLoader() {
+        if (!loaderEl) return;
+        loaderEl.style.opacity = '0';
+        loaderEl.style.pointerEvents = 'none';
+    }
+
     // Reconciles <link rel="stylesheet"> tags to exactly match the target
-    // page: adds what's missing AND removes what the new page doesn't
-    // load. Without the removal step, a page-specific stylesheet (e.g.
+    // page (adds what's missing, removes what the new page doesn't load —
+    // without the removal step a page-specific stylesheet like
     // directory.css, which locks body to position:fixed/overflow:hidden
-    // for the non-scrolling Directory Gateway) stays linked forever once
-    // added, silently breaking scroll on every page navigated to
-    // afterward until a hard refresh clears it.
+    // for the non-scrolling Directory Gateway, stays linked forever and
+    // silently breaks scroll on every later page). Returns a Promise that
+    // resolves once every newly-added stylesheet has actually loaded (or
+    // failed), so callers can wait for real styling to be in place.
     function syncStylesheets(headDoc) {
         var targetHrefs = Array.prototype.map.call(
             headDoc.querySelectorAll('link[rel="stylesheet"]'),
@@ -57,14 +106,22 @@
             document.querySelectorAll('link[rel="stylesheet"]'),
             function (l) { return l.href; }
         );
+
+        var loadPromises = [];
         headDoc.querySelectorAll('link[rel="stylesheet"]').forEach(function (link) {
             if (existingHrefs.indexOf(link.href) === -1) {
                 var clone = document.createElement('link');
                 clone.rel = 'stylesheet';
                 clone.href = link.href;
+                loadPromises.push(new Promise(function (resolve) {
+                    clone.onload = resolve;
+                    clone.onerror = resolve; // never let a broken stylesheet hang navigation
+                }));
                 document.head.appendChild(clone);
             }
         });
+
+        return Promise.all(loadPromises);
     }
 
     function runScriptsSequentially(scripts, index, done) {
@@ -94,21 +151,25 @@
         }
     }
 
-    function swapBody(doc, done) {
-        var scripts = Array.prototype.slice.call(doc.body.querySelectorAll('script'));
-        scripts.forEach(function (s) { s.parentNode.removeChild(s); });
+    function swapBody(doc) {
+        return new Promise(function (resolve) {
+            var scripts = Array.prototype.slice.call(doc.body.querySelectorAll('script'));
+            scripts.forEach(function (s) { s.parentNode.removeChild(s); });
 
-        // Clear any stateful classes a previous page left on <body>
-        // (e.g. Calendar's single-date view) so the new page starts clean.
-        document.body.className = '';
-        document.body.innerHTML = doc.body.innerHTML;
+            // Clear any stateful classes a previous page left on <body>
+            // (e.g. Calendar's single-date view) so the new page starts clean.
+            document.body.className = '';
+            document.body.innerHTML = doc.body.innerHTML;
 
-        runScriptsSequentially(scripts, 0, done);
+            runScriptsSequentially(scripts, 0, resolve);
+        });
     }
 
     function navigate(url, push) {
         if (isNavigating) return;
         isNavigating = true;
+        showLoader();
+        var shownAt = Date.now();
 
         fetch(url, { credentials: 'same-origin' })
             .then(function (res) {
@@ -118,33 +179,38 @@
             .then(function (html) {
                 var doc = new DOMParser().parseFromString(html, 'text/html');
                 var parsedUrl = new URL(url, window.location.href);
-
                 document.title = doc.title;
-                syncStylesheets(doc.head);
 
-                swapBody(doc, function () {
-                    if (window.Audio42) window.Audio42.reinitWidgets();
-                    if (window.Analytics42) window.Analytics42.trackPageview();
+                return syncStylesheets(doc.head)
+                    .then(function () { return swapBody(doc); })
+                    .then(function () {
+                        if (window.Audio42) window.Audio42.reinitWidgets();
+                        if (window.Analytics42) window.Analytics42.trackPageview();
 
-                    if (push) {
-                        history.pushState({ pjax: true }, doc.title, url);
-                    }
+                        if (push) {
+                            history.pushState({ pjax: true }, doc.title, url);
+                        }
 
-                    if (parsedUrl.hash) {
-                        var target = document.getElementById(parsedUrl.hash.slice(1));
-                        if (target) {
-                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        if (parsedUrl.hash) {
+                            var target = document.getElementById(parsedUrl.hash.slice(1));
+                            if (target) {
+                                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            } else {
+                                window.scrollTo(0, 0);
+                            }
                         } else {
                             window.scrollTo(0, 0);
                         }
-                    } else {
-                        window.scrollTo(0, 0);
-                    }
 
-                    isNavigating = false;
-                });
+                        var remaining = Math.max(0, MIN_LOADER_MS - (Date.now() - shownAt));
+                        setTimeout(function () {
+                            hideLoader();
+                            isNavigating = false;
+                        }, remaining);
+                    });
             })
             .catch(function () {
+                hideLoader();
                 isNavigating = false;
                 window.location.href = url; // real navigation fallback
             });
