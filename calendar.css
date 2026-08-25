@@ -26,13 +26,22 @@ a {
     color: inherit;
 }
 
-/* ===== Kinetic text reveal ===== */
+/* ===== Kinetic text reveal =====
+   Word gap is a CSS margin, not a space character inside the
+   inline-block span — the latter can render inconsistently (a
+   noticeably wider gap than normal text) depending on how the
+   browser handles trailing whitespace inside inline-block boxes. */
 .kinetic-word {
     display: inline-block;
+    margin-right: 0.28em;
     opacity: 0;
     transform: translateY(0.6em);
     filter: blur(4px);
     transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.6s ease;
+}
+
+.kinetic-word:last-child {
+    margin-right: 0;
 }
 
 .kinetic-word.in-view {
@@ -140,8 +149,8 @@ a {
 .cal-simple-row {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 6px 24px;
+    justify-content: space-between;
+    gap: 20px;
     padding: 20px 4px;
     border-bottom: 1px solid var(--panel-border);
     transition: background 0.2s ease, transform 0.15s ease;
@@ -152,21 +161,42 @@ a {
     transform: translateX(4px);
 }
 
+.cal-simple-primary {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
 .cal-simple-date {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.85rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.62rem;
     font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: var(--accent-hover);
-    min-width: 110px;
 }
 
 .cal-simple-name {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 700;
     letter-spacing: -0.005em;
     text-transform: uppercase;
-    flex: 1 1 200px;
+}
+
+.cal-simple-footer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+.cal-simple-secondary {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 14px;
 }
 
 .cal-simple-venue {
@@ -174,6 +204,7 @@ a {
     color: var(--grey);
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    white-space: nowrap;
 }
 
 .cal-simple-tag {
@@ -185,6 +216,7 @@ a {
     border: 1px solid var(--accent-hover);
     padding: 4px 10px;
     border-radius: 999px;
+    white-space: nowrap;
 }
 
 .cal-simple-tag.is-motive {
@@ -198,44 +230,22 @@ a {
     color: var(--grey);
     letter-spacing: 0.04em;
     text-transform: uppercase;
+    white-space: nowrap;
 }
 
 .cal-simple-cta {
-    margin-left: auto;
     font-size: 0.62rem;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--ink);
     text-decoration: none;
+    white-space: nowrap;
     transition: color 0.2s ease;
 }
 
 .cal-simple-cta:hover {
     color: var(--accent-hover);
-}
-
-.cal-simple-status {
-    margin-left: auto;
-    font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--grey);
-    border: 1px solid var(--panel-border);
-    padding: 6px 12px;
-    border-radius: 999px;
-}
-
-.cal-simple-status.status-onsale {
-    color: var(--accent-hover);
-    border-color: var(--accent-hover);
-}
-
-.cal-simple-status.status-selling {
-    color: #ffffff;
-    background: var(--accent);
-    border-color: var(--accent);
 }
 
 /* ===== Section Head (Featured Events / Map) ===== */
@@ -340,9 +350,20 @@ a {
         margin: 0 20px;
     }
 
-    .cal-simple-status,
-    .cal-simple-cta {
-        margin-left: 0;
+    .cal-simple-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 18px 4px;
+    }
+
+    .cal-simple-footer {
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .cal-simple-name {
+        font-size: 1rem;
     }
 
     .cal-section-head {

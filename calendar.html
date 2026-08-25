@@ -103,44 +103,74 @@
     <section class="cal-list-view">
         <div class="cal-simple-list">
             <div class="cal-simple-row">
-                <span class="cal-simple-date">Dec 20, 2026</span>
-                <span class="cal-simple-name">Flytime Concert</span>
-                <span class="cal-simple-venue">Eko Hotel &middot; Lagos</span>
-                <span class="cal-simple-tag">Concert</span>
-                <span class="cal-simple-time">7:00 PM</span>
-                <a href="#" class="cal-simple-cta" onclick="event.preventDefault()">Get Tickets &#8599;</a>
+                <div class="cal-simple-primary">
+                    <span class="cal-simple-date">Dec 20, 2026</span>
+                    <span class="cal-simple-name">Flytime Concert</span>
+                </div>
+                <div class="cal-simple-footer">
+                    <div class="cal-simple-secondary">
+                        <span class="cal-simple-venue">Eko Hotel &middot; Lagos</span>
+                        <span class="cal-simple-tag">Concert</span>
+                        <span class="cal-simple-time">7:00 PM</span>
+                    </div>
+                    <a href="#" class="cal-simple-cta" onclick="event.preventDefault()">Get Tickets &#8599;</a>
+                </div>
             </div>
             <div class="cal-simple-row">
-                <span class="cal-simple-date">Dec 26, 2026</span>
-                <span class="cal-simple-name">Go Crazy Pop-Up</span>
-                <span class="cal-simple-venue">Jabi Lake Mall &middot; Abuja</span>
-                <span class="cal-simple-tag">Pop-Up</span>
-                <span class="cal-simple-time">12:00 PM</span>
-                <a href="#" class="cal-simple-cta" onclick="event.preventDefault()">Get Tickets &#8599;</a>
+                <div class="cal-simple-primary">
+                    <span class="cal-simple-date">Dec 26, 2026</span>
+                    <span class="cal-simple-name">Go Crazy Pop-Up</span>
+                </div>
+                <div class="cal-simple-footer">
+                    <div class="cal-simple-secondary">
+                        <span class="cal-simple-venue">Muri Okunola Park &middot; Lagos</span>
+                        <span class="cal-simple-tag">Pop-Up</span>
+                        <span class="cal-simple-time">12:00 PM</span>
+                    </div>
+                    <a href="#" class="cal-simple-cta" onclick="event.preventDefault()">Get Tickets &#8599;</a>
+                </div>
             </div>
             <div class="cal-simple-row">
-                <span class="cal-simple-date">Dec 31, 2026</span>
-                <span class="cal-simple-name">New Year Motive</span>
-                <span class="cal-simple-venue">Landmark Beach &middot; Lagos</span>
-                <span class="cal-simple-tag is-motive">Motive</span>
-                <span class="cal-simple-time">10:00 PM</span>
-                <a href="#" class="cal-simple-cta" onclick="event.preventDefault()">Get Tickets &#8599;</a>
+                <div class="cal-simple-primary">
+                    <span class="cal-simple-date">Dec 31, 2026</span>
+                    <span class="cal-simple-name">New Year Motive</span>
+                </div>
+                <div class="cal-simple-footer">
+                    <div class="cal-simple-secondary">
+                        <span class="cal-simple-venue">Landmark Beach &middot; Lagos</span>
+                        <span class="cal-simple-tag is-motive">Motive</span>
+                        <span class="cal-simple-time">10:00 PM</span>
+                    </div>
+                    <a href="#" class="cal-simple-cta" onclick="event.preventDefault()">Get Tickets &#8599;</a>
+                </div>
             </div>
             <div class="cal-simple-row">
-                <span class="cal-simple-date">Jan 3, 2027</span>
-                <span class="cal-simple-name">Abuja Sessions</span>
-                <span class="cal-simple-venue">Transcorp Hilton Grounds &middot; Abuja</span>
-                <span class="cal-simple-tag">Concert</span>
-                <span class="cal-simple-time">8:00 PM</span>
-                <a href="#" class="cal-simple-cta" onclick="event.preventDefault()">Get Tickets &#8599;</a>
+                <div class="cal-simple-primary">
+                    <span class="cal-simple-date">Jan 3, 2027</span>
+                    <span class="cal-simple-name">Lagos Sessions</span>
+                </div>
+                <div class="cal-simple-footer">
+                    <div class="cal-simple-secondary">
+                        <span class="cal-simple-venue">Hard Rock Cafe, VI &middot; Lagos</span>
+                        <span class="cal-simple-tag">Concert</span>
+                        <span class="cal-simple-time">8:00 PM</span>
+                    </div>
+                    <a href="#" class="cal-simple-cta" onclick="event.preventDefault()">Get Tickets &#8599;</a>
+                </div>
             </div>
             <div class="cal-simple-row">
-                <span class="cal-simple-date">Jan 10, 2027</span>
-                <span class="cal-simple-name">Lekki Sound Bath</span>
-                <span class="cal-simple-venue">Lekki &middot; Lagos</span>
-                <span class="cal-simple-tag">Pop-Up</span>
-                <span class="cal-simple-time">6:00 PM</span>
-                <a href="#" class="cal-simple-cta" onclick="event.preventDefault()">Get Tickets &#8599;</a>
+                <div class="cal-simple-primary">
+                    <span class="cal-simple-date">Jan 10, 2027</span>
+                    <span class="cal-simple-name">Lekki Sound Bath</span>
+                </div>
+                <div class="cal-simple-footer">
+                    <div class="cal-simple-secondary">
+                        <span class="cal-simple-venue">Lekki &middot; Lagos</span>
+                        <span class="cal-simple-tag">Pop-Up</span>
+                        <span class="cal-simple-time">6:00 PM</span>
+                    </div>
+                    <a href="#" class="cal-simple-cta" onclick="event.preventDefault()">Get Tickets &#8599;</a>
+                </div>
             </div>
         </div>
     </section>
@@ -241,11 +271,11 @@
         function splitIntoWords(el) {
             var text = el.textContent;
             el.innerHTML = '';
-            text.split(' ').forEach(function (word, i, arr) {
+            text.split(' ').forEach(function (word, i) {
                 var span = document.createElement('span');
                 span.className = 'kinetic-word';
                 span.style.transitionDelay = (i * 55) + 'ms';
-                span.textContent = word + (i < arr.length - 1 ? ' ' : '');
+                span.textContent = word;
                 el.appendChild(span);
             });
         }
