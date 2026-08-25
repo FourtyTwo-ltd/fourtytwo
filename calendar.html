@@ -33,8 +33,6 @@
                 <div class="ticket-group">
                     <a href="about.html" class="ticket-tab">About</a>
                     <span class="ticket-neck"></span>
-                    <a href="about.html#contact" class="ticket-tab">Contact</a>
-                    <span class="ticket-neck"></span>
                     <a href="#" class="ticket-tab">Log In</a>
                 </div>
             </div>
@@ -53,7 +51,6 @@
             <a href="calendar.html" class="mobile-menu-item active"><span class="mm-index">0004</span>Calendar</a>
             <a href="about.html" class="mobile-menu-item"><span class="mm-index">0005</span>About</a>
             <a href="about.html#contact" class="mobile-menu-item"><span class="mm-index">0006</span>Contact</a>
-            <a href="#" class="mobile-menu-item"><span class="mm-index">0007</span>Log In</a>
         </nav>
     </div>
 
@@ -61,122 +58,63 @@
         <h1 id="calTitleText">December 2026</h1>
     </section>
 
-    <!-- Desktop Controls -->
-    <section class="cal-controls">
-        <div class="cal-filter-group">
-            <span class="cal-filter-label">Location</span>
-            <div class="ticket-group" id="locationGroup">
-                <button type="button" class="ticket-tab active" data-location="LAGOS">Lagos</button>
-                <span class="ticket-neck"></span>
-                <button type="button" class="ticket-tab" data-location="ABUJA">Abuja</button>
+    <!-- Pure List View -->
+    <section class="cal-list-view">
+        <!-- Featured Event Card -->
+        <div class="cal-featured-card">
+            <span class="cal-featured-tag">Motive &middot; 42 Proprietary</span>
+            <h2 class="cal-featured-title">
+                <img src="assets/42widelogo.png" alt="42" class="cal-featured-logo">
+                <span>December</span>
+            </h2>
+            <div class="cal-featured-meta">
+                <span>Dec 17, 2026</span>
+                <span class="cal-featured-dot">&middot;</span>
+                <span>9:00 PM &ndash; 3:00 AM</span>
+                <span class="cal-featured-dot">&middot;</span>
+                <span>Lagos, Nigeria</span>
             </div>
+            <a href="#" class="cal-featured-cta" onclick="event.preventDefault()">Get Tickets &#8599;</a>
         </div>
 
-        <div class="cal-filter-group">
-            <span class="cal-filter-label">Type</span>
-            <div class="type-tag-group">
-                <button type="button" class="type-tag active" data-type="MOTIVE">Motive</button>
-                <button type="button" class="type-tag active" data-type="CONCERT">Concert</button>
-                <button type="button" class="type-tag active" data-type="POP-UP">Pop-Up</button>
+        <!-- Template List Items -->
+        <div class="cal-simple-list">
+            <div class="cal-simple-row">
+                <span class="cal-simple-date">Dec 20, 2026</span>
+                <span class="cal-simple-name">Flytime Concert</span>
+                <span class="cal-simple-venue">Eko Hotel &middot; Lagos</span>
+                <span class="cal-simple-status">Upcoming</span>
             </div>
-        </div>
-
-        <div class="cal-filter-group">
-            <span class="cal-filter-label">View</span>
-            <div class="ticket-group">
-                <button type="button" class="ticket-tab active" data-view="grid">Grid View</button>
-                <span class="ticket-neck"></span>
-                <button type="button" class="ticket-tab" data-view="list">List Schedule</button>
+            <div class="cal-simple-row">
+                <span class="cal-simple-date">Dec 26, 2026</span>
+                <span class="cal-simple-name">Go Crazy Pop-Up</span>
+                <span class="cal-simple-venue">Jabi Lake Mall &middot; Abuja</span>
+                <span class="cal-simple-status status-onsale">On Sale</span>
+            </div>
+            <div class="cal-simple-row">
+                <span class="cal-simple-date">Dec 31, 2026</span>
+                <span class="cal-simple-name">New Year Motive</span>
+                <span class="cal-simple-venue">Landmark Beach &middot; Lagos</span>
+                <span class="cal-simple-status status-selling">Selling Fast</span>
+            </div>
+            <div class="cal-simple-row">
+                <span class="cal-simple-date">Jan 3, 2027</span>
+                <span class="cal-simple-name">Abuja Sessions</span>
+                <span class="cal-simple-venue">Transcorp Hilton Grounds &middot; Abuja</span>
+                <span class="cal-simple-status">Upcoming</span>
+            </div>
+            <div class="cal-simple-row">
+                <span class="cal-simple-date">Jan 10, 2027</span>
+                <span class="cal-simple-name">Lekki Sound Bath</span>
+                <span class="cal-simple-venue">Lekki &middot; Lagos</span>
+                <span class="cal-simple-status">Upcoming</span>
             </div>
         </div>
     </section>
 
-    <!-- Mobile Controls: Type + View dropdowns only (Location hidden) -->
-    <section class="cal-mobile-controls">
-        <div class="cal-dropdown" id="typeDropdown">
-            <button type="button" class="cal-dropdown-trigger" data-dropdown-trigger="type">Type &#9662;</button>
-            <div class="cal-dropdown-panel" data-panel="type">
-                <button type="button" class="active" data-type="MOTIVE">Motive</button>
-                <button type="button" class="active" data-type="CONCERT">Concert</button>
-                <button type="button" class="active" data-type="POP-UP">Pop-Up</button>
-            </div>
-        </div>
-        <div class="cal-dropdown" id="viewDropdown">
-            <button type="button" class="cal-dropdown-trigger" data-dropdown-trigger="view">View &#9662;</button>
-            <div class="cal-dropdown-panel" data-panel="view">
-                <button type="button" class="active" data-view="grid">Grid View</button>
-                <button type="button" data-view="list">List Schedule</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Grid View -->
-    <section class="cal-view active" id="gridView">
-        <div class="cal-grid-wrap">
-            <div class="cal-weekdays">
-                <div class="cal-weekday">Sun</div>
-                <div class="cal-weekday">Mon</div>
-                <div class="cal-weekday">Tue</div>
-                <div class="cal-weekday">Wed</div>
-                <div class="cal-weekday">Thu</div>
-                <div class="cal-weekday">Fri</div>
-                <div class="cal-weekday">Sat</div>
-            </div>
-            <div class="cal-grid" id="calGrid"></div>
-            <div class="cal-pager" id="calPager">
-                <button type="button" id="pagerPrev">&#8592; Previous</button>
-                <div class="cal-pager-dots" id="pagerDots"></div>
-                <button type="button" id="pagerNext">Next &#8594;</button>
-            </div>
-            <p class="cal-grid-empty" id="calGridEmpty">No events match the current filters.</p>
-        </div>
-    </section>
-
-    <!-- List Schedule View -->
-    <section class="cal-view" id="listView">
-        <div class="cal-list" id="calList"></div>
-        <p class="cal-list-empty" id="calListEmpty">No events match the current filters.</p>
-    </section>
-
-    <!-- Single-Date Event View -->
-    <div class="cal-date-view" id="dateView">
-        <button type="button" class="cal-return-btn" id="returnToCalendar">&#8592; Return to Calendar</button>
-        <h2 class="cal-date-view-heading" id="dateViewHeading">24 December 2026</h2>
-        <div class="cal-pass-grid" id="datePassGrid"></div>
-    </div>
-
-    <!-- Today in Lagos: Featured Event + Real Map -->
-    <section class="cal-today">
-        <div class="cal-section-head">
-            <span class="cal-section-index">01</span>
-            <h2 class="kinetic-heading">Today in Lagos <span class="cal-section-sub">— 24 December 2026</span></h2>
-        </div>
-        <div class="cal-today-grid">
-            <div class="cal-hero-card" id="heroCard">
-                <div class="cal-hero-image">
-                    <img src="assets/42logowhite.png" alt="" class="cal-hero-watermark">
-                </div>
-                <div class="cal-hero-body">
-                    <span class="cal-hero-tag" id="heroTag">Motive</span>
-                    <h3 id="heroName">42 Fest</h3>
-                    <p class="cal-hero-meta" id="heroMeta">Muri Okunola Park &middot; Lagos &middot; 9:00 PM &middot; Dec 24</p>
-                    <a href="#" class="cal-hero-cta" onclick="event.preventDefault()">Get Tickets &#8599;</a>
-                </div>
-            </div>
-            <div class="cal-today-map">
-                <div id="lagosMap" class="cal-leaflet-map"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Upcoming Events Feed -->
-    <section class="cal-feed">
-        <div class="cal-section-head">
-            <span class="cal-section-index">02</span>
-            <h2 class="kinetic-heading">Upcoming Events</h2>
-        </div>
-        <div class="cal-feed-track" id="feedTrack"></div>
-        <p class="cal-feed-empty" id="feedEmpty">No events match the current filters.</p>
+    <!-- Interactive Map -->
+    <section class="cal-map-section">
+        <div id="lagosMap" class="cal-leaflet-map"></div>
     </section>
 
     <footer class="pdp-footer">
@@ -235,7 +173,7 @@
             globalNewsletterForm.reset();
         });
 
-        // ===== Kinetic word-reveal =====
+        // ===== Kinetic word-reveal (page title) =====
         function splitIntoWords(el) {
             var text = el.textContent;
             el.innerHTML = '';
@@ -243,7 +181,7 @@
                 var span = document.createElement('span');
                 span.className = 'kinetic-word';
                 span.style.transitionDelay = (i * 55) + 'ms';
-                span.textContent = word + (i < arr.length - 1 ? ' ' : '');
+                span.textContent = word + (i < arr.length - 1 ? ' ' : '');
                 el.appendChild(span);
             });
         }
@@ -258,271 +196,8 @@
         splitIntoWords(titleEl);
         requestAnimationFrame(function () { revealNow(titleEl); });
 
-        var kineticHeadings = document.querySelectorAll('.kinetic-heading');
-        kineticHeadings.forEach(function (h) {
-            var subEl = h.querySelector('.cal-section-sub');
-            var subHTML = subEl ? subEl.outerHTML : '';
-            var mainText = subEl ? h.textContent.replace(subEl.textContent, '') : h.textContent;
-            h.textContent = mainText.trim();
-            splitIntoWords(h);
-            if (subHTML) h.insertAdjacentHTML('beforeend', ' ' + subHTML);
-        });
-
-        if ('IntersectionObserver' in window) {
-            var headingObserver = new IntersectionObserver(function (entries) {
-                entries.forEach(function (entry) {
-                    if (entry.isIntersecting) {
-                        revealNow(entry.target);
-                        headingObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.4 });
-            kineticHeadings.forEach(function (h) { headingObserver.observe(h); });
-        } else {
-            kineticHeadings.forEach(revealNow);
-        }
-
-        // ===== Calendar data =====
-        // Sample cultural events — placeholder content pending real listings.
-        var EVENTS = [
-            { id: 'e3', date: '2026-12-24', name: '42 Fest', type: 'MOTIVE', location: 'LAGOS', venue: 'Muri Okunola Park', time: '9:00 PM', coords: [6.4281, 3.4219] },
-            { id: 'e4', date: '2026-12-25', name: 'Flytime Concert', type: 'CONCERT', location: 'LAGOS', venue: 'Eko Hotel', time: '7:00 PM', coords: [6.4299, 3.4256] },
-            { id: 'e5', date: '2026-12-26', name: 'Go Crazy Pop-Up', type: 'POP-UP', location: 'ABUJA', venue: 'Jabi Lake Mall', time: '12:00 PM' },
-            { id: 'e6', date: '2026-12-31', name: 'New Year Motive', type: 'MOTIVE', location: 'LAGOS', venue: 'Landmark Beach', time: '10:00 PM', coords: [6.4324, 3.4520] },
-            { id: 'e7', date: '2027-01-03', name: 'Abuja Sessions', type: 'CONCERT', location: 'ABUJA', venue: 'Transcorp Hilton Grounds', time: '8:00 PM' }
-        ];
-
-        var FEATURED_EVENT_ID = 'e3';
-
-        var GRID_START = new Date(2026, 11, 13); // Sun Dec 13 2026 — first cell of the grid
-        var RANGE_START = new Date(2026, 11, 13); // Dec 13 2026
-        var RANGE_END = new Date(2027, 0, 5);    // Jan 5 2027
-        var GRID_CELLS = 28; // 4 weeks, exactly 2 mobile pages of 2 weeks each
-
-        function isoDate(d) {
-            var y = d.getFullYear();
-            var m = String(d.getMonth() + 1).padStart(2, '0');
-            var day = String(d.getDate()).padStart(2, '0');
-            return y + '-' + m + '-' + day;
-        }
-
-        function slashDate(d) {
-            var m = String(d.getMonth() + 1).padStart(2, '0');
-            var day = String(d.getDate()).padStart(2, '0');
-            return m + '/' + day;
-        }
-
-        function fullDateLabel(d) {
-            var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-            return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
-        }
-
-        var eventsByDate = {};
-        EVENTS.forEach(function (ev) {
-            if (!eventsByDate[ev.date]) eventsByDate[ev.date] = [];
-            eventsByDate[ev.date].push(ev);
-        });
-
-        // ===== Filter state =====
-        var state = {
-            location: 'LAGOS',
-            types: { MOTIVE: true, CONCERT: true, 'POP-UP': true }
-        };
-
-        // ===== Build Grid (shared by desktop + mobile; mobile paginates via CSS/JS) =====
-        var calGrid = document.getElementById('calGrid');
-        var calGridEmpty = document.getElementById('calGridEmpty');
-        var PAGE_SIZE = 14; // two weeks per mobile page
-        var TOTAL_PAGES = Math.ceil(GRID_CELLS / PAGE_SIZE);
-        var currentPage = 0; // page containing Dec 1 by default
-
-        for (var i = 0; i < GRID_CELLS; i++) {
-            var cellDate = new Date(GRID_START);
-            cellDate.setDate(GRID_START.getDate() + i);
-            var muted = cellDate < RANGE_START || cellDate > RANGE_END;
-            var iso = isoDate(cellDate);
-
-            var cell = document.createElement('div');
-            cell.className = 'cal-cell' + (muted ? ' muted' : ' clickable');
-            cell.dataset.page = Math.floor(i / PAGE_SIZE);
-            cell.dataset.date = iso;
-
-            var dayEl = document.createElement('div');
-            dayEl.className = 'cal-cell-day';
-            dayEl.textContent = cellDate.getDate();
-            cell.appendChild(dayEl);
-
-            if (!muted) {
-                var dayEvents = eventsByDate[iso] || [];
-                if (dayEvents.length) {
-                    if (dayEvents.some(function (ev) { return ev.type === 'MOTIVE'; })) {
-                        cell.classList.add('has-motive');
-                    }
-                    var eventsWrap = document.createElement('div');
-                    eventsWrap.className = 'cal-cell-events';
-                    dayEvents.forEach(function (ev) {
-                        var isMotive = ev.type === 'MOTIVE';
-
-                        var item = document.createElement('div');
-                        item.className = 'cal-event-item' + (isMotive ? ' is-motive' : '');
-                        item.dataset.type = ev.type;
-                        item.dataset.location = ev.location;
-
-                        var lead = document.createElement('span');
-                        lead.className = 'cal-event-lead';
-                        lead.textContent = '- ' + ev.name.toUpperCase();
-
-                        var card = document.createElement('div');
-                        card.className = 'cal-event-card' + (isMotive ? ' is-motive' : '');
-                        card.innerHTML =
-                            '<div class="cal-event-card-image"></div>' +
-                            '<div class="cal-event-card-body">' +
-                            '<h4>' + ev.name + '</h4>' +
-                            '<p class="cal-event-card-meta">' + ev.type + ' &middot; ' + ev.venue + ' &middot; ' + ev.time + '</p>' +
-                            '<a href="#" class="cal-event-card-cta">Get Tickets &#8599;</a>' +
-                            '</div>';
-                        card.querySelector('.cal-event-card-cta').addEventListener('click', function (e) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                        });
-
-                        item.appendChild(lead);
-                        item.appendChild(card);
-                        eventsWrap.appendChild(item);
-                    });
-                    cell.appendChild(eventsWrap);
-                }
-
-                cell.addEventListener('click', function (e) {
-                    if (e.target.closest('.cal-event-card-cta')) return;
-                    openDateView(this.dataset.date);
-                });
-            }
-
-            calGrid.appendChild(cell);
-        }
-
-        // ===== Mobile pager =====
-        var pagerPrev = document.getElementById('pagerPrev');
-        var pagerNext = document.getElementById('pagerNext');
-        var pagerDots = document.getElementById('pagerDots');
-
-        for (var p = 0; p < TOTAL_PAGES; p++) {
-            var dot = document.createElement('span');
-            dot.className = 'cal-pager-dot';
-            pagerDots.appendChild(dot);
-        }
-
-        function renderPage() {
-            document.querySelectorAll('.cal-cell').forEach(function (c) {
-                c.style.display = (Number(c.dataset.page) === currentPage) ? '' : 'none';
-            });
-            document.querySelectorAll('.cal-pager-dot').forEach(function (d, idx) {
-                d.classList.toggle('active', idx === currentPage);
-            });
-            pagerPrev.disabled = currentPage === 0;
-            pagerNext.disabled = currentPage === TOTAL_PAGES - 1;
-        }
-
-        pagerPrev.addEventListener('click', function () {
-            if (currentPage > 0) { currentPage--; renderPage(); }
-        });
-        pagerNext.addEventListener('click', function () {
-            if (currentPage < TOTAL_PAGES - 1) { currentPage++; renderPage(); }
-        });
-
-        function applyMobileGridLayout() {
-            if (window.innerWidth <= 768) {
-                renderPage();
-            } else {
-                document.querySelectorAll('.cal-cell').forEach(function (c) { c.style.display = ''; });
-            }
-        }
-        applyMobileGridLayout();
-        window.addEventListener('resize', applyMobileGridLayout);
-
-        // ===== Build List View =====
-        var calList = document.getElementById('calList');
-        var calListEmpty = document.getElementById('calListEmpty');
-
-        var sortedEvents = EVENTS.slice().sort(function (a, b) {
-            return a.date.localeCompare(b.date);
-        });
-
-        sortedEvents.forEach(function (ev) {
-            var isMotive = ev.type === 'MOTIVE';
-            var row = document.createElement('div');
-            row.className = 'cal-list-row' + (isMotive ? ' is-motive' : '');
-            row.dataset.type = ev.type;
-            row.dataset.location = ev.location;
-
-            var d = new Date(ev.date + 'T00:00:00');
-
-            row.innerHTML =
-                '<div class="cal-list-primary">' +
-                '<span class="cal-list-date">' + slashDate(d) + '</span>' +
-                '<span class="cal-list-dash">&mdash;</span>' +
-                '<span class="cal-list-name">' + ev.name + '</span>' +
-                '</div>' +
-                '<div class="cal-list-meta">' + ev.type + ' &middot; ' + ev.venue + ' &middot; ' + ev.time + '</div>' +
-                '<a href="#" class="cal-list-cta">Get Tickets &#8599;</a>';
-
-            row.querySelector('.cal-list-cta').addEventListener('click', function (e) { e.preventDefault(); });
-            calList.appendChild(row);
-        });
-
-        // ===== Single-Date Event View =====
-        var dateViewHeading = document.getElementById('dateViewHeading');
-        var datePassGrid = document.getElementById('datePassGrid');
-        var returnToCalendar = document.getElementById('returnToCalendar');
-
-        function openDateView(iso) {
-            var d = new Date(iso + 'T00:00:00');
-            dateViewHeading.textContent = fullDateLabel(d);
-
-            var dayEvents = eventsByDate[iso] || [];
-            datePassGrid.innerHTML = '';
-
-            if (!dayEvents.length) {
-                datePassGrid.innerHTML = '<p class="cal-date-view-empty">No events scheduled on this date.</p>';
-            } else {
-                dayEvents.forEach(function (ev) {
-                    var isMotive = ev.type === 'MOTIVE';
-                    var card = document.createElement('div');
-                    card.className = 'cal-pass-card' + (isMotive ? ' is-motive' : '');
-                    card.innerHTML =
-                        '<span class="cal-pass-name">' + ev.name + '</span>' +
-                        '<span class="cal-pass-tag">' + ev.type + '</span>' +
-                        '<div class="cal-pass-meta">' +
-                        '<span>' + ev.venue + '</span><span>' + ev.location + '</span><span>' + ev.time + '</span>' +
-                        '</div>' +
-                        '<a href="#" class="cal-pass-cta">Get Tickets &#8599;</a>';
-                    card.querySelector('.cal-pass-cta').addEventListener('click', function (e) { e.preventDefault(); });
-                    datePassGrid.appendChild(card);
-                });
-            }
-
-            document.body.classList.add('date-view-active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function closeDateView() {
-            document.body.classList.remove('date-view-active');
-        }
-
-        returnToCalendar.addEventListener('click', closeDateView);
-
-        // ===== Today in Lagos: featured hero + real Leaflet map =====
-        var featuredEvent = EVENTS.filter(function (ev) { return ev.id === FEATURED_EVENT_ID; })[0];
-        var heroCard = document.getElementById('heroCard');
-
-        document.getElementById('heroTag').textContent = featuredEvent.type;
-        document.getElementById('heroName').textContent = featuredEvent.name;
-        document.getElementById('heroMeta').textContent =
-            featuredEvent.venue + ' · ' + featuredEvent.location + ' · ' + featuredEvent.time + ' · Dec 24';
-        if (featuredEvent.type === 'MOTIVE') heroCard.classList.add('is-motive');
-
-        var map = L.map('lagosMap', { zoomControl: true, scrollWheelZoom: false }).setView([6.4550, 3.4600], 11);
+        // ===== Interactive Lagos map with bookmark pins =====
+        var map = L.map('lagosMap', { zoomControl: true, scrollWheelZoom: false }).setView([6.5000, 3.4200], 11);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors',
             subdomains: 'abc',
@@ -533,192 +208,18 @@
             { name: 'Victoria Island', coords: [6.4281, 3.4219] },
             { name: 'Ikoyi', coords: [6.4541, 3.4316] },
             { name: 'Lekki', coords: [6.4698, 3.5852] },
-            { name: 'Mainland', coords: [6.5244, 3.3792] }
+            { name: 'Murtala Muhammed International Airport', coords: [6.5774, 3.3212] }
         ];
 
         lagosHubs.forEach(function (hub) {
-            L.circleMarker(hub.coords, {
-                radius: 5,
-                color: '#1040B0',
-                weight: 1.5,
-                fillColor: '#ffffff',
-                fillOpacity: 0.9
-            }).addTo(map).bindTooltip(hub.name, { direction: 'top', className: 'cal-map-tooltip' });
-        });
-
-        // One pin per Lagos event that has real coordinates. Hovering or
-        // clicking a pin bridges to its matching card (hero and/or feed);
-        // hovering or clicking a card bridges back to its pin.
-        var eventMarkers = {};
-
-        EVENTS.filter(function (ev) { return ev.coords; }).forEach(function (ev) {
             var icon = L.divIcon({
-                className: 'cal-event-marker' + (ev.type === 'MOTIVE' ? ' is-motive' : ''),
-                html: '<span class="cal-pin-dot"></span>',
-                iconSize: [16, 16]
+                className: 'cal-bookmark-pin',
+                html: '<span class="cal-bookmark-shape"></span>',
+                iconSize: [22, 28],
+                iconAnchor: [11, 28]
             });
-            var marker = L.marker(ev.coords, { icon: icon }).addTo(map);
-            marker.bindTooltip(ev.name + ' — ' + ev.venue, { direction: 'top', className: 'cal-map-tooltip' });
-            marker.on('mouseover', function () { setEventActive(ev.id, true); });
-            marker.on('mouseout', function () { setEventActive(ev.id, false); });
-            marker.on('click', function () { setEventActive(ev.id, true, true); });
-            eventMarkers[ev.id] = marker;
-        });
-
-        function setEventActive(eventId, active, scrollToCard) {
-            var marker = eventMarkers[eventId];
-            if (marker) {
-                var markerEl = marker.getElement();
-                if (markerEl) markerEl.classList.toggle('active', active);
-            }
-
-            if (eventId === featuredEvent.id) {
-                heroCard.classList.toggle('active', active);
-                if (active && scrollToCard) heroCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-
-            var feedCard = document.querySelector('.cal-feed-card[data-event-id="' + eventId + '"]');
-            if (feedCard) {
-                feedCard.classList.toggle('active', active);
-                if (active && scrollToCard) {
-                    feedCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-                }
-            }
-        }
-
-        heroCard.addEventListener('mouseenter', function () { setEventActive(featuredEvent.id, true); });
-        heroCard.addEventListener('mouseleave', function () { setEventActive(featuredEvent.id, false); });
-        heroCard.addEventListener('click', function () {
-            setEventActive(featuredEvent.id, true);
-            map.panTo(featuredEvent.coords);
-        });
-
-        // ===== Build Upcoming Events Feed =====
-        var feedTrack = document.getElementById('feedTrack');
-        var feedEmpty = document.getElementById('feedEmpty');
-
-        sortedEvents.forEach(function (ev) {
-            var isMotive = ev.type === 'MOTIVE';
-            var d = new Date(ev.date + 'T00:00:00');
-
-            var card = document.createElement('div');
-            card.className = 'cal-feed-card' + (isMotive ? ' is-motive' : '');
-            card.dataset.type = ev.type;
-            card.dataset.location = ev.location;
-            card.dataset.eventId = ev.id;
-            card.innerHTML =
-                '<span class="cal-feed-card-date">' + slashDate(d) + '</span>' +
-                '<h4>' + ev.name + '</h4>' +
-                '<p>' + ev.type + ' &middot; ' + ev.venue + '</p>';
-            if (ev.coords) {
-                card.addEventListener('mouseenter', function () { setEventActive(ev.id, true); });
-                card.addEventListener('mouseleave', function () { setEventActive(ev.id, false); });
-            }
-            card.addEventListener('click', function () { openDateView(ev.date); });
-            feedTrack.appendChild(card);
-        });
-
-        // ===== Apply filters (grid, list, feed) =====
-        function applyFilters() {
-            var gridVisible = 0;
-            document.querySelectorAll('.cal-event-item').forEach(function (item) {
-                var match = item.dataset.location === state.location && state.types[item.dataset.type];
-                item.classList.toggle('filtered-out', !match);
-                if (match) gridVisible++;
-            });
-            calGridEmpty.classList.toggle('show', gridVisible === 0);
-
-            var listVisible = 0;
-            document.querySelectorAll('.cal-list-row').forEach(function (row) {
-                var match = row.dataset.location === state.location && state.types[row.dataset.type];
-                row.classList.toggle('filtered-out', !match);
-                if (match) listVisible++;
-            });
-            calListEmpty.classList.toggle('show', listVisible === 0);
-
-            var feedVisible = 0;
-            document.querySelectorAll('.cal-feed-card').forEach(function (card) {
-                var match = card.dataset.location === state.location && state.types[card.dataset.type];
-                card.classList.toggle('filtered-out', !match);
-                if (match) feedVisible++;
-            });
-            feedEmpty.classList.toggle('show', feedVisible === 0);
-        }
-
-        applyFilters();
-
-        // ===== Location toggle (desktop only) =====
-        document.querySelectorAll('[data-location]').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                document.querySelectorAll('[data-location]').forEach(function (b) {
-                    b.classList.toggle('active', b === btn);
-                });
-                state.location = btn.getAttribute('data-location');
-                applyFilters();
-            });
-        });
-
-        // ===== Type toggle (multi-select, synced across desktop + mobile) =====
-        document.querySelectorAll('[data-type]').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                var type = btn.getAttribute('data-type');
-                state.types[type] = !state.types[type];
-                document.querySelectorAll('[data-type="' + type + '"]').forEach(function (b) {
-                    b.classList.toggle('active', state.types[type]);
-                });
-                applyFilters();
-            });
-        });
-
-        // ===== View switcher (synced across desktop + mobile) =====
-        var gridView = document.getElementById('gridView');
-        var listView = document.getElementById('listView');
-
-        function fadeIn(el) {
-            el.classList.add('active');
-            el.style.opacity = '0';
-            requestAnimationFrame(function () {
-                el.style.opacity = '1';
-            });
-        }
-
-        document.querySelectorAll('[data-view]').forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                var view = btn.getAttribute('data-view');
-                document.querySelectorAll('[data-view]').forEach(function (b) {
-                    b.classList.toggle('active', b.getAttribute('data-view') === view);
-                });
-
-                if (view === 'grid') {
-                    listView.classList.remove('active');
-                    fadeIn(gridView);
-                } else {
-                    gridView.classList.remove('active');
-                    fadeIn(listView);
-                }
-                closeMobileDropdowns();
-            });
-        });
-
-        // ===== Mobile filter dropdowns =====
-        var dropdowns = document.querySelectorAll('.cal-dropdown');
-
-        function closeMobileDropdowns() {
-            dropdowns.forEach(function (d) { d.classList.remove('open'); });
-        }
-
-        dropdowns.forEach(function (dropdown) {
-            var trigger = dropdown.querySelector('.cal-dropdown-trigger');
-            trigger.addEventListener('click', function (e) {
-                e.stopPropagation();
-                var wasOpen = dropdown.classList.contains('open');
-                closeMobileDropdowns();
-                if (!wasOpen) dropdown.classList.add('open');
-            });
-        });
-
-        document.addEventListener('click', function (e) {
-            if (!e.target.closest('.cal-dropdown')) closeMobileDropdowns();
+            L.marker(hub.coords, { icon: icon }).addTo(map)
+                .bindTooltip(hub.name, { direction: 'top', className: 'cal-map-tooltip' });
         });
     </script>
 

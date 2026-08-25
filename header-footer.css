@@ -355,10 +355,15 @@ body {
     width: 100%;
     overflow: hidden;
     padding: 0 24px 4px;
+    display: flex;
+    justify-content: center;
 }
 
 .footer-hero-logo {
+    max-width: 220px;
     width: 100%;
+    height: auto;
+    margin: 0 auto;
     display: block;
 }
 

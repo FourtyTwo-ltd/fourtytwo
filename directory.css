@@ -21,13 +21,15 @@
 html, body {
     width: 100%;
     height: 100%;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 body {
     background: var(--bg);
     color: var(--ink);
     font-family: 'Space Mono', 'Courier Prime', monospace;
+    position: fixed;
+    inset: 0;
 }
 
 a {
@@ -70,13 +72,14 @@ a {
 
 /* ===== Folder Grid Stage ===== */
 .directory-stage {
-    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 2.5rem;
-    padding: 120px 24px 100px;
+    padding: 24px;
 }
 
 .folder-row {
@@ -187,7 +190,6 @@ a {
     }
 
     .directory-stage {
-        padding: 96px 16px 80px;
         gap: 1.8rem;
     }
 
@@ -210,19 +212,9 @@ a {
     }
 }
 
-/* Equalizes top/bottom padding so the flex centering in .directory-stage
-   (above) lands the folder grid dead-center between the fixed logo/login
-   bar and the bottom edge, instead of biasing low from the larger
-   top padding reserved on desktop. */
 @media (max-width: 768px) {
     .directory-stage {
-        min-height: 100vh;
-        min-height: 100dvh;
-        display: flex;
-        flex-direction: column;
-        padding-top: 0;
-        padding-bottom: 0;
-        justify-content: center;
-        align-items: center;
+        padding-top: 16px;
+        padding-bottom: 16px;
     }
 }

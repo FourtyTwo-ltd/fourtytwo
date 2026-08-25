@@ -1,4 +1,4 @@
-/* ===== 42 — Calendar Page (Brutalist Dual-View) =====
+/* ===== 42 — Calendar Page (Pure List View + Map) =====
    Page-specific styles. Header, mobile menu, ticket-tab component,
    and footer come from header-footer.css (shared site-wide). */
 
@@ -55,606 +55,65 @@ a {
     text-transform: uppercase;
 }
 
-/* ===== Controls (Desktop) ===== */
-.cal-controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 32px 28px;
-    border-bottom: 1px solid var(--panel-border);
+/* ===== Pure List View ===== */
+.cal-list-view {
+    padding: 0 32px 20px;
 }
 
-.cal-filter-group {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.cal-filter-label {
-    font-size: 0.6rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--grey);
-    margin-right: 4px;
-}
-
-.type-tag-group {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.type-tag {
-    padding: 8px 16px;
-    border: 1px solid var(--panel-border);
-    border-radius: 999px;
-    background: var(--panel);
-    color: var(--ink);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
-}
-
-.type-tag:hover {
-    transform: translateY(-1px);
-    border-color: var(--accent-hover);
-}
-
-.type-tag.active {
-    background: var(--accent);
-    border-color: var(--accent);
-}
-
-/* ===== Mobile Filter Dropdowns ===== */
-.cal-mobile-controls {
-    display: none;
-    padding: 0 20px 20px;
-    gap: 10px;
-}
-
-.cal-dropdown {
+/* ===== Featured Event Card (42 December) ===== */
+.cal-featured-card {
     position: relative;
-    flex: 1;
-}
-
-.cal-dropdown-trigger {
-    width: 100%;
-    padding: 12px 14px;
-    background: var(--panel);
+    padding: 40px;
     border: 1px solid var(--panel-border);
-    border-radius: 8px;
-    color: var(--ink);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.66rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.cal-dropdown.open .cal-dropdown-trigger {
-    border-color: var(--accent-hover);
-    color: var(--accent-hover);
-}
-
-.cal-dropdown-panel {
-    position: absolute;
-    top: calc(100% + 6px);
-    left: 0;
-    right: 0;
     background: var(--panel);
-    border: 1px solid var(--panel-border);
-    border-radius: 8px;
-    padding: 8px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    z-index: 80;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-6px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.55);
-}
-
-.cal-dropdown.open .cal-dropdown-panel {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.cal-dropdown-panel button {
-    text-align: left;
-    padding: 10px 12px;
-    background: transparent;
-    border: none;
-    border-radius: 6px;
-    color: var(--ink);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.66rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    cursor: pointer;
-}
-
-.cal-dropdown-panel button.active {
-    background: var(--accent);
-    color: #ffffff;
-}
-
-/* ===== View switch ===== */
-.cal-view {
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    transform: translateY(0);
-}
-
-.cal-view.active {
-    display: block;
-    opacity: 1;
-}
-
-/* ===== Grid View ===== */
-.cal-grid-wrap {
-    padding: 28px 32px 60px;
-}
-
-.cal-weekdays {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 1px;
-    margin-bottom: 1px;
-}
-
-.cal-weekday {
-    background: var(--panel);
-    color: var(--grey);
-    text-align: center;
-    padding: 10px 0;
-    font-size: 0.62rem;
-    letter-spacing: 0.08em;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.cal-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 1px;
-    background: var(--panel-border);
-    border: 1px solid var(--panel-border);
-}
-
-.cal-cell {
-    position: relative;
-    background: var(--bg);
-    min-height: 120px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.cal-cell.clickable {
-    cursor: pointer;
-}
-
-@media (hover: hover) {
-    .cal-cell.clickable:hover {
-        background: var(--panel);
-        transform: scale(1.03);
-        box-shadow: 0 0 0 1px var(--accent-hover), 0 12px 24px rgba(0, 0, 0, 0.5);
-        z-index: 10;
-    }
-}
-
-.cal-cell.muted {
-    opacity: 0.3;
-}
-
-.cal-cell.has-motive {
-    box-shadow: inset 0 0 0 1px rgba(30, 86, 200, 0.35);
-}
-
-.cal-cell-day {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-}
-
-.cal-cell-events {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.cal-event-item {
-    position: relative;
-}
-
-.cal-event-item.filtered-out {
-    display: none;
-}
-
-.cal-event-lead {
-    display: block;
-    font-size: 0.58rem;
-    letter-spacing: 0.02em;
-    color: var(--ink);
-    line-height: 1.4;
-}
-
-.cal-event-item.is-motive .cal-event-lead {
-    color: var(--accent-hover);
-}
-
-.cal-event-card {
-    position: absolute;
-    top: calc(100% + 6px);
-    left: 0;
-    width: 210px;
-    background: var(--panel);
-    border: 1px solid var(--panel-border);
-    z-index: 60;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-6px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    pointer-events: none;
-    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
-}
-
-@media (hover: hover) {
-    .cal-event-item:hover .cal-event-card {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-        pointer-events: auto;
-    }
-}
-
-.cal-event-card-image {
-    height: 80px;
-    background: linear-gradient(135deg, var(--panel-border), var(--bg));
-    transition: transform 0.4s ease;
-    overflow: hidden;
-}
-
-.cal-event-card:hover .cal-event-card-image {
-    transform: scale(1.06);
-}
-
-.cal-event-card.is-motive .cal-event-card-image {
-    background: linear-gradient(135deg, var(--accent), var(--bg));
-}
-
-.cal-event-card-body {
-    padding: 12px 14px 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.cal-event-card-body h4 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
-}
-
-.cal-event-card-meta {
-    font-size: 0.58rem;
-    color: var(--grey);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-}
-
-.cal-event-card-cta {
-    margin-top: 4px;
-    font-size: 0.58rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink);
-    text-decoration: none;
-    border-top: 1px solid var(--panel-border);
-    padding-top: 8px;
-    transition: color 0.2s ease;
-}
-
-.cal-event-card-cta:hover {
-    color: var(--accent-hover);
-}
-
-.cal-grid-empty {
-    padding: 40px 4px;
-    color: var(--grey);
-    font-size: 0.7rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    display: none;
-}
-
-.cal-grid-empty.show {
-    display: block;
-}
-
-/* Mobile pager (2-week / half-month pagination) */
-.cal-pager {
-    display: none;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 4px;
-}
-
-.cal-pager button {
-    background: var(--panel);
-    border: 1px solid var(--panel-border);
-    color: var(--ink);
-    padding: 10px 16px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.cal-pager button:disabled {
-    opacity: 0.3;
-    cursor: default;
-}
-
-.cal-pager-dots {
-    display: flex;
-    gap: 6px;
-}
-
-.cal-pager-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--panel-border);
-    transition: background 0.2s ease;
-}
-
-.cal-pager-dot.active {
-    background: var(--accent-hover);
-}
-
-/* ===== List View ===== */
-.cal-list {
-    padding: 8px 32px 60px;
-    display: flex;
-    flex-direction: column;
-}
-
-.cal-list-row {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 6px 24px;
-    padding: 20px 14px;
-    border-bottom: 1px solid var(--panel-border);
-    border-left: 3px solid transparent;
-    transition: background 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
-}
-
-.cal-list-row:hover {
-    background: var(--panel);
-    transform: translateX(4px);
-}
-
-.cal-list-row.filtered-out {
-    display: none;
-}
-
-.cal-list-row.is-motive {
-    border-left-color: var(--accent);
-}
-
-.cal-list-primary {
-    display: flex;
-    align-items: baseline;
     gap: 14px;
+    margin-bottom: 32px;
 }
 
-.cal-list-date {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--accent-hover);
-}
-
-.cal-list-dash {
-    color: var(--grey);
-}
-
-.cal-list-name {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    text-transform: uppercase;
-}
-
-.cal-list-meta {
-    width: 100%;
-    font-size: 0.6rem;
-    color: var(--grey);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-}
-
-.cal-list-cta {
-    margin-left: auto;
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.cal-list-cta:hover {
-    color: var(--accent-hover);
-}
-
-.cal-list-empty {
-    padding: 40px 4px;
-    color: var(--grey);
-    font-size: 0.7rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    display: none;
-}
-
-.cal-list-empty.show {
-    display: block;
-}
-
-/* ===== Section Heads ===== */
-.cal-section-head {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    padding: 0 32px;
-    margin: 60px 0 20px;
-}
-
-.cal-section-index {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--grey);
-}
-
-.cal-section-head h2 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(1.4rem, 3vw, 2.2rem);
-    text-transform: uppercase;
-    letter-spacing: -0.01em;
-    font-weight: 700;
-}
-
-.cal-section-sub {
-    color: var(--accent-hover);
-}
-
-.cal-brand-mark {
-    height: 18px;
-    width: auto;
-    opacity: 0.7;
-    margin-left: auto;
-}
-
-/* ===== Today in Lagos — Featured Hero + Map ===== */
-.cal-today {
-    padding-bottom: 20px;
-}
-
-.cal-today-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: var(--panel-border);
-    border: 1px solid var(--panel-border);
-    margin: 0 32px;
-}
-
-.cal-hero-card {
-    position: relative;
-    background: var(--bg);
-    border-left: 3px solid var(--panel-border);
-    display: flex;
-    flex-direction: column;
-    transition: border-color 0.2s ease;
-}
-
-.cal-hero-card.is-motive {
-    border-left-color: var(--accent);
-}
-
-.cal-hero-card.active {
-    border-left-color: var(--accent-hover);
-}
-
-.cal-hero-image {
-    height: 200px;
-    background: linear-gradient(135deg, var(--panel), var(--panel-border));
-    overflow: hidden;
-    position: relative;
-}
-
-.cal-hero-card.is-motive .cal-hero-image {
-    background: linear-gradient(135deg, var(--accent), var(--panel-border));
-}
-
-.cal-hero-image::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.08), transparent 60%);
-    transition: transform 0.5s ease;
-}
-
-.cal-hero-card:hover .cal-hero-image::after {
-    transform: scale(1.15);
-}
-
-.cal-hero-watermark {
-    position: absolute;
-    bottom: 10px;
-    right: 12px;
-    height: 22px;
-    width: auto;
-    opacity: 0.55;
-}
-
-.cal-hero-body {
-    padding: 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.cal-hero-tag {
-    font-size: 0.62rem;
+.cal-featured-tag {
+    font-size: 0.64rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--accent-hover);
     font-weight: 700;
 }
 
-.cal-hero-body h3 {
+.cal-featured-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
     text-transform: uppercase;
     letter-spacing: -0.01em;
 }
 
-.cal-hero-meta {
-    font-size: 0.68rem;
-    color: var(--grey);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    line-height: 1.7;
+.cal-featured-logo {
+    height: 1.1em;
+    width: auto;
+    display: block;
 }
 
-.cal-hero-cta {
-    margin-top: 8px;
+.cal-featured-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--grey);
+}
+
+.cal-featured-dot {
+    color: var(--panel-border);
+}
+
+.cal-featured-cta {
+    margin-top: 10px;
     align-self: flex-start;
-    padding: 12px 24px;
+    padding: 14px 28px;
     background: var(--accent);
     color: #ffffff;
     text-decoration: none;
@@ -666,61 +125,105 @@ a {
     transition: background 0.2s ease, transform 0.15s ease;
 }
 
-.cal-hero-cta:hover {
+.cal-featured-cta:hover {
     background: var(--accent-hover);
     transform: translateY(-1px);
 }
 
-/* ===== Real Lagos Map (Leaflet) ===== */
-.cal-today-map {
-    background: var(--bg);
-    padding: 0;
-    min-height: 320px;
-    position: relative;
+/* ===== Template List Items ===== */
+.cal-simple-list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--panel-border);
+}
+
+.cal-simple-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px 24px;
+    padding: 20px 4px;
+    border-bottom: 1px solid var(--panel-border);
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.cal-simple-row:hover {
+    background: var(--panel);
+    transform: translateX(4px);
+}
+
+.cal-simple-date {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-hover);
+    min-width: 110px;
+}
+
+.cal-simple-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    text-transform: uppercase;
+    flex: 1 1 200px;
+}
+
+.cal-simple-venue {
+    font-size: 0.64rem;
+    color: var(--grey);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.cal-simple-status {
+    margin-left: auto;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--grey);
+    border: 1px solid var(--panel-border);
+    padding: 6px 12px;
+    border-radius: 999px;
+}
+
+.cal-simple-status.status-onsale {
+    color: var(--accent-hover);
+    border-color: var(--accent-hover);
+}
+
+.cal-simple-status.status-selling {
+    color: #ffffff;
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+/* ===== Interactive Map ===== */
+.cal-map-section {
+    margin: 20px 32px 60px;
+    border: 1px solid var(--panel-border);
 }
 
 .cal-leaflet-map {
     width: 100%;
-    height: 100%;
-    min-height: 320px;
+    height: 420px;
     filter: saturate(1.15) contrast(1.02);
 }
 
-.cal-event-marker {
+/* Custom bookmark/pin marker for named Lagos hubs */
+.cal-bookmark-pin {
     position: relative;
 }
 
-.cal-pin-dot {
+.cal-bookmark-shape {
     display: block;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
+    width: 22px;
+    height: 28px;
     background: var(--accent-hover);
+    clip-path: polygon(0 0, 100% 0, 100% 65%, 50% 100%, 0 65%);
     border: 2px solid var(--bg);
-    box-shadow: 0 0 0 0 rgba(30, 86, 200, 0.6);
-    animation: pin-pulse 2.2s ease-out infinite;
-}
-
-@keyframes pin-pulse {
-    0% { box-shadow: 0 0 0 0 rgba(30, 86, 200, 0.55); }
-    70% { box-shadow: 0 0 0 14px rgba(30, 86, 200, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(30, 86, 200, 0); }
-}
-
-.cal-event-marker.is-motive .cal-pin-dot {
-    background: var(--accent);
-}
-
-.cal-event-marker.active .cal-pin-dot {
-    background: #ffffff;
-    box-shadow: 0 0 0 4px rgba(30, 86, 200, 0.8), 0 0 16px 4px rgba(30, 86, 200, 0.6);
-    animation: pin-pop 0.4s ease;
-}
-
-@keyframes pin-pop {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.6); }
-    100% { transform: scale(1.3); }
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
 }
 
 .leaflet-container {
@@ -754,320 +257,29 @@ a {
     border-radius: 4px !important;
 }
 
-/* ===== Upcoming Events Feed ===== */
-.cal-feed {
-    padding-bottom: 60px;
-}
-
-.cal-feed-track {
-    display: flex;
-    gap: 1px;
-    background: var(--panel-border);
-    border: 1px solid var(--panel-border);
-    margin: 0 32px;
-    overflow-x: auto;
-}
-
-.cal-feed-card {
-    flex: 0 0 220px;
-    background: var(--bg);
-    padding: 16px;
-    border-left: 3px solid transparent;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.cal-feed-card:hover {
-    background: var(--panel);
-    transform: translateY(-3px);
-}
-
-.cal-feed-card.filtered-out {
-    display: none;
-}
-
-.cal-feed-card.is-motive {
-    border-left-color: var(--accent);
-}
-
-.cal-feed-card.active {
-    background: var(--panel);
-    border-left-color: var(--accent-hover);
-    box-shadow: 0 0 0 1px var(--accent-hover);
-}
-
-.cal-feed-card-date {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--accent-hover);
-}
-
-.cal-feed-card h4 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-}
-
-.cal-feed-card p {
-    font-size: 0.58rem;
-    color: var(--grey);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-}
-
-.cal-feed-empty {
-    display: none;
-    padding: 24px 32px;
-    color: var(--grey);
-    font-size: 0.7rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-}
-
-.cal-feed-empty.show {
-    display: block;
-}
-
-/* ===== Single-Date Event View ===== */
-.cal-date-view {
-    display: none;
-    padding: 20px 32px 60px;
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.35s ease, transform 0.35s ease;
-}
-
-body.date-view-active .cal-title,
-body.date-view-active .cal-controls,
-body.date-view-active .cal-mobile-controls,
-body.date-view-active .cal-view,
-body.date-view-active .cal-today,
-body.date-view-active .cal-feed {
-    display: none;
-}
-
-body.date-view-active .cal-date-view {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.cal-return-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--panel);
-    border: 1px solid var(--panel-border);
-    color: var(--ink);
-    padding: 12px 22px;
-    border-radius: 999px;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.66rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    cursor: pointer;
-    margin-bottom: 32px;
-    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
-}
-
-.cal-return-btn:hover {
-    background: var(--accent);
-    border-color: var(--accent);
-    transform: translateX(-3px);
-}
-
-.cal-date-view-heading {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(2rem, 5vw, 3.4rem);
-    text-transform: uppercase;
-    letter-spacing: -0.02em;
-    margin-bottom: 32px;
-}
-
-.cal-pass-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    background: var(--panel-border);
-    border: 1px solid var(--panel-border);
-}
-
-.cal-pass-card {
-    background: var(--bg);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px 28px;
-    padding: 26px 24px;
-    border-left: 3px solid transparent;
-    position: relative;
-}
-
-.cal-pass-card.is-motive {
-    border-left-color: var(--accent);
-}
-
-.cal-pass-card::after {
-    content: '';
-    position: absolute;
-    left: -1px;
-    top: 0;
-    bottom: 0;
-    width: 0;
-    border-left: 1px dashed var(--panel-border);
-}
-
-.cal-pass-name {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(1.4rem, 3vw, 2rem);
-    text-transform: uppercase;
-    letter-spacing: -0.01em;
-    flex: 1 1 240px;
-}
-
-.cal-pass-tag {
-    font-size: 0.6rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent-hover);
-    border: 1px solid var(--accent-hover);
-    padding: 4px 12px;
-    border-radius: 999px;
-}
-
-.cal-pass-meta {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px 20px;
-    font-size: 0.66rem;
-    color: var(--grey);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-}
-
-.cal-pass-cta {
-    margin-left: auto;
-    padding: 12px 22px;
-    background: var(--accent);
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 0.64rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border-radius: 999px;
-    transition: background 0.2s ease, transform 0.15s ease;
-}
-
-.cal-pass-cta:hover {
-    background: var(--accent-hover);
-    transform: translateY(-1px);
-}
-
-.cal-date-view-empty {
-    color: var(--grey);
-    font-size: 0.72rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    padding: 20px 0;
-}
-
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
     .cal-title {
         padding: 28px 20px 16px;
     }
 
-    /* Desktop filter bar hidden; dropdown bar shown instead */
-    .cal-controls {
-        display: none;
+    .cal-list-view {
+        padding: 0 20px 16px;
     }
 
-    .cal-mobile-controls {
-        display: flex;
+    .cal-featured-card {
+        padding: 26px 22px;
     }
 
-    .cal-grid-wrap {
-        padding: 16px 12px 32px;
-    }
-
-    .cal-weekday {
-        font-size: 0.64rem;
-        padding: 12px 0;
-        letter-spacing: 0.1em;
-    }
-
-    /* Drastically larger, easy-to-tap cells — full grid stays, paginated
-       into 2 clean pages of 2 weeks each */
-    .cal-cell {
-        min-height: 128px;
-        padding: 14px 10px;
-        gap: 8px;
-    }
-
-    .cal-cell-day {
-        font-size: 1.35rem;
-    }
-
-    .cal-event-lead {
-        font-size: 0.64rem;
-        line-height: 1.6;
-    }
-
-    .cal-pager {
-        display: flex;
-    }
-
-    .cal-list {
-        padding: 8px 20px 48px;
-    }
-
-    .cal-list-row {
-        padding: 18px 12px;
-    }
-
-    .cal-list-name {
-        font-size: 1.2rem;
-    }
-
-    .cal-list-cta {
+    .cal-simple-status {
         margin-left: 0;
     }
 
-    .cal-section-head {
-        padding: 0 20px;
-        margin: 44px 0 16px;
+    .cal-map-section {
+        margin: 16px 20px 48px;
     }
 
-    .cal-today-grid {
-        grid-template-columns: 1fr;
-        margin: 0 20px;
-    }
-
-    .cal-hero-image {
-        height: 160px;
-    }
-
-    .cal-feed-track {
-        margin: 0 20px;
-    }
-
-    .cal-date-view {
-        padding: 16px 20px 48px;
-    }
-
-    .cal-pass-card {
-        padding: 20px 16px;
-    }
-
-    .cal-pass-cta {
-        margin-left: 0;
-        width: 100%;
-        text-align: center;
+    .cal-leaflet-map {
+        height: 320px;
     }
 }
