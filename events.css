@@ -292,9 +292,15 @@ a {
     margin-top: 8px;
 }
 
+/* transform: translateZ(0) forces its own compositing layer — Safari
+   (particularly iOS) can fail to repaint an animated child inside a
+   masked ancestor that isn't already on its own layer, which is the
+   most likely cause of the marquee sometimes not appearing on phone. */
 .ev-marquee {
     width: 100%;
     overflow: hidden;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
     -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
     mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
 }

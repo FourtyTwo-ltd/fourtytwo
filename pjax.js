@@ -21,7 +21,7 @@
    Falls back to a real navigation (window.location.href) if fetch
    fails for any reason, so the site still works with this disabled. */
 (function () {
-    var PAGES = ['index.html', 'clothing.html', 'calendar.html', 'events.html', 'about.html', 'privacy.html', 'terms.html'];
+    var PAGES = ['index.html', 'clothing.html', 'calendar.html', 'events.html', 'about.html', 'contact.html', 'privacy.html', 'terms.html'];
     var isNavigating = false;
     var MIN_LOADER_MS = 350;
     var loaderEl = null;
@@ -151,6 +151,31 @@
         }
     }
 
+    // Waits for every <img> currently in the document to finish loading
+    // (or fail) before resolving, capped at a timeout so one slow or
+    // broken image can never hold the loader up indefinitely — the goal
+    // is "don't reveal a page that's still visibly popping images in,"
+    // not "wait forever."
+    function waitForImages(timeoutMs) {
+        var imgs = Array.prototype.filter.call(document.querySelectorAll('img'), function (img) {
+            return !img.complete;
+        });
+        if (!imgs.length) return Promise.resolve();
+
+        var loadPromise = Promise.all(imgs.map(function (img) {
+            return new Promise(function (resolve) {
+                img.addEventListener('load', resolve, { once: true });
+                img.addEventListener('error', resolve, { once: true });
+            });
+        }));
+
+        var timeoutPromise = new Promise(function (resolve) {
+            setTimeout(resolve, timeoutMs);
+        });
+
+        return Promise.race([loadPromise, timeoutPromise]);
+    }
+
     function swapBody(doc) {
         return new Promise(function (resolve) {
             var scripts = Array.prototype.slice.call(doc.body.querySelectorAll('script'));
@@ -202,6 +227,13 @@
                             window.scrollTo(0, 0);
                         }
 
+                        // Everything is in place behind the loader (styles,
+                        // scripts, DOM, scroll position) — hold it a little
+                        // longer only for images still fetching, capped so a
+                        // slow one can't strand the visitor on a black screen.
+                        return waitForImages(1800);
+                    })
+                    .then(function () {
                         var remaining = Math.max(0, MIN_LOADER_MS - (Date.now() - shownAt));
                         setTimeout(function () {
                             hideLoader();

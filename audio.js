@@ -30,6 +30,7 @@
     var state = loadState();
     var audioEngine = new Audio(TRACKS[state.trackIndex]);
     audioEngine.volume = 0.6;
+    audioEngine.preload = 'auto';
 
     function saveState() {
         try {
@@ -97,11 +98,26 @@
         reinitWidgets();
     }
 
-    // Desktop and mobile both follow the same browser autoplay policy:
-    // sound can only start from a real user gesture (click/tap), so we
-    // arm playback on the first pointerdown anywhere on the page.
+    // Browsers block audio with sound from starting before a real user
+    // gesture — but they universally allow MUTED autoplay with no
+    // gesture at all. So on load we start playback muted immediately
+    // (meaning it's already running, buffered, and at the right
+    // position by the time the visitor does anything), then unmute on
+    // the first pointerdown anywhere on the page. Unmuting an
+    // already-playing element is instant — no play() call, no
+    // buffering wait — so sound is audible the moment they first touch
+    // the page instead of only "starting" after they've already
+    // clicked through to another page.
+    if (state.isOn) {
+        audioEngine.muted = true;
+        tryPlay();
+    }
+
     function firstGestureStart() {
-        if (state.isOn) tryPlay();
+        if (state.isOn) {
+            audioEngine.muted = false;
+            tryPlay();
+        }
         document.removeEventListener('pointerdown', firstGestureStart);
     }
     document.addEventListener('pointerdown', firstGestureStart);

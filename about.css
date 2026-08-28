@@ -1,0 +1,164 @@
+/* ===== 42 — About Page =====
+   Editorial, numbered-section layout matching the Events/Calendar
+   design language (Space Mono/Space Grotesk, shared --bg/--panel/
+   --accent tokens, kinetic-clip reveals) instead of the old
+   mismatched generic stylesheet. Header, mobile menu, ticket-tab
+   component, and footer come from header-footer.css (shared
+   site-wide). */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Mono', 'Courier Prime', monospace;
+    min-height: 100vh;
+}
+
+a {
+    color: inherit;
+}
+
+/* ===== Kinetic clip-path reveal (matches Events/Calendar) ===== */
+.kinetic-clip {
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.kinetic-clip.in-view {
+    clip-path: inset(0 0 0% 0);
+}
+
+/* ===== Page Header ===== */
+.ab-header {
+    padding: 40px 32px 24px;
+    border-bottom: 1px solid var(--panel-border);
+}
+
+.ab-header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    text-transform: uppercase;
+}
+
+.ab-header p {
+    margin-top: 12px;
+    color: var(--grey);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* ===== Numbered Section Blocks ===== */
+.ab-block {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 56px 32px 0;
+}
+
+.ab-block:last-of-type {
+    padding-bottom: 56px;
+}
+
+.ab-section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.ab-section-index {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--grey);
+}
+
+.ab-section-head h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.4rem, 3vw, 2.1rem);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+}
+
+.ab-copy {
+    color: var(--grey);
+    font-size: 0.85rem;
+    line-height: 1.85;
+    max-width: 70ch;
+}
+
+.ab-block--center {
+    text-align: center;
+}
+
+.ab-block--center .ab-section-head {
+    justify-content: center;
+}
+
+.ab-copy--center {
+    max-width: 65ch;
+    margin: 0 auto;
+}
+
+/* ===== Contact Teaser (links out to the dedicated Contact page) ===== */
+.ab-contact-teaser {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 32px 64px;
+    text-align: center;
+}
+
+.ab-contact-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: var(--accent);
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.ab-contact-cta:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .ab-header {
+        padding: 28px 20px 20px;
+    }
+
+    .ab-block {
+        padding: 40px 20px 0;
+    }
+
+    .ab-block:last-of-type {
+        padding-bottom: 40px;
+    }
+
+    .ab-contact-teaser {
+        padding: 32px 20px 48px;
+    }
+}

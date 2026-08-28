@@ -1,0 +1,153 @@
+/* ===== 42 — Contact Page =====
+   Simple, dark, on-brand — phone, email, socials, location. Header,
+   mobile menu, ticket-tab component, and footer come from
+   header-footer.css (shared site-wide). */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Mono', 'Courier Prime', monospace;
+    min-height: 100vh;
+}
+
+a {
+    color: inherit;
+}
+
+.kinetic-clip {
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.kinetic-clip.in-view {
+    clip-path: inset(0 0 0% 0);
+}
+
+.ct-header {
+    padding: 40px 32px 24px;
+    border-bottom: 1px solid var(--panel-border);
+}
+
+.ct-header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    text-transform: uppercase;
+}
+
+.ct-header p {
+    margin-top: 12px;
+    color: var(--grey);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.ct-body {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 32px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    text-align: center;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+}
+
+.ct-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    width: 100%;
+}
+
+.ct-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ct-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--grey);
+}
+
+.ct-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.005em;
+    transition: color 0.2s ease;
+}
+
+a.ct-value:hover {
+    color: var(--accent-hover);
+}
+
+.ct-social-row {
+    display: flex;
+    gap: 1.25rem;
+}
+
+.social-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1px solid var(--panel-border);
+    color: var(--ink);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.social-badge svg {
+    width: 22px;
+    height: 22px;
+}
+
+.social-badge:hover {
+    transform: translateY(-4px) scale(1.05);
+    border-color: var(--accent-hover);
+    color: var(--accent-hover);
+    box-shadow: 0 8px 24px rgba(30, 86, 200, 0.35);
+}
+
+@media (max-width: 768px) {
+    .ct-header {
+        padding: 28px 20px 20px;
+    }
+
+    .ct-body {
+        padding: 48px 20px 72px;
+        gap: 36px;
+    }
+
+    .ct-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+}
