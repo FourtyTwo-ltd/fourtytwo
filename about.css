@@ -102,19 +102,6 @@ a {
     max-width: 70ch;
 }
 
-.ab-block--center {
-    text-align: center;
-}
-
-.ab-block--center .ab-section-head {
-    justify-content: center;
-}
-
-.ab-copy--center {
-    max-width: 65ch;
-    margin: 0 auto;
-}
-
 /* ===== Contact Teaser (links out to the dedicated Contact page) ===== */
 .ab-contact-teaser {
     max-width: 1000px;
