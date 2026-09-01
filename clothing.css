@@ -329,6 +329,120 @@ a {
     color: #ffffff;
 }
 
+/* ===== Waitlist Popup =====
+   Lightweight corner card (not a full-screen dimming modal) that
+   appears 1s after landing on this page. */
+.waitlist-popup {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    width: 320px;
+    max-width: calc(100vw - 32px);
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: 14px;
+    padding: 24px 22px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+    z-index: 2000;
+    opacity: 0;
+    transform: translateY(16px);
+    pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.waitlist-popup.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.waitlist-popup-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: none;
+    border: none;
+    color: var(--grey);
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 6px;
+    transition: color 0.2s ease;
+}
+
+.waitlist-popup-close:hover {
+    color: var(--ink);
+}
+
+.waitlist-popup-logo {
+    height: 22px;
+    width: auto;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.waitlist-popup-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+}
+
+.waitlist-popup-text {
+    font-size: 0.72rem;
+    color: var(--grey);
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.waitlist-popup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.waitlist-popup-form input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: var(--ink);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+}
+
+.waitlist-popup-form input::placeholder {
+    color: var(--grey);
+}
+
+.waitlist-popup-form input:focus {
+    outline: none;
+    border-color: var(--accent-hover);
+}
+
+.waitlist-popup-cta {
+    width: 100%;
+    background: var(--accent);
+    color: #ffffff;
+    border: none;
+    border-radius: 999px;
+    padding: 13px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.waitlist-popup-cta:hover {
+    background: var(--accent-hover);
+}
+
 /* ===== Responsive (Mobile ≤768px) ===== */
 @media (max-width: 768px) {
     .pdp-stage {
@@ -374,5 +488,16 @@ a {
 
     .audio-widget {
         bottom: 60px;
+    }
+
+    .waitlist-popup {
+        left: 16px;
+        right: 16px;
+        /* Clears the stacked audio + currency widgets in the bottom-right
+           corner instead of sitting under them. */
+        bottom: 108px;
+        width: auto;
+        max-width: none;
+        padding: 22px 20px;
     }
 }

@@ -216,6 +216,17 @@
         </div>
     </div>
 
+    <div class="waitlist-popup" id="waitlistPopup" role="dialog" aria-label="Join the waitlist">
+        <button type="button" class="waitlist-popup-close" id="waitlistPopupClose" aria-label="Close">&times;</button>
+        <img src="assets/42logowhite.png" alt="42" class="waitlist-popup-logo">
+        <h3 class="waitlist-popup-title">Launching Soon</h3>
+        <p class="waitlist-popup-text">Join the waitlist and get 5% off your first order.</p>
+        <form class="waitlist-popup-form" id="waitlistPopupForm">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit" class="waitlist-popup-cta">Join Waitlist</button>
+        </form>
+    </div>
+
     <script>
         var hamburgerBtn = document.getElementById('hamburgerBtn');
         var mobileMenu = document.getElementById('mobileMenu');
@@ -298,6 +309,25 @@
         newsletterForm.addEventListener('submit', function (e) {
             e.preventDefault();
             newsletterForm.reset();
+        });
+
+        // ===== Waitlist popup: appears 1s after landing on this page =====
+        var waitlistPopup = document.getElementById('waitlistPopup');
+        var waitlistPopupClose = document.getElementById('waitlistPopupClose');
+        var waitlistPopupForm = document.getElementById('waitlistPopupForm');
+
+        setTimeout(function () {
+            waitlistPopup.classList.add('open');
+        }, 1000);
+
+        waitlistPopupClose.addEventListener('click', function () {
+            waitlistPopup.classList.remove('open');
+        });
+
+        waitlistPopupForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            waitlistPopup.classList.remove('open');
+            waitlistPopupForm.reset();
         });
     </script>
     <script src="analytics.js" defer></script>
